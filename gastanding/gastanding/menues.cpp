@@ -66,3 +66,15 @@ int renderMenuListas(string nombre)
 
 }
 
+
+int renderMenuCategoriasIngresos() {
+    int opcion;
+    char nombre_categoria[20];
+    cout << "Elegi una categoria" << endl;
+    cout << "1. Relacion de dependencia" << endl;
+    cout << "2. Freelance" << endl;
+    cout << "3. Otros" << endl;
+    cout << "Opcion: ";
+    cin >> opcion;
+    return opcion;
+}

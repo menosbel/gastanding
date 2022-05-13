@@ -21,8 +21,6 @@ int main()
         cout << "Ingrese una opcion: ";
         cin >> opcion;
 
-        string nombre;
-
         switch (opcion)
         {
         case 1:

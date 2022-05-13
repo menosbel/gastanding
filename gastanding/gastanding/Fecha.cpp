@@ -43,36 +43,54 @@ Fecha::Fecha(std::string fecha) {
 }
 
 
-void Fecha::setDia(int valor)
+int Fecha::setDia(int valor)
 {
 	bool es_mes_largo = std::find(std::begin(_meses_largos), std::end(_meses_largos), _mes) != std::end(_meses_largos);
 	
 	if (_mes == 2) {
 		if (valor >= 1 && valor <= 28) _dia = valor;
-		else std::cout << "Numero de dia invalido" << std::endl;
+		else {
+			std::cout << "Numero de dia invalido" << std::endl;
+			return 0;
+		}
 	}
 	else if (!es_mes_largo) {
 		if (valor >= 1 && valor <= 30) _dia = valor;
-		else std::cout << "Numero de dia invalido" << std::endl;
+		else {
+			std::cout << "Numero de dia invalido" << std::endl;
+			return 0;
+		}
 	}
 	else {
 		if (valor >= 1 && valor <= 31) _dia = valor;
-		else std::cout << "Numero de dia invalido" << std::endl;
+		else {
+			std::cout << "Numero de dia invalido" << std::endl;
+			return 0;
+		}
 	}
+	return 1;
 }
 
-void Fecha::setMes(int valor)
+int Fecha::setMes(int valor)
 {
 	if (valor >= 1 && valor <= 12) _mes = valor;
-	else std::cout << "Numero de mes invalido" << std::endl;
+	else {
+		std::cout << "Numero de mes invalido" << std::endl;
+		return 0;
+	}
+	return 1;
 }
 
-void Fecha::setAnio(int valor)
+int Fecha::setAnio(int valor)
 {
 	int largo_anio = trunc(log10(valor)) + 1;
 
 	if (largo_anio == 4 && valor > 1900) _anio = valor;
-	else std::cout << "Numero de año invalido" << std::endl;
+	else {
+		std::cout << "Numero de año invalido" << std::endl;
+		return 0;
+	}
+	return 1;
 }
 
 void Fecha::mostrar()
@@ -82,18 +100,27 @@ void Fecha::mostrar()
 
 void Fecha::cargar()
 {
-	std::cout << "Fecha de nacimiento" << std::endl;
-	std::cout << "Dia: ";
-	std::cin >> _dia;
-	std::cout << "Mes: ";
-	std::cin >> _mes;
-	std::cout << "Año: ";
-	std::cin >> _anio;
+	int dia, mes, anio;
+	bool guardo_dia = false;
+	bool guardo_mes = false;
+	bool guardo_anio = false;
+
+	while (!guardo_dia) {
+		std::cout << "Dia: ";
+		std::cin >> dia;
+		guardo_dia = setDia(dia);
+	};
+
+	while (!guardo_mes) {
+		std::cout << "Mes: ";
+		std::cin >> mes;
+		guardo_mes = setMes(mes);
+	};
+
+	while (!guardo_anio) {
+		std::cout << "Anio: ";
+		std::cin >> anio;
+		guardo_anio = setAnio(anio);
+	};
 
 }
-
-void Fecha::dia_semana()
-{
-	
-}
-

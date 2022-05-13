@@ -14,11 +14,10 @@ public:
 	Fecha();
 	Fecha(int dia, int mes, int anio);
 	Fecha(std::string fecha);
-	void setDia(int valor);
-	void setMes(int valor);
-	void setAnio(int valor);
+	int setDia(int valor);
+	int setMes(int valor);
+	int setAnio(int valor);
 	void mostrar();
 	void cargar();
-	void dia_semana();
 };
 

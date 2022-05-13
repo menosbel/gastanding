@@ -6,4 +6,5 @@ using namespace std;
 int renderMenuEntidad(string nombre);
 int renderMenuInformes();
 int renderMenuBuscar(string nombre);
-int renderMenuListas(std::string nombre);
+int renderMenuListas(string nombre);
+int renderMenuCategoriasIngresos();

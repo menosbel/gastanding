@@ -53,5 +53,8 @@
     <ClInclude Include="IngresosHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Fecha.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

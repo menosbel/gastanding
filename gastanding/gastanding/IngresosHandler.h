@@ -8,7 +8,7 @@ class IngresosHandler
 {
 private:
 	string _nombre = "INGRESOS";
-	Ingresos _ingresos = Ingresos();
+	IngresosRepository _ingresos = IngresosRepository();
 public:
 	bool exec();
 };

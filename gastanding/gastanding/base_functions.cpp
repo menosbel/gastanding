@@ -9,3 +9,19 @@ std::string ZeroPadNumber(int num)
 	ss << std::setw(2) << std::setfill('0') << num;
 	return ss.str();
 }
+
+std::string categoriasIngresosToString(int num)
+{
+	switch (num)
+	{
+	case 1:
+		"Relacion de dependencia";
+	case 2:
+		"Freelance";
+	case 3:
+		"Otros";
+	default:
+		break;
+	}
+	return std::string();
+}
