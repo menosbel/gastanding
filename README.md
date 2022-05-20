@@ -7,5 +7,4 @@ Sistema de control de gastos
 ### Integrantes del equipo
 - Fernandez Navarro, María Belén
 - Linares, Iván
-- Peves, Jackeline 
 - Zorzoli, Marcos
