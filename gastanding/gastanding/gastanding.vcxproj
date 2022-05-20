@@ -154,6 +154,7 @@
     <ClInclude Include="IngresosRepository.h" />
     <ClInclude Include="IngresosHandler.h" />
     <ClInclude Include="menues.h" />
+    <ClInclude Include="rlutil.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

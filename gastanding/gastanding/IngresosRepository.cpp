@@ -1,4 +1,5 @@
 #include "IngresosRepository.h"
+#include "base_functions.h"
 #include "Ingreso.h"
 #include <iostream>
 
@@ -8,8 +9,8 @@ void IngresosRepository::agregar()
 {
 	Ingreso ingreso;
 	ingreso.cargar();
-	if (ingreso.grabarEnDisco("ingresos.dat")) cout << "Ingreso agregado" << endl;
-	else cout << "Error en el archivo" << endl;
+	if (ingreso.grabarEnDisco("ingresos.dat")) mostrarMensaje("Ingreso agregado exitosamente", 15, 2);
+	else mostrarMensaje("No se pude agregar el ingreso", 15, 4);
 };
 
 void IngresosRepository::eliminar()

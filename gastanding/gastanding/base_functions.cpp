@@ -1,16 +1,19 @@
 #include "base_functions.h"
+#include "rlutil.h"
 #include <iomanip>
 #include <sstream>
 #include <string>
 
-std::string ZeroPadNumber(int num)
+using namespace std;
+
+string ZeroPadNumber(int num)
 {
-	std::ostringstream ss;
-	ss << std::setw(2) << std::setfill('0') << num;
+	ostringstream ss;
+	ss << setw(2) << setfill('0') << num;
 	return ss.str();
 }
 
-std::string categoriasIngresosToString(int num)
+string categoriasIngresosToString(int num)
 {
 	switch (num)
 	{
@@ -23,5 +26,13 @@ std::string categoriasIngresosToString(int num)
 	default:
 		break;
 	}
-	return std::string();
+	return string();
+}
+
+void mostrarMensaje(string mensaje, int color, int colorFondo, int x, int y) {
+	rlutil::locate(x, y);
+	rlutil::setColor(color);
+	rlutil::setBackgroundColor(colorFondo);
+	cout << mensaje << endl;
+	rlutil::setBackgroundColor(0);
 }

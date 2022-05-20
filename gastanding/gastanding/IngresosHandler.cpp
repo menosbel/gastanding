@@ -1,5 +1,6 @@
 #include "IngresosHandler.h"
 #include "menues.h"
+#include "rlutil.h"
 
 bool IngresosHandler::exec()
 {
@@ -8,7 +9,7 @@ bool IngresosHandler::exec()
 
     while (seguir)
     {
-        system("cls");
+        rlutil::cls();
         opcion = renderMenuEntidad(_nombre);
         switch (opcion)
         {
@@ -29,6 +30,6 @@ bool IngresosHandler::exec()
         default:
             break;
         }
-        system("pause");
+        rlutil::anykey();
     }
 }

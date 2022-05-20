@@ -2,6 +2,8 @@
 #include <string>
 #include "menues.h"
 #include "IngresosHandler.h"
+#include "rlutil.h"
+#include "base_functions.h"
 
 using namespace std;
 
@@ -9,7 +11,12 @@ int main()
 {
     IngresosHandler ingresosHandler;
 
-    int opcion;
+    rlutil::setColor(rlutil::WHITE);
+    mostrarMensaje("** Bienvenidx a Gastanding **", 15, 13);
+    rlutil::anykey();
+    rlutil::cls();
+
+    int opcion, confirmarSalida;
     while (true)
     {
         cout << "--- MENU PRINCIPAL ---" << endl;
@@ -33,15 +40,20 @@ int main()
         case 4:
             break;
         case 0:
-            return false;
+            cout << "¿Confirma que desea salir? (S/N): ";
+            cin >> confirmarSalida;
+            if (tolower(confirmarSalida) == 's') {
+                return 0;
+            }
+            break;
         default:
             break;
         }
-        system("cls");
+        rlutil::cls();
+        mostrarMensaje("** Muchas gracias por usar Gastanding **", 15, 13);
     }
-    system("cls");
-    cout << "** Muchas gracias por usar Gastanding **" << endl;
-    system("pause");
+
+    rlutil::anykey();
 
     return 0;
 }
