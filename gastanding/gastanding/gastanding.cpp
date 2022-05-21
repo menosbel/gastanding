@@ -11,6 +11,7 @@ int main()
 {
     IngresosHandler ingresosHandler;
 
+    setlocale(LC_ALL, "spanish");
     rlutil::setColor(rlutil::WHITE);
     mostrarMensaje("** Bienvenidx a Gastanding **", 15, 13);
     rlutil::anykey();
@@ -25,7 +26,7 @@ int main()
         cout << "3. Deudas" << endl;
         cout << "4. Informes" << endl;
         cout << "0. Salir" << endl;
-        cout << "Ingrese una opcion: ";
+        cout << "Ingrese una opción: ";
         cin >> opcion;
 
         switch (opcion)

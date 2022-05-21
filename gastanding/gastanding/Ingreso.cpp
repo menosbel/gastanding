@@ -15,6 +15,7 @@ void Ingreso::cargar()
 	_categoria = renderMenuCategoriasIngresos();
 	cout << "Fecha: " << endl;
 	_fecha.cargar();
+	_estado = true;
 
 }
 
@@ -27,22 +28,38 @@ void Ingreso::mostrar() {
 	_fecha.mostrar();
 }
 
-int Ingreso::grabarEnDisco(const char *nombre_archivo)
+bool Ingreso::grabarEnDisco(string fileName)
 {
 	FILE* p;
 	errno_t err;
-	err = fopen_s(&p, nombre_archivo, "ab");
+	const char* file = fileName.c_str();
+	err = fopen_s(&p, file, "ab");
 	if (err != 0) { return -1; }
 	int escribio = fwrite(this, sizeof(Ingreso), 1, p);
 	fclose(p);
 	return escribio;
 }
 
-int Ingreso::leerDeDisco(int pos, const char* nombre_archivo)
+bool Ingreso::grabarEnDisco(int pos, string fileName)
 {
 	FILE* p;
 	errno_t err;
-	err = fopen_s(&p, nombre_archivo, "rb");
+	const char* file = fileName.c_str();
+	err = fopen_s(&p, file, "rb+");
+	if (err != 0) { return false; }
+	fseek(p, pos * sizeof(Ingreso), SEEK_SET);
+	bool guardo = fwrite(this, sizeof(Ingreso), 1, p);
+	fclose(p);
+
+	return guardo;
+}
+
+bool Ingreso::leerDeDisco(int pos, string fileName)
+{
+	FILE* p;
+	errno_t err;
+	const char* file = fileName.c_str();
+	err = fopen_s(&p, file, "rb");
 	if (err != 0) { return -1; }
 	fseek(p, sizeof(Ingreso) * pos, 0);
 	int leyo = fread(this, sizeof(Ingreso), 1, p);
