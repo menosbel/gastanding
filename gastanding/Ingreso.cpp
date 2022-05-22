@@ -9,16 +9,20 @@ using namespace std;
 
 void Ingreso::cargar()
 {
-	cout << "Monto: $";
-	cin >> _monto;
-	cout << "Concepto: ";
-	cin >> _concepto;
-	cout << "Categoria: ";
-	_categoria = renderMenuCategoriasIngresos();
-	cout << "Fecha: " << endl;
-	_fecha.cargar();
-	_estado = true;
+	int monto, categoria, dia, mes, anio;
+	string concepto;
 
+	cout << "Categoria: ";
+	categoria = renderMenuCategoriasIngresos();
+	setCategoria(categoria);
+	_fecha.cargar();
+	cout << "Monto: $";
+	cin >> monto;
+	setMonto(monto);
+	cout << "Concepto: ";
+	cin >> concepto;
+	setConcepto(concepto);
+	setEstado(true);
 }
 
 void Ingreso::mostrar() {
@@ -30,6 +34,17 @@ void Ingreso::mostrar() {
 	printElement(_concepto, nameWidth);
 	printElement(categoriasIngresosToString(_categoria), nameWidth);
 	printElement(_fecha.toString(), numWidth);
+}
+
+bool Ingreso::equals(Ingreso otro)
+{
+	if (
+		getMonto() == otro.getMonto() &&
+		getFecha().equals(otro.getFecha()) &&
+		getCategoria() == otro.getCategoria() &&
+		getConcepto() == otro.getConcepto()
+		) return true;
+	return false;
 }
 
 bool Ingreso::grabarEnDisco(string fileName)

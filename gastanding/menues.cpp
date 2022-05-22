@@ -69,8 +69,8 @@ int renderMenuListas(string nombre)
     return opcion;
 }
 
-
-int renderMenuCategoriasIngresos() {
+int menuCategoriasIngresos()
+{
     int opcion;
     rlutil::cls();
     cout << "Elegi una categoria" << endl;
@@ -80,5 +80,18 @@ int renderMenuCategoriasIngresos() {
     cout << "Ingrese una opción: ";
     cin >> opcion;
     rlutil::cls();
+    return opcion;
+}
+
+int renderMenuCategoriasIngresos() {
+    int opcion;
+    opcion = menuCategoriasIngresos();
+
+    while (opcion < 1 || opcion > 3)
+    {
+        cout << "La opcion elegida es invalida. Vuelva a intentarlo" << endl << endl;
+        opcion = menuCategoriasIngresos();
+        rlutil::anykey();
+    }
     return opcion;
 }

@@ -1,5 +1,6 @@
 #include "Fecha.h"
 #include "functions.h"
+#include "rlutil.h"
 #include <algorithm> // for std::find
 #include <iterator> // for std::begin, std::end
 #include<cmath>
@@ -8,6 +9,7 @@
 #include <string.h>
 #include <vector>
 #include <sstream>
+#include <iomanip>
 
 Fecha::Fecha() {
 	time_t rawtime;
@@ -112,23 +114,42 @@ void Fecha::cargar()
 	bool guardo_mes = false;
 	bool guardo_anio = false;
 
-	while (!guardo_dia) {
-		std::cout << "Dia: ";
-		std::cin >> dia;
+	cout << "Dia: ";
+	cin >> dia;
+	cout << "Mes: ";
+	cin >> mes;
+	cout << "Año: ";
+	cin >> anio;
+	
+	guardo_dia = setDia(dia);
+	while (!guardo_dia)
+	{
+		cout << "Intente nuevamente" << endl;
+		cout << "Dia: ";
+		cin >> dia;
+		cout << endl;
 		guardo_dia = setDia(dia);
-	};
+	}
 
-	while (!guardo_mes) {
-		std::cout << "Mes: ";
-		std::cin >> mes;
+	guardo_mes = setMes(mes);
+	while (!guardo_mes)
+	{
+		cout << "Intente nuevamente" << endl;
+		cout << "Mes: ";
+		cin >> mes;
+		cout << endl;
 		guardo_mes = setMes(mes);
-	};
+	}
 
-	while (!guardo_anio) {
-		std::cout << "Año: ";
-		std::cin >> anio;
+	guardo_anio = setAnio(anio);
+	while (!guardo_anio)
+	{
+		cout << "Intente nuevamente" << endl;
+		cout << "Año: ";
+		cin >> anio;
+		cout << endl;
 		guardo_anio = setAnio(anio);
-	};
+	}
 }
 
 std::string parseDayOfWeek(int numDay) {

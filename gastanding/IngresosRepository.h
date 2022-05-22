@@ -11,11 +11,11 @@ private:
 	string _fileName = "ingresos.dat";
 public:
 	void agregar();
-	void eliminar();
+	int buscarPor(float monto, Fecha fecha, int categoria, string concepto);
 	vector<int> buscarPor(float monto);
 	vector<int> buscarPor(float montoMin, float montoMax);
 	vector<int> buscarPor(Fecha fecha);
-	void listarPorMesYAnio(int mes, int anio);
-	void listarPorCategoria();
+	vector<int> listarPor(int mes, int anio);
+	vector<int> listarPor(int categoria);
 	int cantidadRegistros();
 };

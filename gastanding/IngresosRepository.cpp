@@ -7,15 +7,48 @@ using namespace std;
 
 void IngresosRepository::agregar() 
 {
-	Ingreso ingreso;
+	Ingreso ingreso, aux;
 	ingreso.cargar();
-	if (ingreso.grabarEnDisco(_fileName)) mostrarMensaje("Ingreso agregado exitosamente", 15, 2);
-	else mostrarMensaje("No se pude agregar el ingreso", 15, 4);
+
+    int cantIngresos = cantidadRegistros();
+    bool existe = false;
+    for (int i = 0; i < cantIngresos; i++)
+    {
+        aux.leerDeDisco(i, _fileName);
+        if (aux.equals(ingreso)) {
+            existe = true;
+            break;
+        };
+    }
+
+    if (existe) {
+        mostrarMensaje("El ingreso ya existe. No puede volver a agregarse", 15, 4);
+    }
+    else {
+        if (ingreso.grabarEnDisco(_fileName)) mostrarMensaje("Ingreso agregado exitosamente", 15, 2);
+        else mostrarMensaje("No se pudo agregar el ingreso", 15, 4);
+    }
 };
 
-void IngresosRepository::eliminar()
+int IngresosRepository::buscarPor(float monto, Fecha fecha, int categoria, string concepto)
 {
-	cout << "Ingreso eliminado" << endl;
+    Ingreso aux;
+    int cantIngresos = cantidadRegistros();
+
+    for (int i = 0; i < cantIngresos; i++)
+    {
+        aux.leerDeDisco(i, _fileName);
+        if (
+            aux.getEstado() == true && 
+            aux.getMonto() == monto &&
+            aux.getFecha().equals(fecha) &&
+            aux.getCategoria() == categoria &&
+            aux.getConcepto() == concepto
+            ) {
+            return i;
+        }
+    }
+    return -1;
 }
 
 vector<int> IngresosRepository::buscarPor(float monto)
@@ -27,11 +60,10 @@ vector<int> IngresosRepository::buscarPor(float monto)
     for (int i = 0; i < cantIngresos; i++)
     {
         aux.leerDeDisco(i, _fileName);
-        if (aux.getMonto() == monto) {
+        if (aux.getEstado() == true && aux.getMonto() == monto) {
             posiciones.push_back(i);
         }
     }
-
     return posiciones;
 }
 
@@ -44,13 +76,13 @@ vector<int> IngresosRepository::buscarPor(float montoMin, float montoMax)
     for (int i = 0; i < cantIngresos; i++)
     {
         aux.leerDeDisco(i, _fileName);
-        if (aux.getMonto() <= montoMin || aux.getMonto() >= montoMax) {
-            posiciones.push_back(i);
+        if (aux.getEstado() == true) {
+            if (aux.getMonto() >= montoMin || aux.getMonto() <= montoMax) {
+                posiciones.push_back(i);
+            }
         }
     }
-
     return posiciones;
-
 }
 
 vector<int> IngresosRepository::buscarPor(Fecha fecha)
@@ -62,36 +94,49 @@ vector<int> IngresosRepository::buscarPor(Fecha fecha)
     for (int i = 0; i < cantIngresos; i++)
     {
         aux.leerDeDisco(i, _fileName);
-        if (aux.getFecha().equals(fecha)) {
+        if (aux.getEstado() == true && aux.getFecha().equals(fecha)) {
             posiciones.push_back(i);
         }
     }
-
     return posiciones;
 }
 
-void IngresosRepository::listarPorMesYAnio(int mes, int anio)
+vector<int> IngresosRepository::listarPor(int mes, int anio)
 {
     Ingreso aux;
     int cantIngresos = cantidadRegistros();
+    vector<int> posiciones;
 
     for (int i = 0; i < cantIngresos; i++)
     {
         aux.leerDeDisco(i, _fileName);
-        if (aux.getFecha().getAnio() == anio && aux.getFecha().getMes() == mes) {
-            aux.mostrar();
+        if (aux.getEstado() == true && aux.getFecha().getAnio() == anio && aux.getFecha().getMes() == mes) {
+            posiciones.push_back(i);
         }
     }
+    return posiciones;
 }
 
-void IngresosRepository::listarPorCategoria()
+vector<int> IngresosRepository::listarPor(int categoria)
 {
+    Ingreso aux;
+    int cantIngresos = cantidadRegistros();
+    vector<int> posiciones;
+
+    for (int i = 0; i < cantIngresos; i++)
+    {
+        aux.leerDeDisco(i, _fileName);
+        if (aux.getEstado() == true && aux.getCategoria() == categoria) {
+            posiciones.push_back(i);
+        }
+    }
+    return posiciones;
 }
 
 int IngresosRepository::cantidadRegistros() {
     FILE* p;
     errno_t err;
-    err = fopen_s(&p, "ingresos.dat", "rb");
+    err = fopen_s(&p, _fileName.c_str(), "rb");
     if (err != 0) { return 0; };
     size_t bytes;
     int cant_reg;
