@@ -1,6 +1,6 @@
 #include "Ingreso.h"
 #include "menues.h"
-#include "base_functions.h"
+#include "functions.h"
 #include <iostream>
 
 using namespace std;

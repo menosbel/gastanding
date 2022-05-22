@@ -139,7 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="base_functions.cpp" />
+    <ClCompile Include="functions.cpp" />
     <ClCompile Include="Fecha.cpp" />
     <ClCompile Include="gastanding.cpp" />
     <ClCompile Include="Ingreso.cpp" />
@@ -148,7 +148,7 @@
     <ClCompile Include="menues.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="base_functions.h" />
+    <ClInclude Include="functions.h" />
     <ClInclude Include="Fecha.h" />
     <ClInclude Include="Ingreso.h" />
     <ClInclude Include="IngresosRepository.h" />

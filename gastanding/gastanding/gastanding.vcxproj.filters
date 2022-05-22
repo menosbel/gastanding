@@ -19,18 +19,21 @@
     <Filter Include="Header Files\Ingresos">
       <UniqueIdentifier>{6e160b06-7853-4553-9565-b3db10080683}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Base">
+      <UniqueIdentifier>{de2b5648-f19b-4fda-b647-5080de1e8e45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Menues">
+      <UniqueIdentifier>{ed43c6bb-b0b8-463e-96fe-6d918ad3371a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Base">
+      <UniqueIdentifier>{e63a2b5f-863b-41db-bb6d-73f69b23d55b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Menues">
+      <UniqueIdentifier>{91c81377-bbbd-4065-909c-6567b164b0b4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="gastanding.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="menues.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="base_functions.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Fecha.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Ingreso.cpp">
@@ -42,23 +45,17 @@
     <ClCompile Include="IngresosRepository.cpp">
       <Filter>Source Files\Ingresos</Filter>
     </ClCompile>
+    <ClCompile Include="Fecha.cpp">
+      <Filter>Source Files\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="functions.cpp">
+      <Filter>Source Files\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="menues.cpp">
+      <Filter>Source Files\Menues</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="menues.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="base_functions.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Fecha.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="rlutil.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MenuNames.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="IngresosHandler.h">
       <Filter>Header Files\Ingresos</Filter>
     </ClInclude>
@@ -67,6 +64,21 @@
     </ClInclude>
     <ClInclude Include="Ingreso.h">
       <Filter>Header Files\Ingresos</Filter>
+    </ClInclude>
+    <ClInclude Include="functions.h">
+      <Filter>Header Files\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Fecha.h">
+      <Filter>Header Files\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="rlutil.h">
+      <Filter>Header Files\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="menues.h">
+      <Filter>Header Files\Menues</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuNames.h">
+      <Filter>Header Files\Menues</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

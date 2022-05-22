@@ -1,7 +1,7 @@
 #include "IngresosHandler.h"
 #include "menues.h"
 #include "rlutil.h"
-#include "base_functions.h"
+#include "functions.h"
 
 bool IngresosHandler::exec()
 {

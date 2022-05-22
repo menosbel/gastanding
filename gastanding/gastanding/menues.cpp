@@ -2,7 +2,7 @@
 #include "menues.h"
 #include "IngresosRepository.h"
 #include "rlutil.h"
-#include "base_functions.h"
+#include "functions.h"
 
 using namespace std;
 

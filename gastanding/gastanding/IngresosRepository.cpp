@@ -1,5 +1,5 @@
 #include "IngresosRepository.h"
-#include "base_functions.h"
+#include "functions.h"
 #include "Ingreso.h"
 #include <iostream>
 
