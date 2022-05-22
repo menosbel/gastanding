@@ -13,9 +13,9 @@ public:
 	void agregar();
 	void eliminar();
 	vector<int> buscarPor(float monto);
-	void buscarPor(float monto_min, float monto_max);
-	void buscarPor(Fecha fecha);
-	void listarPorMes(string mes);
+	vector<int> buscarPor(float montoMin, float montoMax);
+	vector<int> buscarPor(Fecha fecha);
+	void listarPorMesYAnio(string mes);
 	void listarPorCategoria();
 	int cantidadRegistros();
 };

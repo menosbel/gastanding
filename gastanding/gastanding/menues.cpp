@@ -2,9 +2,9 @@
 #include "menues.h"
 #include "IngresosRepository.h"
 #include "rlutil.h"
+#include "base_functions.h"
 
 using namespace std;
-
 
 int renderMenuEntidad(string nombre)
 {
@@ -44,10 +44,9 @@ int renderMenuBuscar(string nombre)
     int opcion;
     rlutil::cls();
     cout << "--- BUSCAR " << nombre << " --- " << endl;
-    cout << "1. Por categoría" << endl;
-    cout << "2. Por concepto" << endl;
+    cout << "1. Por fecha" << endl;
+    cout << "2. Por rango de montos" << endl;
     cout << "3. Por monto exacto" << endl;
-    cout << "4. Por rango de montos" << endl;
     cout << "0. Salir" << endl << endl;
     cout << "Ingrese una opción: ";
     cin >> opcion;
@@ -61,9 +60,8 @@ int renderMenuListas(string nombre)
     int opcion;
     rlutil::cls();
     cout << "--- LISTAR " << nombre << " --- " << endl;
-    cout << "1. Por mes" << endl;
+    cout << "1. Por mes y año" << endl;
     cout << "2. Por categoría" << endl;
-    cout << "3. Por concepto" << endl;
     cout << "0. Salir" << endl << endl;
     cout << "Ingrese una opción: ";
     cin >> opcion;

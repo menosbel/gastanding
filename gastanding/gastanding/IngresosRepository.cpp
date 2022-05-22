@@ -35,15 +35,42 @@ vector<int> IngresosRepository::buscarPor(float monto)
     return posiciones;
 }
 
-void IngresosRepository::buscarPor(float monto_min, float monto_max)
+vector<int> IngresosRepository::buscarPor(float montoMin, float montoMax)
 {
+    Ingreso aux;
+    int cantIngresos = cantidadRegistros();
+    vector<int> posiciones;
+
+    for (int i = 0; i < cantIngresos; i++)
+    {
+        aux.leerDeDisco(i, _fileName);
+        if (aux.getMonto() <= montoMin || aux.getMonto() >= montoMax) {
+            posiciones.push_back(i);
+        }
+    }
+
+    return posiciones;
+
 }
 
-void IngresosRepository::buscarPor(Fecha fecha)
+vector<int> IngresosRepository::buscarPor(Fecha fecha)
 {
+    Ingreso aux;
+    int cantIngresos = cantidadRegistros();
+    vector<int> posiciones;
+
+    for (int i = 0; i < cantIngresos; i++)
+    {
+        aux.leerDeDisco(i, _fileName);
+        if (aux.getFecha().equals(fecha)) {
+            posiciones.push_back(i);
+        }
+    }
+
+    return posiciones;
 }
 
-void IngresosRepository::listarPorMes(string mes)
+void IngresosRepository::listarPorMesYAnio(string mes)
 {
 }
 

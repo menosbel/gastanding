@@ -13,6 +13,7 @@ private:
 	bool _estado;
 public:
 	float getMonto() { return _monto; };
+	Fecha getFecha() { return _fecha; };
 	void cargar();
 	void mostrar();
 	bool leerDeDisco(int pos, string fileName);

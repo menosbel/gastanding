@@ -118,9 +118,52 @@ void Fecha::cargar()
 	};
 
 	while (!guardo_anio) {
-		std::cout << "Anio: ";
+		std::cout << "Año: ";
 		std::cin >> anio;
 		guardo_anio = setAnio(anio);
 	};
+}
 
+std::string parseDayOfWeek(int numDay) {
+	switch (numDay) {
+	case 0:
+		return "Domingo";
+	case 1:
+		return "Lunes";
+	case 2:
+		return "Martes";
+	case 3:
+		return "Miercoles";
+	case 4:
+		return "Jueves";
+	case 5:
+		return "Viernes";
+	case 6:
+		return "Sabado";
+	default:
+		return "Dia inexistente";
+	}
+}
+
+std::string Fecha::dia_semana()
+{
+	time_t rawtime;
+	time(&rawtime);
+
+	struct tm timeinfo;
+	localtime_s(&timeinfo, &rawtime);
+	timeinfo.tm_year = _anio - 1900;
+	timeinfo.tm_mon = _mes - 1;
+	timeinfo.tm_mday = _dia;
+
+	mktime(&timeinfo);
+
+	int dayOfWeek = timeinfo.tm_wday;
+	return parseDayOfWeek(dayOfWeek);
+}
+
+bool Fecha::equals(Fecha otraFecha)
+{
+	if (otraFecha._anio == _anio && otraFecha._mes == _mes && otraFecha._dia == _dia) return true;
+	else return false;
 }

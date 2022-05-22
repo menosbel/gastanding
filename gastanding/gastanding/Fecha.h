@@ -19,5 +19,7 @@ public:
 	int setAnio(int valor);
 	void mostrar();
 	void cargar();
+	std::string dia_semana();
+	bool equals(Fecha otraFecha);
 };
 
