@@ -145,6 +145,9 @@
     <ClCompile Include="Ingreso.cpp" />
     <ClCompile Include="IngresosRepository.cpp" />
     <ClCompile Include="IngresosHandler.cpp" />
+    <ClCompile Include="Inversion.cpp" />
+    <ClCompile Include="InversionesHandler.cpp" />
+    <ClCompile Include="InversionesRepository.cpp" />
     <ClCompile Include="menues.cpp" />
     <ClCompile Include="tables.cpp" />
   </ItemGroup>
@@ -154,6 +157,9 @@
     <ClInclude Include="Ingreso.h" />
     <ClInclude Include="IngresosRepository.h" />
     <ClInclude Include="IngresosHandler.h" />
+    <ClInclude Include="Inversion.h" />
+    <ClInclude Include="InversionesHandler.h" />
+    <ClInclude Include="InversionesRepository.h" />
     <ClInclude Include="menues.h" />
     <ClInclude Include="MenuNames.h" />
     <ClInclude Include="rlutil.h" />

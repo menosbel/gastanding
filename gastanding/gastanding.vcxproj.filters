@@ -31,6 +31,12 @@
     <Filter Include="Source Files\Output">
       <UniqueIdentifier>{91c81377-bbbd-4065-909c-6567b164b0b4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Inversiones">
+      <UniqueIdentifier>{cd13eed6-d339-452e-b99d-c9e7b7c18354}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Inversiones">
+      <UniqueIdentifier>{c8fe991b-f642-412d-8445-fb439ffe47f5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="gastanding.cpp">
@@ -56,6 +62,15 @@
     </ClCompile>
     <ClCompile Include="tables.cpp">
       <Filter>Source Files\Output</Filter>
+    </ClCompile>
+    <ClCompile Include="Inversion.cpp">
+      <Filter>Source Files\Inversiones</Filter>
+    </ClCompile>
+    <ClCompile Include="InversionesRepository.cpp">
+      <Filter>Source Files\Inversiones</Filter>
+    </ClCompile>
+    <ClCompile Include="InversionesHandler.cpp">
+      <Filter>Source Files\Inversiones</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -85,6 +100,15 @@
     </ClInclude>
     <ClInclude Include="tables.h">
       <Filter>Header Files\Output</Filter>
+    </ClInclude>
+    <ClInclude Include="Inversion.h">
+      <Filter>Header Files\Inversiones</Filter>
+    </ClInclude>
+    <ClInclude Include="InversionesRepository.h">
+      <Filter>Header Files\Inversiones</Filter>
+    </ClInclude>
+    <ClInclude Include="InversionesHandler.h">
+      <Filter>Header Files\Inversiones</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
