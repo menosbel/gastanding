@@ -22,13 +22,13 @@
     <Filter Include="Header Files\Base">
       <UniqueIdentifier>{de2b5648-f19b-4fda-b647-5080de1e8e45}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Menues">
-      <UniqueIdentifier>{ed43c6bb-b0b8-463e-96fe-6d918ad3371a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Base">
       <UniqueIdentifier>{e63a2b5f-863b-41db-bb6d-73f69b23d55b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Menues">
+    <Filter Include="Header Files\Output">
+      <UniqueIdentifier>{ed43c6bb-b0b8-463e-96fe-6d918ad3371a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Output">
       <UniqueIdentifier>{91c81377-bbbd-4065-909c-6567b164b0b4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -52,7 +52,10 @@
       <Filter>Source Files\Base</Filter>
     </ClCompile>
     <ClCompile Include="menues.cpp">
-      <Filter>Source Files\Menues</Filter>
+      <Filter>Source Files\Output</Filter>
+    </ClCompile>
+    <ClCompile Include="tables.cpp">
+      <Filter>Source Files\Output</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -75,10 +78,13 @@
       <Filter>Header Files\Base</Filter>
     </ClInclude>
     <ClInclude Include="menues.h">
-      <Filter>Header Files\Menues</Filter>
+      <Filter>Header Files\Output</Filter>
     </ClInclude>
     <ClInclude Include="MenuNames.h">
-      <Filter>Header Files\Menues</Filter>
+      <Filter>Header Files\Output</Filter>
+    </ClInclude>
+    <ClInclude Include="tables.h">
+      <Filter>Header Files\Output</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

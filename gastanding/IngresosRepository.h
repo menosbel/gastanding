@@ -15,7 +15,7 @@ public:
 	vector<int> buscarPor(float monto);
 	vector<int> buscarPor(float montoMin, float montoMax);
 	vector<int> buscarPor(Fecha fecha);
-	void listarPorMesYAnio(string mes);
+	void listarPorMesYAnio(int mes, int anio);
 	void listarPorCategoria();
 	int cantidadRegistros();
 };

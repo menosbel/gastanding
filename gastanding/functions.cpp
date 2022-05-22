@@ -18,15 +18,15 @@ string categoriasIngresosToString(int num)
 	switch (num)
 	{
 	case 1:
-		"Relacion de dependencia";
+		return "Relacion de dependencia";
 	case 2:
-		"Freelance";
+		return "Freelance";
 	case 3:
-		"Otros";
+		return "Otros";
 	default:
+		return "Categoria inválida";
 		break;
-	}
-	return string();
+	};
 }
 
 void mostrarMensaje(string mensaje, int color, int colorFondo, int x, int y) {

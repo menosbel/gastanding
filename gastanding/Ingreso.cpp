@@ -1,9 +1,11 @@
+#include <iostream>
 #include "Ingreso.h"
 #include "menues.h"
 #include "functions.h"
-#include <iostream>
-
+#include "rlutil.h"
+#include "tables.h"
 using namespace std;
+
 
 void Ingreso::cargar()
 {
@@ -19,13 +21,15 @@ void Ingreso::cargar()
 
 }
 
-
 void Ingreso::mostrar() {
-	cout << "Monto: $" << _monto << endl;
-	cout << "Concepto: " << _concepto << endl;
-	cout << "Categoria: " << categoriasIngresosToString(_categoria) << endl;
-	cout << "Fecha: ";
-	_fecha.mostrar();
+
+	const int nameWidth = 30;
+	const int numWidth = 15;
+
+	printElement(_monto, numWidth);
+	printElement(_concepto, nameWidth);
+	printElement(categoriasIngresosToString(_categoria), nameWidth);
+	printElement(_fecha.toString(), numWidth);
 }
 
 bool Ingreso::grabarEnDisco(string fileName)

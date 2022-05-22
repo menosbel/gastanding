@@ -98,6 +98,13 @@ void Fecha::mostrar()
 	std::cout << ZeroPadNumber(_dia) << "/" << ZeroPadNumber(_mes) << "/" << _anio << std::endl;
 }
 
+string Fecha::toString()
+{
+	ostringstream oss;
+	oss << ZeroPadNumber(_dia) << "/" << ZeroPadNumber(_mes) << "/" << getAnio();
+	return oss.str();
+}
+
 void Fecha::cargar()
 {
 	int dia, mes, anio;

@@ -70,8 +70,18 @@ vector<int> IngresosRepository::buscarPor(Fecha fecha)
     return posiciones;
 }
 
-void IngresosRepository::listarPorMesYAnio(string mes)
+void IngresosRepository::listarPorMesYAnio(int mes, int anio)
 {
+    Ingreso aux;
+    int cantIngresos = cantidadRegistros();
+
+    for (int i = 0; i < cantIngresos; i++)
+    {
+        aux.leerDeDisco(i, _fileName);
+        if (aux.getFecha().getAnio() == anio && aux.getFecha().getMes() == mes) {
+            aux.mostrar();
+        }
+    }
 }
 
 void IngresosRepository::listarPorCategoria()

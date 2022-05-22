@@ -2,6 +2,7 @@
 #include "menues.h"
 #include "rlutil.h"
 #include "functions.h"
+#include "tables.h"
 
 bool IngresosHandler::exec()
 {
@@ -40,6 +41,7 @@ void IngresosHandler::mostrarRegistrosPor(vector<int> posiciones)
 {
     Ingreso aux;
 
+    printIngresosHeader();
     for (int i = 0; i < posiciones.size(); i++)
     {
         aux.leerDeDisco(i, _fileName);

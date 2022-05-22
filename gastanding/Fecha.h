@@ -17,7 +17,11 @@ public:
 	int setDia(int valor);
 	int setMes(int valor);
 	int setAnio(int valor);
+	int getDia() { return _dia; };
+	int getMes() { return _mes; };
+	int getAnio() { return _anio; };
 	void mostrar();
+	std::string toString();
 	void cargar();
 	std::string dia_semana();
 	bool equals(Fecha otraFecha);

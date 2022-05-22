@@ -146,6 +146,7 @@
     <ClCompile Include="IngresosRepository.cpp" />
     <ClCompile Include="IngresosHandler.cpp" />
     <ClCompile Include="menues.cpp" />
+    <ClCompile Include="tables.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="functions.h" />
@@ -156,6 +157,7 @@
     <ClInclude Include="menues.h" />
     <ClInclude Include="MenuNames.h" />
     <ClInclude Include="rlutil.h" />
+    <ClInclude Include="tables.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
