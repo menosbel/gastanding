@@ -53,8 +53,6 @@ int main()
         mostrarMensaje("** Muchas gracias por usar Gastanding **", 15, 13);
     }
 
-    //esto es pa probar el commit :D
-
     rlutil::anykey();
 
     return 0;
