@@ -18,9 +18,11 @@ bool IngresosHandler::exec()
         {
         case 1:
             _ingresos.agregar();
+            rlutil::anykey();
             break;
         case 2:
             eliminarIngreso();
+            rlutil::anykey();
             break;
         case 3:
             buscarIngresos();
@@ -30,11 +32,10 @@ bool IngresosHandler::exec()
             break;
         case 0:
             return false;
+            break;
         default:
             break;
         }
-        rlutil::anykey();
-        rlutil::cls();
     }
 }
 
@@ -47,12 +48,15 @@ void IngresosHandler::buscarIngresos()
     {
     case 1:
         mostrarPorFecha();
+        rlutil::anykey();
         break;
     case 2:
         mostrarPorRangoMontos();
+        rlutil::anykey();
         break;
     case 3:
         mostrarPorMonto();
+        rlutil::anykey();
         break;
     case 0:
         break;
@@ -70,9 +74,11 @@ void IngresosHandler::listarIngresos()
     {
     case 1:
         mostrarPorMesYAnio();
+        rlutil::anykey();
         break;
     case 2:
         mostrarPorCategoria();
+        rlutil::anykey();
         break;
     case 0:
         break;

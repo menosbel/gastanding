@@ -10,7 +10,9 @@ int renderMenuEntidad(string nombre)
 {
     int opcion;
     rlutil::cls();
-    cout << "---" << nombre << "--- " << endl;
+    cout << "---------------------------" << endl;
+    cout << "\t" << nombre << endl;
+    cout << "---------------------------" << endl;
     cout << "1. Añadir" << endl;
     cout << "2. Eliminar" << endl;
     cout << "3. Buscar" << endl;
@@ -26,8 +28,9 @@ int renderMenuInformes()
 {
     int opcion;
     rlutil::cls();
-    cout << "--- INFORMES --- " << endl;
-    cout << "1. Balance mensual" << endl;
+    cout << "---------------------------" << endl;
+    cout << "\t" << "INFORMES" << endl;
+    cout << "---------------------------" << endl;    cout << "1. Balance mensual" << endl;
     cout << "2. Balance anual" << endl;
     cout << "3. Gastos por categoría" << endl;
     cout << "4. Comparación de gastos interanual por categoría" << endl;
@@ -43,7 +46,9 @@ int renderMenuBuscar(string nombre)
 {
     int opcion;
     rlutil::cls();
-    cout << "--- BUSCAR " << nombre << " --- " << endl;
+    cout << "-------------------------------------" << endl;
+    cout << "\t" << "BUSCAR " << nombre << endl;
+    cout << "-------------------------------------" << endl;
     cout << "1. Por fecha" << endl;
     cout << "2. Por rango de montos" << endl;
     cout << "3. Por monto exacto" << endl;
@@ -54,12 +59,13 @@ int renderMenuBuscar(string nombre)
     return opcion;
 }
 
-
 int renderMenuListas(string nombre)
 {
     int opcion;
     rlutil::cls();
-    cout << "--- LISTAR " << nombre << " --- " << endl;
+    cout << "-------------------------------------" << endl;
+    cout << "\t" << "LISTAR " << nombre << endl;
+    cout << "-------------------------------------" << endl;
     cout << "1. Por mes y año" << endl;
     cout << "2. Por categoría" << endl;
     cout << "0. Salir" << endl << endl;

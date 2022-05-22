@@ -42,7 +42,8 @@ bool Ingreso::equals(Ingreso otro)
 		getMonto() == otro.getMonto() &&
 		getFecha().equals(otro.getFecha()) &&
 		getCategoria() == otro.getCategoria() &&
-		getConcepto() == otro.getConcepto()
+		getConcepto() == otro.getConcepto() &&
+		getEstado() == otro.getEstado()
 		) return true;
 	return false;
 }
