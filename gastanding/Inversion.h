@@ -1,6 +1,8 @@
 #pragma once
+#include <iostream>
 #include <string>
 #include "Fecha.h"
+#include "tables.h"
 
 using namespace std;
 
@@ -13,6 +15,12 @@ private:
 	Fecha _fecha_cobro;
 	bool _estado;
 public:
+	void cargar();
+	void mostrar();
+
+	bool leerDeDisco(int pos, string fileName);
+	bool grabarEnDisco(string fileName);
+
 	float getMonto();
 	float getInteres();
 	string getEntidad();
@@ -24,10 +32,4 @@ public:
 	void setEntidad(string entidad);
 	void setFecha();
 	void setEstado(bool estado);
-
-	void cargar();
-	void mostrar();
-
-	bool leerDeDisco(int pos, string fileName);
-	bool grabarEnDisco(string fileName);
 };
