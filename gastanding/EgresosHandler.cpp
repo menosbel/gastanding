@@ -109,33 +109,14 @@ void EgresosHandler::eliminarEgreso()
     categoria = renderMenuCategoriasEgresos();
     medioPago = renderMenuMediosPago();
     fecha.cargar();
-    cout << "Monto: $";
-    cin >> monto;
-    cout << "Concepto: ";
-    cin >> concepto;
+    monto = ingresoMonto();
+    concepto = ingresoConcepto();
     cout << endl << endl;
-
 
     int posicion = _egresos.buscarPor(monto, fecha, categoria, concepto, medioPago);
     if (posicion == -1) mostrarMensaje("No se encontró el gasto", 15, 4);
     else {
-        Egreso aux;
-        char confirmacion;
-        bool guardo = false;
-
-        aux.leerDeDisco(posicion, _fileName);
-        printEgresosHeader();
-        aux.mostrar();
-        cout << endl << endl;
-        cout << "¿Desea eliminar el registro? (S/N): ";
-        cin >> confirmacion;
-        if (tolower(confirmacion) == 's') {
-            aux.setEstado(false);
-            guardo = aux.grabarEnDisco(posicion, _fileName);
-        }
-        rlutil::cls();
-        if (guardo) mostrarMensaje("Gasto eliminado exitosamente", 15, 2);
-        else mostrarMensaje("Ocurrió un error. El gasto no ha sido eliminado", 15, 4);
+        _egresos.eliminar(posicion);
     }
 }
 

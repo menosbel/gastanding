@@ -4,7 +4,7 @@
 #include "functions.h"
 #include "ingresoDatos.h"
 #include "tables.h"
-
+#include <iostream>
 using namespace std;
 
 bool IngresosHandler::exec()
@@ -98,33 +98,14 @@ void IngresosHandler::eliminarIngreso()
     string concepto;
     categoria = renderMenuCategoriasIngresos();
     fecha.cargar();
-    cout << "Monto: $";
-    cin >> monto;
-    cout << "Concepto: ";
-    cin >> concepto;
+    monto = ingresoMonto();
+    concepto = ingresoConcepto();
     cout << endl << endl;
-
 
     int posicion = _ingresos.buscarPor(monto, fecha, categoria, concepto);
     if (posicion == -1) mostrarMensaje("No se encontró el ingreso", 15, 4);
     else {
-        Ingreso aux;
-        char confirmacion;
-        bool guardo = false;
-
-        aux.leerDeDisco(posicion, _fileName);
-        printIngresosHeader();
-        aux.mostrar();
-        cout << endl << endl;
-        cout << "¿Desea eliminar el registro? (S/N): ";
-        cin >> confirmacion;
-        if (tolower(confirmacion) == 's') {
-            aux.setEstado(false);
-            guardo = aux.grabarEnDisco(posicion, _fileName);
-        }
-        rlutil::cls();
-        if (guardo) mostrarMensaje("Ingreso eliminado exitosamente", 15, 2);
-        else mostrarMensaje("Ocurrió un error. El ingreso no ha sido eliminado", 15, 4);
+        _ingresos.eliminar(posicion);
     }
 }
 

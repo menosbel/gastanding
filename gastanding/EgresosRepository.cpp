@@ -1,5 +1,7 @@
 #include "EgresosRepository.h"
 #include "functions.h"
+#include "tables.h"
+#include "rlutil.h"
 #include "Egreso.h"
 #include <iostream>
 
@@ -26,6 +28,27 @@ void EgresosRepository::agregar()
         if (egreso.grabarEnDisco(_fileName)) mostrarMensaje("Gasto agregado exitosamente", 15, 2);
         else mostrarMensaje("No se pudo agregar el gasto", 15, 4);
     }
+}
+
+void EgresosRepository::eliminar(int pos)
+{
+    Egreso aux;
+    char confirmacion;
+    bool guardo = false;
+
+    aux.leerDeDisco(pos, _fileName);
+    printEgresosHeader();
+    aux.mostrar();
+    cout << endl << endl;
+    cout << "¿Desea eliminar el registro? (S/N): ";
+    cin >> confirmacion;
+    if (tolower(confirmacion) == 's') {
+        aux.setEstado(false);
+        guardo = aux.grabarEnDisco(pos, _fileName);
+    }
+    rlutil::cls();
+    if (guardo) mostrarMensaje("Gasto eliminado exitosamente", 15, 2);
+    else mostrarMensaje("Ocurrió un error. El gasto no ha sido eliminado", 15, 4);
 }
 
 int EgresosRepository::cantidadRegistros() {

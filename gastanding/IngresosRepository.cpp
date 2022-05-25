@@ -1,5 +1,7 @@
 #include "IngresosRepository.h"
 #include "functions.h"
+#include "tables.h"
+#include "rlutil.h"
 #include "Ingreso.h"
 #include <iostream>
 
@@ -29,6 +31,27 @@ void IngresosRepository::agregar()
         else mostrarMensaje("No se pudo agregar el ingreso", 15, 4);
     }
 };
+
+void IngresosRepository::eliminar(int pos)
+{
+    Ingreso aux;
+    char confirmacion;
+    bool guardo = false;
+
+    aux.leerDeDisco(pos, _fileName);
+    printIngresosHeader();
+    aux.mostrar();
+    cout << endl << endl;
+    cout << "¿Desea eliminar el registro? (S/N): ";
+    cin >> confirmacion;
+    if (tolower(confirmacion) == 's') {
+        aux.setEstado(false);
+        guardo = aux.grabarEnDisco(pos, _fileName);
+    }
+    rlutil::cls();
+    if (guardo) mostrarMensaje("Ingreso eliminado exitosamente", 15, 2);
+    else mostrarMensaje("Ocurrió un error. El ingreso no ha sido eliminado", 15, 4);
+}
 
 int IngresosRepository::cantidadRegistros() {
     FILE* p;

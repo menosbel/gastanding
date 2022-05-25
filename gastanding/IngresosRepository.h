@@ -10,10 +10,9 @@ class IngresosRepository
 private:
 	string _fileName;
 public:
-	IngresosRepository(string value) {
-		_fileName = value;
-	};
+	IngresosRepository(string value) { _fileName = value; };
 	void agregar();
+	void eliminar(int pos);
 	int cantidadRegistros();
 	int buscarPor(float monto, Fecha fecha, int categoria, string concepto);
 	vector<int> buscarPor(float monto);

@@ -60,3 +60,11 @@ int ingresoAnio()
     }
     return anio;
 }
+
+string ingresoConcepto()
+{
+    string concepto;
+    cout << "Concepto: ";
+    cin >> concepto;
+    return concepto;
+}

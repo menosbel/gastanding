@@ -12,6 +12,7 @@ private:
 public:
 	EgresosRepository(string value) { _fileName = value; };
 	void agregar();
+	void eliminar(int pos);
 	int cantidadRegistros();
 	int buscarPor(float monto, Fecha fecha, int categoria, string concepto, int medioPago);
 	vector<int> buscarPor(Fecha fecha);

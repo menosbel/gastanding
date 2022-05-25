@@ -39,9 +39,7 @@ int main()
         switch (opcion)
         {
         case 1:
-            rlutil::setBackgroundColor(1);
             ingresosHandler.exec();
-            rlutil::setBackgroundColor(0);
             break;
         case 2:
             egresosHandler.exec();
