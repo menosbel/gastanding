@@ -16,6 +16,7 @@ void Inversion::cargar()
 	_fecha_cobro.cargar();
 
 	cout << "Entidad: ";
+	cin.ignore();
 	getline(cin, entidad);
 	cin.ignore();
 	this->setEntidad(entidad);
