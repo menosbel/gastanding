@@ -10,7 +10,7 @@ bool InversionesHandler::exec()
         switch (opcion)
         {
         case 1:
-            _inversion.agregar();
+            _inversion_repo.agregar();
             break;
         default:
             break;

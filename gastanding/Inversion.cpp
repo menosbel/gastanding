@@ -1,5 +1,81 @@
 #include "Inversion.h"
 
+void Inversion::setMontoFinal(float monto, float interes)
+{
+	_monto_final = monto * ((interes / 100) + 1);
+}
+
+void Inversion::cargar()
+{
+	float monto, interes;
+	string entidad;
+
+	cout << "Monto invertido: $";
+	cin >> monto;
+	this->setMonto(monto);
+
+	cout << "Tasa de interes: %";
+	cin >> interes;
+	this->setInteres(interes);
+
+	_fecha_cobro.cargar();
+
+	cout << "Entidad: ";
+	cin.ignore();
+	getline(cin, entidad);
+	this->setEntidad(entidad);
+
+	this->setMontoFinal(monto, interes);
+	this->setEstado(true);
+}
+
+void Inversion::mostrar()
+{
+	const int nameWidth = 30;
+	const int numWidth = 15;
+
+	printElement(_monto, numWidth);
+	printElement(_interes, numWidth);
+	printElement(_entidad, nameWidth);
+	printElement(_fecha_cobro.toString(), numWidth);
+}
+
+bool Inversion::grabarEnDisco(string fileName)
+{
+	char* file = new char[fileName.length() + 1]; 
+	strcpy_s(file, fileName.length() + 1, fileName.c_str());
+
+	FILE* p;
+	errno_t err = fopen_s(&p, file, "ab");
+	if (err != 0) 
+		return false;
+
+	bool guardo = fwrite(this, sizeof(Inversion), 1, p);
+	fclose(p);
+
+	delete[] file;
+
+	return guardo;
+}
+
+bool Inversion::leerDeDisco(int pos, string fileName)
+{
+	char* file = new char[fileName.length() + 1];
+	strcpy_s(file, fileName.length() + 1, fileName.c_str());
+
+	FILE* p;
+	errno_t err = fopen_s(&p, file, "rb");
+	if (err != 0)
+		return false;
+
+	fseek(p, sizeof(Inversion) * pos, 0);
+	int leyo = fread(this, sizeof(Inversion), 1, p);
+	fclose(p);
+
+	delete[] file;
+	return leyo;
+}
+
 float Inversion::getMonto()
 {
 	return _monto;
@@ -20,6 +96,11 @@ Fecha Inversion::getFecha()
 	return _fecha_cobro;
 }
 
+float Inversion::getMontoFinal()
+{
+	return _monto_final;
+}
+
 bool Inversion::getEstado()
 {
 	return _estado;
@@ -37,7 +118,7 @@ void Inversion::setInteres(float interes)
 
 void Inversion::setEntidad(string entidad)
 {
-	strcpy_s(_entidad, entidad.c_str());
+	strcpy_s(_entidad, 40, entidad.c_str());
 }
 
 void Inversion::setFecha()
@@ -48,22 +129,4 @@ void Inversion::setFecha()
 void Inversion::setEstado(bool estado)
 {
 	_estado = estado;
-}
-
-void Inversion::cargar()
-{
-}
-
-void Inversion::mostrar()
-{
-}
-
-bool Inversion::leerDeDisco(int pos, string fileName)
-{
-	return false;
-}
-
-bool Inversion::grabarEnDisco(string fileName)
-{
-	return false;
 }
