@@ -1,5 +1,10 @@
 #include "Inversion.h"
 
+void Inversion::setMontoFinal(float monto, float interes)
+{
+	_monto_final = monto * ((interes / 100) + 1);
+}
+
 void Inversion::cargar()
 {
 	float monto, interes;
@@ -18,10 +23,10 @@ void Inversion::cargar()
 	cout << "Entidad: ";
 	cin.ignore();
 	getline(cin, entidad);
-	cin.ignore();
 	this->setEntidad(entidad);
 
-	setEstado(true);
+	this->setMontoFinal(monto, interes);
+	this->setEstado(true);
 }
 
 void Inversion::mostrar()
@@ -59,7 +64,7 @@ bool Inversion::leerDeDisco(int pos, string fileName)
 	strcpy_s(file, fileName.length() + 1, fileName.c_str());
 
 	FILE* p;
-	errno_t err = fopen_s(&p, file, "ab");
+	errno_t err = fopen_s(&p, file, "rb");
 	if (err != 0)
 		return false;
 
@@ -89,6 +94,11 @@ string Inversion::getEntidad()
 Fecha Inversion::getFecha()
 {
 	return _fecha_cobro;
+}
+
+float Inversion::getMontoFinal()
+{
+	return _monto_final;
 }
 
 bool Inversion::getEstado()

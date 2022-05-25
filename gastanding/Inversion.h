@@ -14,6 +14,9 @@ private:
 	char _entidad[40];
 	Fecha _fecha_cobro;
 	bool _estado;
+	float _monto_final;
+
+	void setMontoFinal(float monto, float interes);
 public:
 	void cargar();
 	void mostrar();
@@ -25,6 +28,7 @@ public:
 	float getInteres();
 	string getEntidad();
 	Fecha getFecha();
+	float getMontoFinal();
 	bool getEstado();
 	
 	void setMonto(float monto);

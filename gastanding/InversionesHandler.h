@@ -8,9 +8,8 @@ class InversionesHandler
 {
 private:
 	string _nombre = "INVERSIONES";
-	string _fileName = "inversiones.dat";
 
-	InversionesRepository _inversion;
+	InversionesRepository _inversion_repo;
 public:
 	bool exec();
 };
