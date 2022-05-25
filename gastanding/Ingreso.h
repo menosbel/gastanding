@@ -17,7 +17,7 @@ public:
 	int getCategoria() { return _categoria; };
 	string getConcepto() { return string(_concepto); };
 	bool getEstado() { return _estado; };
-	void setMonto(int valor) { _monto = valor; };
+	void setMonto(float valor) { _monto = valor; };
 	void setConcepto(string valor) { strcpy_s(_concepto, valor.c_str()); };
 	void setCategoria(int valor) { _categoria = valor; };
 	void setEstado(bool valor) { _estado = valor; };
