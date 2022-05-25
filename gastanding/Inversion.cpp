@@ -16,7 +16,8 @@ void Inversion::cargar()
 	_fecha_cobro.cargar();
 
 	cout << "Entidad: ";
-	cin >> entidad;
+	getline(cin, entidad);
+	cin.ignore();
 	this->setEntidad(entidad);
 
 	setEstado(true);
@@ -106,7 +107,7 @@ void Inversion::setInteres(float interes)
 
 void Inversion::setEntidad(string entidad)
 {
-	strcpy_s(_entidad, entidad.c_str());
+	strcpy_s(_entidad, 40, entidad.c_str());
 }
 
 void Inversion::setFecha()
