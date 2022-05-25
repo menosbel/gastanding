@@ -25,7 +25,40 @@ string categoriasIngresosToString(int num)
 		return "Otros";
 	default:
 		return "Categoria inválida";
-		break;
+	};
+}
+
+std::string categoriasEgresosToString(int num)
+{
+	switch (num)
+	{
+	case 1:
+		return "Supermercado";
+	case 2:
+		return "Hogar";
+	case 3:
+		return "Personal";
+	case 4:
+		return "Otros";
+	default:
+		return "Categoria inválida";
+	};
+}
+
+std::string mediosPagoToString(int num)
+{
+	switch (num)
+	{
+	case 1:
+		return "Efectivo";
+	case 2:
+		return "Tarjeta de débito";
+	case 3:
+		return "Tarjeta de crédito";
+	case 4:
+		return "Otros";
+	default:
+		return "Categoria inválida";
 	};
 }
 

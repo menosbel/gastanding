@@ -79,8 +79,8 @@ int menuCategoriasIngresos()
 {
     int opcion;
     rlutil::cls();
-    cout << "Elegi una categoria" << endl;
-    cout << "1. Relacion de dependencia" << endl;
+    cout << "Elegí una categoría" << endl;
+    cout << "1. Relación de dependencia" << endl;
     cout << "2. Freelance" << endl;
     cout << "3. Otros" << endl << endl;
     cout << "Ingrese una opción: ";
@@ -95,8 +95,64 @@ int renderMenuCategoriasIngresos() {
 
     while (opcion < 1 || opcion > 3)
     {
-        cout << "La opcion elegida es invalida. Vuelva a intentarlo" << endl << endl;
+        cout << "La opción elegida es invalida. Vuelva a intentarlo" << endl << endl;
         opcion = menuCategoriasIngresos();
+        rlutil::anykey();
+    }
+    return opcion;
+}
+
+int menuCategoriasEgresos()
+{
+    int opcion;
+    rlutil::cls();
+    cout << "Elegí una categoría" << endl;
+    cout << "1. Supermercado" << endl;
+    cout << "2. Hogar" << endl;
+    cout << "3. Personal" << endl;
+    cout << "4. Otros" << endl;
+    cout << "Ingrese una opción: ";
+    cin >> opcion;
+    rlutil::cls();
+    return opcion;
+}
+
+int renderMenuCategoriasEgresos() {
+    int opcion;
+    opcion = menuCategoriasEgresos();
+
+    while (opcion < 1 || opcion > 4)
+    {
+        cout << "La opción elegida es invalida. Vuelva a intentarlo" << endl << endl;
+        opcion = menuCategoriasEgresos();
+        rlutil::anykey();
+    }
+    return opcion;
+}
+
+int menuMediosPago()
+{
+    int opcion;
+    rlutil::cls();
+    cout << "Elegí un medio de pago" << endl;
+    cout << "1. Efectivo" << endl;
+    cout << "2. Tarjeta de débito" << endl;
+    cout << "3. Tarjeta de crédito" << endl;
+    cout << "4. Otros" << endl << endl;
+    cout << "Ingrese una opción: ";
+    cin >> opcion;
+    rlutil::cls();
+    return opcion;
+}
+
+int renderMenuMediosPago() {
+    int opcion;
+    opcion = menuMediosPago();
+
+    while (opcion < 1 || opcion > 4)
+    {
+        cout << "La opción elegida es invalida. Vuelva a intentarlo" << endl << endl;
+        opcion = menuMediosPago();
         rlutil::anykey();
     }
     return opcion;

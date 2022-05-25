@@ -1,24 +1,25 @@
 #pragma once
 #include <string>
-#include "IngresosRepository.h"
+#include "EgresosRepository.h"
 
 using namespace std;
 
-class IngresosHandler
+class EgresosHandler
 {
 private:
-	string _nombre = "INGRESOS";
-	string _fileName = "ingresos.dat";
-	IngresosRepository _ingresos = IngresosRepository(_fileName);
+	string _nombre = "EGRESOS";
+	string _fileName = "egresos.dat";
+	EgresosRepository _egresos = EgresosRepository(_fileName);
 public:
 	bool exec();
-	void eliminarIngreso();
 	void mostrarRegistrosPor(vector<int> posiciones);
-	void buscarIngresos();
-	void listarIngresos();
+	void eliminarEgreso();
+	void buscarEgresos();
+	void listarEgresos();
 	void mostrarPorFecha();
 	void mostrarPorRangoMontos();
 	void mostrarPorMonto();
 	void mostrarPorMesYAnio();
 	void mostrarPorCategoria();
 };
+

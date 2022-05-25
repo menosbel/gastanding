@@ -37,6 +37,12 @@
     <Filter Include="Header Files\Inversiones">
       <UniqueIdentifier>{c8fe991b-f642-412d-8445-fb439ffe47f5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Egresos">
+      <UniqueIdentifier>{eeb3e9b2-3371-4a4c-a5bb-509cf40e525d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Egresos">
+      <UniqueIdentifier>{53e765e8-cdb2-430e-b194-58eaa7c4902e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="gastanding.cpp">
@@ -71,6 +77,18 @@
     </ClCompile>
     <ClCompile Include="InversionesHandler.cpp">
       <Filter>Source Files\Inversiones</Filter>
+    </ClCompile>
+    <ClCompile Include="Egreso.cpp">
+      <Filter>Source Files\Egresos</Filter>
+    </ClCompile>
+    <ClCompile Include="EgresosHandler.cpp">
+      <Filter>Source Files\Egresos</Filter>
+    </ClCompile>
+    <ClCompile Include="EgresosRepository.cpp">
+      <Filter>Source Files\Egresos</Filter>
+    </ClCompile>
+    <ClCompile Include="ingresoDatos.cpp">
+      <Filter>Source Files\Output</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -109,6 +127,18 @@
     </ClInclude>
     <ClInclude Include="InversionesHandler.h">
       <Filter>Header Files\Inversiones</Filter>
+    </ClInclude>
+    <ClInclude Include="Egreso.h">
+      <Filter>Header Files\Egresos</Filter>
+    </ClInclude>
+    <ClInclude Include="EgresosHandler.h">
+      <Filter>Header Files\Egresos</Filter>
+    </ClInclude>
+    <ClInclude Include="EgresosRepository.h">
+      <Filter>Header Files\Egresos</Filter>
+    </ClInclude>
+    <ClInclude Include="ingresoDatos.h">
+      <Filter>Header Files\Output</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

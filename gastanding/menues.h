@@ -8,3 +8,5 @@ int renderMenuInformes();
 int renderMenuBuscar(string nombre);
 int renderMenuListas(string nombre);
 int renderMenuCategoriasIngresos();
+int renderMenuCategoriasEgresos();
+int renderMenuMediosPago();

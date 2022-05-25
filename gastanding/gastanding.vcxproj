@@ -139,10 +139,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Egreso.cpp" />
+    <ClCompile Include="EgresosHandler.cpp" />
+    <ClCompile Include="EgresosRepository.cpp" />
     <ClCompile Include="functions.cpp" />
     <ClCompile Include="Fecha.cpp" />
     <ClCompile Include="gastanding.cpp" />
     <ClCompile Include="Ingreso.cpp" />
+    <ClCompile Include="ingresoDatos.cpp" />
     <ClCompile Include="IngresosRepository.cpp" />
     <ClCompile Include="IngresosHandler.cpp" />
     <ClCompile Include="Inversion.cpp" />
@@ -152,9 +156,13 @@
     <ClCompile Include="tables.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Egreso.h" />
+    <ClInclude Include="EgresosHandler.h" />
+    <ClInclude Include="EgresosRepository.h" />
     <ClInclude Include="functions.h" />
     <ClInclude Include="Fecha.h" />
     <ClInclude Include="Ingreso.h" />
+    <ClInclude Include="ingresoDatos.h" />
     <ClInclude Include="IngresosRepository.h" />
     <ClInclude Include="IngresosHandler.h" />
     <ClInclude Include="Inversion.h" />

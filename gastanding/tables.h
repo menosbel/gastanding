@@ -8,5 +8,5 @@ template<typename T> void printElement(T t, const int& width)
 {
 	cout << left << setw(width) << setfill(' ') << t;
 }
-
 void printIngresosHeader();
+void printEgresosHeader();

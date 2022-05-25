@@ -30,6 +30,21 @@ void IngresosRepository::agregar()
     }
 };
 
+int IngresosRepository::cantidadRegistros() {
+    FILE* p;
+    errno_t err;
+    err = fopen_s(&p, _fileName.c_str(), "rb");
+    if (err != 0) { return 0; };
+    size_t bytes;
+    int cant_reg;
+
+    fseek(p, 0, SEEK_END);
+    bytes = ftell(p);
+    fclose(p);
+    cant_reg = bytes / sizeof(Ingreso);
+    return cant_reg;
+}
+
 int IngresosRepository::buscarPor(float monto, Fecha fecha, int categoria, string concepto)
 {
     Ingreso aux;
@@ -131,19 +146,4 @@ vector<int> IngresosRepository::listarPor(int categoria)
         }
     }
     return posiciones;
-}
-
-int IngresosRepository::cantidadRegistros() {
-    FILE* p;
-    errno_t err;
-    err = fopen_s(&p, _fileName.c_str(), "rb");
-    if (err != 0) { return 0; };
-    size_t bytes;
-    int cant_reg;
-
-    fseek(p, 0, SEEK_END);
-    bytes = ftell(p);
-    fclose(p);
-    cant_reg = bytes / sizeof(Ingreso);
-    return cant_reg;
 }

@@ -4,6 +4,7 @@
 #include "functions.h"
 #include "IngresosHandler.h"
 #include "InversionesHandler.h"
+#include "EgresosHandler.h"
 
 using namespace std;
 
@@ -11,6 +12,7 @@ int main()
 {
     IngresosHandler ingresosHandler;
     InversionesHandler inversionesHandler;
+    EgresosHandler egresosHandler;
 
     setlocale(LC_ALL, "spanish");
     rlutil::setColor(rlutil::WHITE);
@@ -42,6 +44,7 @@ int main()
             rlutil::setBackgroundColor(0);
             break;
         case 2:
+            egresosHandler.exec();
             break;
         case 3:
             break;

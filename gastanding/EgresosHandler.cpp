@@ -1,13 +1,11 @@
-#include "IngresosHandler.h"
+#include "EgresosHandler.h"
 #include "menues.h"
 #include "rlutil.h"
 #include "functions.h"
 #include "ingresoDatos.h"
 #include "tables.h"
 
-using namespace std;
-
-bool IngresosHandler::exec()
+bool EgresosHandler::exec()
 {
     int opcion;
     bool seguir = true;
@@ -20,18 +18,18 @@ bool IngresosHandler::exec()
         switch (opcion)
         {
         case 1:
-            _ingresos.agregar();
+            _egresos.agregar();
             rlutil::anykey();
             break;
         case 2:
-            eliminarIngreso();
+            eliminarEgreso();
             rlutil::anykey();
             break;
         case 3:
-            buscarIngresos();
+            buscarEgresos();
             break;
         case 4:
-            listarIngresos();
+            listarEgresos();
             break;
         case 0:
             return false;
@@ -42,7 +40,7 @@ bool IngresosHandler::exec()
     }
 }
 
-void IngresosHandler::buscarIngresos()
+void EgresosHandler::buscarEgresos()
 {
     int opcion;
     opcion = renderMenuBuscar(_nombre);
@@ -68,7 +66,7 @@ void IngresosHandler::buscarIngresos()
     }
 }
 
-void IngresosHandler::listarIngresos()
+void EgresosHandler::listarEgresos()
 {
     int opcion;
     opcion = renderMenuListas(_nombre);
@@ -90,13 +88,26 @@ void IngresosHandler::listarIngresos()
     }
 }
 
-void IngresosHandler::eliminarIngreso()
+void EgresosHandler::mostrarRegistrosPor(vector<int> posiciones)
+{
+    Egreso aux;
+    printEgresosHeader();
+    for (int i = 0; i < posiciones.size(); i++)
+    {
+        aux.leerDeDisco(posiciones[i], _fileName);
+        aux.mostrar();
+        cout << endl;
+    }
+}
+
+void EgresosHandler::eliminarEgreso()
 {
     float monto;
     Fecha fecha;
-    int categoria;
+    int categoria, medioPago;
     string concepto;
-    categoria = renderMenuCategoriasIngresos();
+    categoria = renderMenuCategoriasEgresos();
+    medioPago = renderMenuMediosPago();
     fecha.cargar();
     cout << "Monto: $";
     cin >> monto;
@@ -105,15 +116,15 @@ void IngresosHandler::eliminarIngreso()
     cout << endl << endl;
 
 
-    int posicion = _ingresos.buscarPor(monto, fecha, categoria, concepto);
-    if (posicion == -1) mostrarMensaje("No se encontró el ingreso", 15, 4);
+    int posicion = _egresos.buscarPor(monto, fecha, categoria, concepto, medioPago);
+    if (posicion == -1) mostrarMensaje("No se encontró el gasto", 15, 4);
     else {
-        Ingreso aux;
+        Egreso aux;
         char confirmacion;
         bool guardo = false;
 
         aux.leerDeDisco(posicion, _fileName);
-        printIngresosHeader();
+        printEgresosHeader();
         aux.mostrar();
         cout << endl << endl;
         cout << "¿Desea eliminar el registro? (S/N): ";
@@ -123,32 +134,20 @@ void IngresosHandler::eliminarIngreso()
             guardo = aux.grabarEnDisco(posicion, _fileName);
         }
         rlutil::cls();
-        if (guardo) mostrarMensaje("Ingreso eliminado exitosamente", 15, 2);
-        else mostrarMensaje("Ocurrió un error. El ingreso no ha sido eliminado", 15, 4);
+        if (guardo) mostrarMensaje("Gasto eliminado exitosamente", 15, 2);
+        else mostrarMensaje("Ocurrió un error. El gasto no ha sido eliminado", 15, 4);
     }
 }
 
-void IngresosHandler::mostrarRegistrosPor(vector<int> posiciones)
-{
-    Ingreso aux;
-    printIngresosHeader();
-    for (int i = 0; i < posiciones.size(); i++)
-    {
-        aux.leerDeDisco(posiciones[i], _fileName);
-        aux.mostrar();
-        cout << endl;
-    }
-}
-
-void IngresosHandler::mostrarPorFecha()
+void EgresosHandler::mostrarPorFecha()
 {
     Fecha fecha;
     int dia, mes, anio;
     cout << "Buscar " << _nombre << " por fecha" << endl << endl;
     fecha.cargar();
-    
-    vector<int> posiciones = _ingresos.buscarPor(fecha);
-    if (posiciones.empty()) mostrarMensaje("No se encontraron ingresos para esa fecha", 15, 4);
+
+    vector<int> posiciones = _egresos.buscarPor(fecha);
+    if (posiciones.empty()) mostrarMensaje("No se encontraron egresos para esa fecha", 15, 4);
     else {
         cout << endl << endl;
         cout << "Buscar " << _nombre << " por fecha" << endl << endl;
@@ -156,15 +155,16 @@ void IngresosHandler::mostrarPorFecha()
     }
 }
 
-void IngresosHandler::mostrarPorRangoMontos()
+void EgresosHandler::mostrarPorRangoMontos()
 {
     float montoMin, montoMax;
     cout << "Buscar " << _nombre << " por rango de montos" << endl << endl;
     montoMin = ingresoMontoMin();
     montoMax = ingresoMontoMax();
 
-    vector<int> posiciones = _ingresos.buscarPor(montoMin, montoMax);
-    if (posiciones.empty()) mostrarMensaje("No se encontraron ingresos dentro de ese rango de montos", 15, 4);
+    EgresosProps m = EgresosProps::MontoMinMax;
+    vector<int> posiciones = _egresos.nuevoBuscarPor(m, montoMin, montoMax);
+    if (posiciones.empty()) mostrarMensaje("No se encontraron egresos dentro de ese rango de montos", 15, 4);
     else {
         cout << endl << endl;
         cout << "Buscar " << _nombre << " por rango de montos" << endl << endl;
@@ -172,14 +172,15 @@ void IngresosHandler::mostrarPorRangoMontos()
     }
 }
 
-void IngresosHandler::mostrarPorMonto()
+void EgresosHandler::mostrarPorMonto()
 {
     float monto;
     cout << "Buscar " << _nombre << " por monto" << endl << endl;
     monto = ingresoMonto();
-
-    vector<int> posiciones = _ingresos.buscarPor(monto);
-    if (posiciones.empty()) mostrarMensaje("No se encontraron ingresos por ese monto", 15, 4);
+    
+    EgresosProps m = EgresosProps::Monto;
+    vector<int> posiciones = _egresos.nuevoBuscarPor(m, monto);
+    if (posiciones.empty()) mostrarMensaje("No se encontraron egresos por ese monto", 15, 4);
     else {
         cout << endl << endl;
         cout << "Buscar " << _nombre << " por monto" << endl << endl;
@@ -187,16 +188,16 @@ void IngresosHandler::mostrarPorMonto()
     }
 }
 
-void IngresosHandler::mostrarPorMesYAnio()
+void EgresosHandler::mostrarPorMesYAnio()
 {
     int mes, anio;
-    bool ok = false;
     cout << "Listar " << _nombre << " por mes y año" << endl << endl;
     mes = ingresoMes();
     anio = ingresoAnio();
-
-    vector<int> posiciones = _ingresos.listarPor(mes, anio);
-    if (posiciones.empty()) mostrarMensaje("No se encontraron ingresos para ese mes y año", 15, 4);
+    
+    EgresosProps m = EgresosProps::MesAnio;
+    vector<int> posiciones = _egresos.nuevoBuscarPor(m, mes, anio);
+    if (posiciones.empty()) mostrarMensaje("No se encontraron egresos para ese mes y año", 15, 4);
     else {
         cout << endl << endl;
         cout << "Listar " << _nombre << " por mes y año" << endl << endl;
@@ -204,13 +205,14 @@ void IngresosHandler::mostrarPorMesYAnio()
     }
 }
 
-void IngresosHandler::mostrarPorCategoria()
+void EgresosHandler::mostrarPorCategoria()
 {
     int categoria;
     cout << "Listar " << _nombre << " por categoría" << endl << endl;
-    categoria = renderMenuCategoriasIngresos();
+    categoria = renderMenuCategoriasEgresos();
 
-    vector<int> posiciones = _ingresos.listarPor(categoria);
+    EgresosProps m = EgresosProps::Categoria;
+    vector<int> posiciones = _egresos.nuevoBuscarPor(m, categoria);
     if (posiciones.empty()) mostrarMensaje("No se encontraron ingresos para esa categoría", 15, 4);
     else {
         cout << endl << endl;
