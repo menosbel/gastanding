@@ -13,8 +13,8 @@ int main()
     string movimientosArchivo = "movimientos.dat";
     string categoriasArchivo = "categorias.dat";
     BilleterasRepository billeteras = BilleterasRepository(billeterasArchivo);
-    MovimientosRepository movimientos = MovimientosRepository(movimientosArchivo);
     CategoriasRepository categorias = CategoriasRepository(categoriasArchivo);
+    MovimientosRepository movimientos = MovimientosRepository(movimientosArchivo, categorias);
     MovimientosHandler movimientosHandler = MovimientosHandler(movimientos, categorias);
 
     BilleterasHandler billeterasHandler = BilleterasHandler(

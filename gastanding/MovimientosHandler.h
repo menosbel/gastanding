@@ -23,7 +23,7 @@ public:
 		_movimientos = mRepo;
 		_categorias = cRepo;
 	}
-	void agregarMovimientosA(Billetera billetera);
+	void agregarMovimientosA(int billeteraId);
 	void buscarMovimientosEn(Billetera billetera);
 	void mostrarPorFecha();
 	void mostrarPorRangoMontos();

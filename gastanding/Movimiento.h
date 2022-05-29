@@ -8,26 +8,30 @@ using namespace std;
 class Movimiento
 {
 private:
+	int _id;
 	float _monto;
 	char _concepto[40];
-	Categoria _categoria;
-	Billetera _billetera;
+	int _categoriaId;
+	int _billeteraId;
 	Fecha _fecha;
 	bool _estado;
 public:
+	int getId() { return _id; };
 	float getMonto() { return _monto; };
 	string getConcepto() { return string(_concepto); };
-	Billetera getBilletera() { return _billetera; };
+	int getBilletera() { return _billeteraId; };
 	Fecha getFecha() { return _fecha; };
-	Categoria getCategoria() { return _categoria; };
+	int getCategoria() { return _categoriaId; };
 	bool getEstado() { return _estado; };
+	void setId(int valor) { _id = valor; };
 	void setMonto(float valor) { _monto = valor; };
 	void setConcepto(string valor) { strcpy_s(_concepto, valor.c_str()); };
-	void setCategoria(Categoria valor) { _categoria = valor; };
-	void setBilletera(Billetera valor) { _billetera = valor; };
+	void setCategoria(int valor) { _categoriaId = valor; };
+	void setBilletera(int valor) { _billeteraId = valor; };
 	void setEstado(bool valor) { _estado = valor; };
-	void cargarEn(Billetera billetera, Categoria categoria);
-	void mostrar();
+	
+	void cargarEn(int billeteraId, int categoriaId, int nextId);
+	void mostrar(Categoria categoria);
 	bool equals(Movimiento otro);
 	bool leerDeDisco(int pos, string fileName);
 	bool grabarEnDisco(string fileName);

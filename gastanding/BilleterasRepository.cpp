@@ -5,9 +5,9 @@
 void BilleterasRepository::agregar()
 {
     Billetera billetera, aux;
-    billetera.cargar();
-
     int cantRegistros = cantidadRegistros();
+    billetera.cargar(cantRegistros + 1);
+
     bool existe = false;
     for (int i = 0; i < cantRegistros; i++)
     {
@@ -47,18 +47,25 @@ Billetera BilleterasRepository::seleccionar()
     int opcion;
     int cantRegistros = cantidadRegistros();
 
-    for (int i = 0; i < cantRegistros; i++)
-    {
-        aux.leerDeDisco(i, _nombreArchivo);
-        cout << i + 1 << "- " << aux.getNombre() << endl;
-        cout << endl;
+    if (cantRegistros != 0) {
+        for (int i = 0; i < cantRegistros; i++)
+        {
+            aux.leerDeDisco(i, _nombreArchivo);
+            cout << i + 1 << "- " << aux.getNombre() << endl;
+            cout << endl;
+        }
+
+        cout << "Opcion: ";
+        cin >> opcion;
+
+        aux.leerDeDisco(opcion - 1, _nombreArchivo);
+        return aux;
     }
-
-    cout << "Opcion: ";
-    cin >> opcion;
-
-    aux.leerDeDisco(opcion - 1, _nombreArchivo);
-    return aux;
+    else
+    {
+        mostrarMensaje("Aún no existe ninguna billetera. Tenés que crear una.", 15, 4);
+        return Billetera();
+    }
 }
 
 int BilleterasRepository::cantidadRegistros() {

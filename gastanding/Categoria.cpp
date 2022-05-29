@@ -24,7 +24,7 @@ void Categoria::mostrar()
 	printElement(getTipoToString(), nameWidth);
 }
 
-void Categoria::cargar()
+void Categoria::cargar(int nextId)
 {
 	string nombre;
 	cout << "Nombre: ";
@@ -36,15 +36,12 @@ void Categoria::cargar()
 	setTipoMovimiento(tipo);
 	setNombre(nombre);
 	setEstado(true);
+	setId(nextId);
 }
 
 bool Categoria::equals(Categoria otro)
 {
-	if (
-		getNombre() == otro.getNombre() &&
-		getTipoMovimiento() == otro.getTipoMovimiento() &&
-		getEstado() == otro.getEstado()
-		) return true;
+	if (getId() == otro.getId()) return true;
 	return false;
 }
 

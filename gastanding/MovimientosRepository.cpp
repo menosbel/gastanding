@@ -8,13 +8,14 @@
 
 using namespace std;
 
-void MovimientosRepository::agregarA(Billetera billetera, Categoria categoria) 
+void MovimientosRepository::agregarA(int billeteraId, int categoriaId) 
 {
 	Movimiento movimiento, aux;
-    rlutil::cls();
-	movimiento.cargarEn(billetera, categoria);
-
     int cantRegistros = cantidadRegistros();
+
+	movimiento.cargarEn(billeteraId, categoriaId, cantRegistros + 1);
+
+    
     bool existe = false;
     for (int i = 0; i < cantRegistros; i++)
     {
@@ -25,9 +26,7 @@ void MovimientosRepository::agregarA(Billetera billetera, Categoria categoria)
         };
     }
 
-    if (existe) {
-        mostrarMensaje("El movimiento ya existe. No puede volver a agregarse", 15, 4);
-    }
+    if (existe) mostrarMensaje("El movimiento ya existe. No puede volver a agregarse", 15, 4);
     else {
         if (movimiento.grabarEnDisco(_nombreArchivo)) mostrarMensaje("Movimiento agregado exitosamente", 15, 2);
         else mostrarMensaje("No se pudo agregar el movimiento", 15, 4);
@@ -36,19 +35,21 @@ void MovimientosRepository::agregarA(Billetera billetera, Categoria categoria)
 
 void MovimientosRepository::eliminar(int pos)
 {
-    Movimiento aux;
+    Movimiento movimiento;
+    Categoria categoria;
     char confirmacion;
     bool guardo = false;
 
-    aux.leerDeDisco(pos, _nombreArchivo);
+    movimiento.leerDeDisco(pos, _nombreArchivo);
+    categoria = _categorias.buscarPor(movimiento.getCategoria());
     printMovimientosHeader();
-    aux.mostrar();
+    movimiento.mostrar(categoria);
     cout << endl << endl;
     cout << "¿Desea eliminar el registro? (S/N): ";
     cin >> confirmacion;
     if (tolower(confirmacion) == 's') {
-        aux.setEstado(false);
-        guardo = aux.grabarEnDisco(pos, _nombreArchivo);
+        movimiento.setEstado(false);
+        guardo = movimiento.grabarEnDisco(pos, _nombreArchivo);
     }
     rlutil::cls();
     if (guardo) mostrarMensaje("Registro eliminado exitosamente", 15, 2);
@@ -70,7 +71,7 @@ int MovimientosRepository::cantidadRegistros() {
     return cant_reg;
 }
 
-int MovimientosRepository::buscarPor(float monto, Fecha fecha, Categoria categoria, string concepto, Billetera billetera)
+int MovimientosRepository::buscarPor(float monto, Fecha fecha, int categoriaId, string concepto, int billeteraId)
 {
     Movimiento aux;
     int cantRegistros = cantidadRegistros();
@@ -82,9 +83,9 @@ int MovimientosRepository::buscarPor(float monto, Fecha fecha, Categoria categor
             aux.getEstado() == true && 
             aux.getMonto() == monto &&
             aux.getFecha().equals(fecha) &&
-            aux.getCategoria().equals(categoria) &&
+            aux.getCategoria() == categoriaId &&
             aux.getConcepto() == concepto &&
-            aux.getBilletera().equals(billetera)
+            aux.getBilletera() == billeteraId
             ) {
             return i;
         }
@@ -158,7 +159,7 @@ vector<int> MovimientosRepository::buscarPor(int mes, int anio)
     return posiciones;
 }
 
-vector<int> MovimientosRepository::buscarPor(Categoria categoria)
+vector<int> MovimientosRepository::buscarPor(int categoriaId)
 {
     Movimiento aux;
     int cantRegistros = cantidadRegistros();
@@ -167,22 +168,24 @@ vector<int> MovimientosRepository::buscarPor(Categoria categoria)
     for (int i = 0; i < cantRegistros; i++)
     {
         aux.leerDeDisco(i, _nombreArchivo);
-        if (aux.getEstado() == true && aux.getCategoria().equals(categoria)) {
+        if (aux.getEstado() == true && aux.getCategoria() == categoriaId) {
             posiciones.push_back(i);
         }
     }
     return posiciones;
 }
 
-void MovimientosRepository::mostrarRegistrosPor(vector<int> posiciones, Billetera billetera)
+void MovimientosRepository::mostrarRegistrosPor(vector<int> posiciones, int billeteraId)
 {
-    Movimiento aux;
+    Movimiento movimiento;
+    Categoria categoria;
     printMovimientosHeader();
     for (int i = 0; i < posiciones.size(); i++)
     {
-        aux.leerDeDisco(posiciones[i], _nombreArchivo);
-        if (aux.getBilletera().equals(billetera)) {
-            aux.mostrar();
+        movimiento.leerDeDisco(posiciones[i], _nombreArchivo);
+        if (movimiento.getBilletera() == billeteraId) {
+            categoria = _categorias.buscarPor(movimiento.getCategoria());
+            movimiento.mostrar(categoria);
             cout << endl;
         }
     }

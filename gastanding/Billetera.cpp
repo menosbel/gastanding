@@ -3,7 +3,7 @@
 #include <iostream>
 using namespace std;
 
-void Billetera::cargar()
+void Billetera::cargar(int nextId)
 {
 	string nombre;
 	cout << "Nombre: ";
@@ -11,6 +11,7 @@ void Billetera::cargar()
 	getline(cin, nombre);
 	setNombre(nombre);
 	setEstado(true);
+	setId(nextId);
 }
 
 void Billetera::mostrar()
@@ -21,10 +22,7 @@ void Billetera::mostrar()
 
 bool Billetera::equals(Billetera otro)
 {
-	if (
-		getNombre() == otro.getNombre() &&
-		getEstado() == otro.getEstado()
-		) return true;
+	if (getId() == otro.getId()) return true;
 	return false;
 }
 

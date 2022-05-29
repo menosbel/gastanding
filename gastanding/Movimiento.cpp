@@ -7,7 +7,7 @@
 using namespace std;
 
 
-void Movimiento::cargarEn(Billetera billetera, Categoria categoria)
+void Movimiento::cargarEn(int billeteraId, int categoriaId, int nextId)
 {
 	int monto, dia, mes, anio, tipoCategoria;
 	string concepto;
@@ -22,32 +22,26 @@ void Movimiento::cargarEn(Billetera billetera, Categoria categoria)
 	cin >> concepto;
 	setConcepto(concepto);
 	
-	setCategoria(categoria);
-	setBilletera(billetera);
+	setCategoria(categoriaId);
+	setBilletera(billeteraId);
 	setEstado(true);
+	setId(nextId);
 }
 
-void Movimiento::mostrar() {
-
+void Movimiento::mostrar(Categoria categoria) 
+{
 	const int nameWidth = 30;
 	const int numWidth = 15;
 
 	printElement(_fecha.toString(), numWidth);
 	printElement(_monto, numWidth);
 	printElement(_concepto, nameWidth);
-	printElement(_categoria.getNombre(), nameWidth);
+	printElement(categoria.getNombre(), nameWidth);
 }
 
 bool Movimiento::equals(Movimiento otro)
 {
-	if (
-		getMonto() == otro.getMonto() &&
-		getConcepto() == otro.getConcepto() &&
-		getCategoria().equals(otro.getCategoria()) &&
-		getBilletera().equals(otro.getBilletera()) &&
-		getFecha().equals(otro.getFecha()) &&
-		getEstado() == otro.getEstado()
-		) return true;
+	if (getId() == otro.getId()) return true;
 	return false;
 }
 
