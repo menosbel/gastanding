@@ -13,12 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\Ingresos">
-      <UniqueIdentifier>{1aceccce-7a1d-4524-9ba1-55ab889eef97}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Ingresos">
-      <UniqueIdentifier>{6e160b06-7853-4553-9565-b3db10080683}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Base">
       <UniqueIdentifier>{de2b5648-f19b-4fda-b647-5080de1e8e45}</UniqueIdentifier>
     </Filter>
@@ -31,31 +25,37 @@
     <Filter Include="Source Files\Output">
       <UniqueIdentifier>{91c81377-bbbd-4065-909c-6567b164b0b4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Inversiones">
-      <UniqueIdentifier>{cd13eed6-d339-452e-b99d-c9e7b7c18354}</UniqueIdentifier>
+    <Filter Include="Source Files\Movimientos">
+      <UniqueIdentifier>{1aceccce-7a1d-4524-9ba1-55ab889eef97}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Inversiones">
-      <UniqueIdentifier>{c8fe991b-f642-412d-8445-fb439ffe47f5}</UniqueIdentifier>
+    <Filter Include="Source Files\Billeteras">
+      <UniqueIdentifier>{5669ac3c-f2af-4c6f-a970-c01e51d440cd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Egresos">
-      <UniqueIdentifier>{eeb3e9b2-3371-4a4c-a5bb-509cf40e525d}</UniqueIdentifier>
+    <Filter Include="Header Files\Billeteras">
+      <UniqueIdentifier>{e59f16a4-0d4e-4202-aa55-98f7db43c986}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Egresos">
-      <UniqueIdentifier>{53e765e8-cdb2-430e-b194-58eaa7c4902e}</UniqueIdentifier>
+    <Filter Include="Header Files\Movimientos">
+      <UniqueIdentifier>{6e160b06-7853-4553-9565-b3db10080683}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Categorias">
+      <UniqueIdentifier>{a4c63248-43c3-458a-81ee-7ef7e2be6af3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Categorias">
+      <UniqueIdentifier>{627c13bd-e127-43a7-8c08-ef6df93fed57}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="gastanding.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Ingreso.cpp">
-      <Filter>Source Files\Ingresos</Filter>
+    <ClCompile Include="Movimiento.cpp">
+      <Filter>Source Files\Movimientos</Filter>
     </ClCompile>
-    <ClCompile Include="IngresosHandler.cpp">
-      <Filter>Source Files\Ingresos</Filter>
+    <ClCompile Include="MovimientosHandler.cpp">
+      <Filter>Source Files\Movimientos</Filter>
     </ClCompile>
-    <ClCompile Include="IngresosRepository.cpp">
-      <Filter>Source Files\Ingresos</Filter>
+    <ClCompile Include="MovimientosRepository.cpp">
+      <Filter>Source Files\Movimientos</Filter>
     </ClCompile>
     <ClCompile Include="Fecha.cpp">
       <Filter>Source Files\Base</Filter>
@@ -69,37 +69,37 @@
     <ClCompile Include="tables.cpp">
       <Filter>Source Files\Output</Filter>
     </ClCompile>
-    <ClCompile Include="Inversion.cpp">
-      <Filter>Source Files\Inversiones</Filter>
-    </ClCompile>
-    <ClCompile Include="InversionesRepository.cpp">
-      <Filter>Source Files\Inversiones</Filter>
-    </ClCompile>
-    <ClCompile Include="InversionesHandler.cpp">
-      <Filter>Source Files\Inversiones</Filter>
-    </ClCompile>
-    <ClCompile Include="Egreso.cpp">
-      <Filter>Source Files\Egresos</Filter>
-    </ClCompile>
-    <ClCompile Include="EgresosHandler.cpp">
-      <Filter>Source Files\Egresos</Filter>
-    </ClCompile>
-    <ClCompile Include="EgresosRepository.cpp">
-      <Filter>Source Files\Egresos</Filter>
-    </ClCompile>
     <ClCompile Include="ingresoDatos.cpp">
       <Filter>Source Files\Output</Filter>
     </ClCompile>
+    <ClCompile Include="Billetera.cpp">
+      <Filter>Source Files\Billeteras</Filter>
+    </ClCompile>
+    <ClCompile Include="Categoria.cpp">
+      <Filter>Source Files\Categorias</Filter>
+    </ClCompile>
+    <ClCompile Include="BilleterasHandler.cpp">
+      <Filter>Source Files\Billeteras</Filter>
+    </ClCompile>
+    <ClCompile Include="BilleterasRepository.cpp">
+      <Filter>Source Files\Billeteras</Filter>
+    </ClCompile>
+    <ClCompile Include="CategoriasRepository.cpp">
+      <Filter>Source Files\Categorias</Filter>
+    </ClCompile>
+    <ClCompile Include="CategoriasHandler.cpp">
+      <Filter>Source Files\Categorias</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="IngresosHandler.h">
-      <Filter>Header Files\Ingresos</Filter>
+    <ClInclude Include="MovimientosHandler.h">
+      <Filter>Header Files\Movimientos</Filter>
     </ClInclude>
-    <ClInclude Include="IngresosRepository.h">
-      <Filter>Header Files\Ingresos</Filter>
+    <ClInclude Include="MovimientosRepository.h">
+      <Filter>Header Files\Movimientos</Filter>
     </ClInclude>
-    <ClInclude Include="Ingreso.h">
-      <Filter>Header Files\Ingresos</Filter>
+    <ClInclude Include="Movimiento.h">
+      <Filter>Header Files\Movimientos</Filter>
     </ClInclude>
     <ClInclude Include="functions.h">
       <Filter>Header Files\Base</Filter>
@@ -119,26 +119,26 @@
     <ClInclude Include="tables.h">
       <Filter>Header Files\Output</Filter>
     </ClInclude>
-    <ClInclude Include="Inversion.h">
-      <Filter>Header Files\Inversiones</Filter>
-    </ClInclude>
-    <ClInclude Include="InversionesRepository.h">
-      <Filter>Header Files\Inversiones</Filter>
-    </ClInclude>
-    <ClInclude Include="InversionesHandler.h">
-      <Filter>Header Files\Inversiones</Filter>
-    </ClInclude>
-    <ClInclude Include="Egreso.h">
-      <Filter>Header Files\Egresos</Filter>
-    </ClInclude>
-    <ClInclude Include="EgresosHandler.h">
-      <Filter>Header Files\Egresos</Filter>
-    </ClInclude>
-    <ClInclude Include="EgresosRepository.h">
-      <Filter>Header Files\Egresos</Filter>
-    </ClInclude>
     <ClInclude Include="ingresoDatos.h">
       <Filter>Header Files\Output</Filter>
+    </ClInclude>
+    <ClInclude Include="Billetera.h">
+      <Filter>Header Files\Billeteras</Filter>
+    </ClInclude>
+    <ClInclude Include="Categoria.h">
+      <Filter>Header Files\Categorias</Filter>
+    </ClInclude>
+    <ClInclude Include="BilleterasHandler.h">
+      <Filter>Header Files\Billeteras</Filter>
+    </ClInclude>
+    <ClInclude Include="BilleterasRepository.h">
+      <Filter>Header Files\Billeteras</Filter>
+    </ClInclude>
+    <ClInclude Include="CategoriasRepository.h">
+      <Filter>Header Files\Categorias</Filter>
+    </ClInclude>
+    <ClInclude Include="CategoriasHandler.h">
+      <Filter>Header Files\Categorias</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

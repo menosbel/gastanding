@@ -2,7 +2,7 @@
 #include "ingresoDatos.h"
 using namespace std;
 
-float ingresoMontoMax()
+float movimientoMontoMax()
 {
     float montoMax;
     cout << "Monto máximo: ";
@@ -10,7 +10,7 @@ float ingresoMontoMax()
     return montoMax;
 }
 
-float ingresoMontoMin()
+float movimientoMontoMin()
 {
     float montoMin;
     cout << "Monto mínimo: ";

@@ -3,35 +3,40 @@
 using namespace std;
 #include "tables.h"
 
-void printIngresosHeader()
+void printMovimientosHeader()
 {
 const char separator = ' ';
-const int nameWidth = 25;
+const int nameWidth = 30;
 const int numWidth = 15;
 
+cout << left << setw(numWidth) << setfill(separator) << "Fecha";
 cout << left << setw(numWidth) << setfill(separator) << "Monto";
 cout << left << setw(nameWidth) << setfill(separator) << "Concepto";
 cout << left << setw(nameWidth) << setfill(separator) << "Categoria";
-cout << left << setw(numWidth) << setfill(separator) << "Fecha";
 cout << endl;
 cout << left << setw(110) << setfill('_') << "";
 cout << endl << endl;
 }
 
-void printEgresosHeader()
+void printBilleterasHeader()
 {
 	const char separator = ' ';
 	const int nameWidth = 25;
-	const int numWidth = 15;
 
-	cout << left << setw(numWidth) << setfill(separator) << "Monto";
-	cout << left << setw(nameWidth) << setfill(separator) << "Medio de pago";
-	cout << left << setw(nameWidth) << setfill(separator) << "Concepto";
-	cout << left << setw(nameWidth) << setfill(separator) << "Categoria";
-	cout << left << setw(numWidth) << setfill(separator) << "Fecha";
+	cout << left << setw(nameWidth) << setfill(separator) << "Nombre";
 	cout << endl;
 	cout << left << setw(110) << setfill('_') << "";
 	cout << endl << endl;
 }
 
-;
+void printCategoriasHeader()
+{
+	const char separator = ' ';
+	const int nameWidth = 50;
+
+	cout << left << setw(nameWidth) << setfill(separator) << "Nombre";
+	cout << left << setw(nameWidth) << setfill(separator) << "Tipo";
+	cout << endl;
+	cout << left << setw(110) << setfill('_') << "";
+	cout << endl << endl;
+}

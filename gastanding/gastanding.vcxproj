@@ -139,35 +139,35 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Egreso.cpp" />
-    <ClCompile Include="EgresosHandler.cpp" />
-    <ClCompile Include="EgresosRepository.cpp" />
+    <ClCompile Include="Billetera.cpp" />
+    <ClCompile Include="BilleterasHandler.cpp" />
+    <ClCompile Include="BilleterasRepository.cpp" />
+    <ClCompile Include="Categoria.cpp" />
+    <ClCompile Include="CategoriasHandler.cpp" />
+    <ClCompile Include="CategoriasRepository.cpp" />
     <ClCompile Include="functions.cpp" />
     <ClCompile Include="Fecha.cpp" />
     <ClCompile Include="gastanding.cpp" />
-    <ClCompile Include="Ingreso.cpp" />
+    <ClCompile Include="Movimiento.cpp" />
     <ClCompile Include="ingresoDatos.cpp" />
-    <ClCompile Include="IngresosRepository.cpp" />
-    <ClCompile Include="IngresosHandler.cpp" />
-    <ClCompile Include="Inversion.cpp" />
-    <ClCompile Include="InversionesHandler.cpp" />
-    <ClCompile Include="InversionesRepository.cpp" />
+    <ClCompile Include="MovimientosRepository.cpp" />
+    <ClCompile Include="MovimientosHandler.cpp" />
     <ClCompile Include="menues.cpp" />
     <ClCompile Include="tables.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Egreso.h" />
-    <ClInclude Include="EgresosHandler.h" />
-    <ClInclude Include="EgresosRepository.h" />
+    <ClInclude Include="Billetera.h" />
+    <ClInclude Include="BilleterasHandler.h" />
+    <ClInclude Include="BilleterasRepository.h" />
+    <ClInclude Include="Categoria.h" />
+    <ClInclude Include="CategoriasHandler.h" />
+    <ClInclude Include="CategoriasRepository.h" />
     <ClInclude Include="functions.h" />
     <ClInclude Include="Fecha.h" />
-    <ClInclude Include="Ingreso.h" />
+    <ClInclude Include="Movimiento.h" />
     <ClInclude Include="ingresoDatos.h" />
-    <ClInclude Include="IngresosRepository.h" />
-    <ClInclude Include="IngresosHandler.h" />
-    <ClInclude Include="Inversion.h" />
-    <ClInclude Include="InversionesHandler.h" />
-    <ClInclude Include="InversionesRepository.h" />
+    <ClInclude Include="MovimientosRepository.h" />
+    <ClInclude Include="MovimientosHandler.h" />
     <ClInclude Include="menues.h" />
     <ClInclude Include="MenuNames.h" />
     <ClInclude Include="rlutil.h" />

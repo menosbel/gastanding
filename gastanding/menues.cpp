@@ -1,23 +1,54 @@
 #include <iostream>
 #include "menues.h"
-#include "IngresosRepository.h"
 #include "rlutil.h"
 #include "functions.h"
 
 using namespace std;
 
-int renderMenuEntidad(string nombre)
+int renderMenuBilleteras()
+{
+    int opcion;
+    rlutil::cls();
+    cout << "-------------------------------" << endl;
+    cout << "\t" << "Menu BILLETERAS" << endl;
+    cout << "-------------------------------" << endl;
+    cout << "1. Gestionar billeteras" << endl;
+    cout << "2. Ingresar a una billetera" << endl;
+    cout << "0. Salir" << endl;
+    cout << "Ingrese una opción: ";
+    cin >> opcion;
+    rlutil::cls();
+    return opcion;
+}
+
+int renderMenuGestionarBilletera()
+{
+    int opcion;
+    rlutil::cls();
+    cout << "-------------------------------" << endl;
+    cout << "\t" << "Gestionar BILLETERAS" << endl;
+    cout << "-------------------------------" << endl;
+    cout << "1. Agregar billetera" << endl;
+    cout << "2. Eliminar billetera" << endl;
+    cout << "3. Listar billeteras disponibles" << endl;
+    cout << "0. Salir" << endl << endl;
+    cout << "Ingrese una opción: ";
+    cin >> opcion;
+    rlutil::cls();
+    return opcion;
+}
+
+int renderMenuDentroDeBilletera(string billetera)
 {
     int opcion;
     rlutil::cls();
     cout << "---------------------------" << endl;
-    cout << "\t" << nombre << endl;
+    cout << "\t" << billetera << endl;
     cout << "---------------------------" << endl;
-    cout << "1. Añadir" << endl;
-    cout << "2. Eliminar" << endl;
-    cout << "3. Buscar" << endl;
-    cout << "4. Listar" << endl;
-    cout << "0. Salir" << endl;
+    cout << "1. Agregar movimiento" << endl;
+    cout << "2. Buscar movimientos" << endl;
+    cout << "3. Hacer una transferencia" << endl;
+    cout << "0. Salir" << endl << endl;
     cout << "Ingrese una opción: ";
     cin >> opcion;
     rlutil::cls();
@@ -30,7 +61,8 @@ int renderMenuInformes()
     rlutil::cls();
     cout << "---------------------------" << endl;
     cout << "\t" << "INFORMES" << endl;
-    cout << "---------------------------" << endl;    cout << "1. Balance mensual" << endl;
+    cout << "---------------------------" << endl;    
+    cout << "1. Balance mensual" << endl;
     cout << "2. Balance anual" << endl;
     cout << "3. Gastos por categoría" << endl;
     cout << "4. Comparación de gastos interanual por categoría" << endl;
@@ -42,16 +74,18 @@ int renderMenuInformes()
     return opcion;
 }
 
-int renderMenuBuscar(string nombre)
+int renderMenuBuscar()
 {
     int opcion;
     rlutil::cls();
     cout << "-------------------------------------" << endl;
-    cout << "\t" << "BUSCAR " << nombre << endl;
+    cout << "\t" << "BUSCAR MOVIMIENTOS" << endl;
     cout << "-------------------------------------" << endl;
     cout << "1. Por fecha" << endl;
-    cout << "2. Por rango de montos" << endl;
-    cout << "3. Por monto exacto" << endl;
+    cout << "2. Por mes y año" << endl;
+    cout << "3. Por rango de montos" << endl;
+    cout << "4. Por monto exacto" << endl;
+    cout << "5. Por categoria" << endl;
     cout << "0. Salir" << endl << endl;
     cout << "Ingrese una opción: ";
     cin >> opcion;
@@ -59,15 +93,16 @@ int renderMenuBuscar(string nombre)
     return opcion;
 }
 
-int renderMenuListas(string nombre)
+int renderMenuCategorias()
 {
     int opcion;
     rlutil::cls();
-    cout << "-------------------------------------" << endl;
-    cout << "\t" << "LISTAR " << nombre << endl;
-    cout << "-------------------------------------" << endl;
-    cout << "1. Por mes y año" << endl;
-    cout << "2. Por categoría" << endl;
+    cout << "---------------------------" << endl;
+    cout << "\t" << "CATEGORIAS" << endl;
+    cout << "---------------------------" << endl;
+    cout << "1. Agregar categoria" << endl;
+    cout << "2. Eliminar categoria" << endl;
+    cout << "3. Listar categorias" << endl;
     cout << "0. Salir" << endl << endl;
     cout << "Ingrese una opción: ";
     cin >> opcion;
@@ -75,85 +110,47 @@ int renderMenuListas(string nombre)
     return opcion;
 }
 
-int menuCategoriasIngresos()
-{
-    int opcion;
-    rlutil::cls();
-    cout << "Elegí una categoría" << endl;
-    cout << "1. Relación de dependencia" << endl;
-    cout << "2. Freelance" << endl;
-    cout << "3. Otros" << endl << endl;
-    cout << "Ingrese una opción: ";
-    cin >> opcion;
-    rlutil::cls();
-    return opcion;
-}
+int renderMenuTiposMovimientos() {
+    int tipo;
+    Categoria categoria;
+    tipo = menuTipoMovimiento();
 
-int renderMenuCategoriasIngresos() {
-    int opcion;
-    opcion = menuCategoriasIngresos();
-
-    while (opcion < 1 || opcion > 3)
+    while (tipo != 1 && tipo != 2)
     {
         cout << "La opción elegida es invalida. Vuelva a intentarlo" << endl << endl;
-        opcion = menuCategoriasIngresos();
+        tipo = menuTipoMovimiento();
         rlutil::anykey();
     }
-    return opcion;
+
+    return tipo;
 }
 
-int menuCategoriasEgresos()
+int menuTipoMovimiento()
 {
-    int opcion;
+    int tipo;
     rlutil::cls();
-    cout << "Elegí una categoría" << endl;
-    cout << "1. Supermercado" << endl;
-    cout << "2. Hogar" << endl;
-    cout << "3. Personal" << endl;
-    cout << "4. Otros" << endl;
+    cout << "Elegí un tipo de movimiento" << endl;
+    cout << "1. Ingreso" << endl;
+    cout << "2. Gasto" << endl;
     cout << "Ingrese una opción: ";
-    cin >> opcion;
+    cin >> tipo;
     rlutil::cls();
-    return opcion;
+    return tipo;
 }
 
-int renderMenuCategoriasEgresos() {
-    int opcion;
-    opcion = menuCategoriasEgresos();
-
-    while (opcion < 1 || opcion > 4)
+Categoria menuCategoriasMovimientos(int tipo) {
+    Categoria categoria = Categoria();
+    switch (tipo)
     {
-        cout << "La opción elegida es invalida. Vuelva a intentarlo" << endl << endl;
-        opcion = menuCategoriasEgresos();
-        rlutil::anykey();
+    case 1:
+        // buscar y listar categorias ingresos
+        return categoria;
+        break;
+    case 2:
+        // buscar y listar categorias gastos
+        return categoria;
+        break;
+    default:
+        break;
     }
-    return opcion;
-}
-
-int menuMediosPago()
-{
-    int opcion;
-    rlutil::cls();
-    cout << "Elegí un medio de pago" << endl;
-    cout << "1. Efectivo" << endl;
-    cout << "2. Tarjeta de débito" << endl;
-    cout << "3. Tarjeta de crédito" << endl;
-    cout << "4. Otros" << endl << endl;
-    cout << "Ingrese una opción: ";
-    cin >> opcion;
-    rlutil::cls();
-    return opcion;
-}
-
-int renderMenuMediosPago() {
-    int opcion;
-    opcion = menuMediosPago();
-
-    while (opcion < 1 || opcion > 4)
-    {
-        cout << "La opción elegida es invalida. Vuelva a intentarlo" << endl << endl;
-        opcion = menuMediosPago();
-        rlutil::anykey();
-    }
-    return opcion;
 }

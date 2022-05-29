@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Ingreso.h"
+#include "Movimiento.h"
 #include "menues.h"
 #include "functions.h"
 #include "rlutil.h"
@@ -7,82 +7,85 @@
 using namespace std;
 
 
-void Ingreso::cargar()
+void Movimiento::cargarEn(Billetera billetera, Categoria categoria)
 {
-	int monto, categoria, dia, mes, anio;
+	int monto, dia, mes, anio, tipoCategoria;
 	string concepto;
-
-	cout << "Categoria: ";
-	categoria = renderMenuCategoriasIngresos();
-	setCategoria(categoria);
+		
 	_fecha.cargar();
+	
 	cout << "Monto: $";
 	cin >> monto;
 	setMonto(monto);
+	
 	cout << "Concepto: ";
 	cin >> concepto;
 	setConcepto(concepto);
+	
+	setCategoria(categoria);
+	setBilletera(billetera);
 	setEstado(true);
 }
 
-void Ingreso::mostrar() {
+void Movimiento::mostrar() {
 
 	const int nameWidth = 30;
 	const int numWidth = 15;
 
+	printElement(_fecha.toString(), numWidth);
 	printElement(_monto, numWidth);
 	printElement(_concepto, nameWidth);
-	printElement(categoriasIngresosToString(_categoria), nameWidth);
-	printElement(_fecha.toString(), numWidth);
+	printElement(_categoria.getNombre(), nameWidth);
 }
 
-bool Ingreso::equals(Ingreso otro)
+bool Movimiento::equals(Movimiento otro)
 {
 	if (
 		getMonto() == otro.getMonto() &&
-		getFecha().equals(otro.getFecha()) &&
-		getCategoria() == otro.getCategoria() &&
 		getConcepto() == otro.getConcepto() &&
+		getCategoria().equals(otro.getCategoria()) &&
+		getBilletera().equals(otro.getBilletera()) &&
+		getFecha().equals(otro.getFecha()) &&
 		getEstado() == otro.getEstado()
 		) return true;
 	return false;
 }
 
-bool Ingreso::grabarEnDisco(string fileName)
+bool Movimiento::grabarEnDisco(string fileName)
 {
 	FILE* p;
 	errno_t err;
 	const char* file = fileName.c_str();
 	err = fopen_s(&p, file, "ab");
 	if (err != 0) { return -1; }
-	int escribio = fwrite(this, sizeof(Ingreso), 1, p);
+	int escribio = fwrite(this, sizeof(Movimiento), 1, p);
 	fclose(p);
 	return escribio;
 }
 
-bool Ingreso::grabarEnDisco(int pos, string fileName)
+bool Movimiento::grabarEnDisco(int pos, string fileName)
 {
 	FILE* p;
 	errno_t err;
 	const char* file = fileName.c_str();
 	err = fopen_s(&p, file, "rb+");
 	if (err != 0) { return false; }
-	fseek(p, pos * sizeof(Ingreso), SEEK_SET);
-	bool guardo = fwrite(this, sizeof(Ingreso), 1, p);
+	fseek(p, pos * sizeof(Movimiento), SEEK_SET);
+	bool guardo = fwrite(this, sizeof(Movimiento), 1, p);
 	fclose(p);
 
 	return guardo;
 }
 
-bool Ingreso::leerDeDisco(int pos, string fileName)
+bool Movimiento::leerDeDisco(int pos, string fileName)
 {
 	FILE* p;
 	errno_t err;
 	const char* file = fileName.c_str();
 	err = fopen_s(&p, file, "rb");
 	if (err != 0) { return -1; }
-	fseek(p, sizeof(Ingreso) * pos, 0);
-	int leyo = fread(this, sizeof(Ingreso), 1, p);
+	fseek(p, sizeof(Movimiento) * pos, 0);
+	int leyo = fread(this, sizeof(Movimiento), 1, p);
 	fclose(p);
 	return leyo;
 }

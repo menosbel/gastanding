@@ -2,17 +2,28 @@
 #include <string>
 #include "rlutil.h"
 #include "functions.h"
-#include "IngresosHandler.h"
-#include "InversionesHandler.h"
-#include "EgresosHandler.h"
+#include "BilleterasHandler.h"
+#include "CategoriasHandler.h"
 
 using namespace std;
 
 int main()
 {
-    IngresosHandler ingresosHandler;
-    InversionesHandler inversionesHandler;
-    EgresosHandler egresosHandler;
+    string billeterasArchivo = "billeteras.dat";
+    string movimientosArchivo = "movimientos.dat";
+    string categoriasArchivo = "categorias.dat";
+    BilleterasRepository billeteras = BilleterasRepository(billeterasArchivo);
+    MovimientosRepository movimientos = MovimientosRepository(movimientosArchivo);
+    CategoriasRepository categorias = CategoriasRepository(categoriasArchivo);
+    MovimientosHandler movimientosHandler = MovimientosHandler(movimientos, categorias);
+
+    BilleterasHandler billeterasHandler = BilleterasHandler(
+        billeteras,
+        movimientos,
+        categorias,
+        movimientosHandler
+    );
+    CategoriasHandler categoriasHandler(categorias);
 
     setlocale(LC_ALL, "spanish");
     rlutil::setColor(rlutil::WHITE);
@@ -27,11 +38,9 @@ int main()
         cout << "----------------------------------" << endl;
         cout << "\t MENU PRINCIPAL" << endl;
         cout << "----------------------------------" << endl;
-        cout << "1. Ingresos" << endl;
-        cout << "2. Egresos" << endl;
-        cout << "3. Deudas" << endl;
-        cout << "4. Inversiones" << endl;
-        cout << "5. Informes" << endl;
+        cout << "1. Billeteras" << endl;
+        cout << "2. Categorias" << endl;
+        cout << "3. Informes" << endl;
         cout << "0. Salir" << endl;
         cout << "Ingrese una opción: ";
         cin >> opcion;
@@ -39,15 +48,14 @@ int main()
         switch (opcion)
         {
         case 1:
-            ingresosHandler.exec();
+            billeterasHandler.exec();
             break;
         case 2:
-            egresosHandler.exec();
+            categoriasHandler.exec();
             break;
         case 3:
             break;
         case 4:
-            inversionesHandler.exec();
             break;
         case 5:
             break;

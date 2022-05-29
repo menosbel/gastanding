@@ -2,8 +2,8 @@
 #include <string>
 using namespace std;
 
-float ingresoMontoMin();
-float ingresoMontoMax();
+float movimientoMontoMin();
+float movimientoMontoMax();
 float ingresoMonto();
 int ingresoMes();
 int ingresoAnio();

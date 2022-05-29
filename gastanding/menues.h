@@ -1,12 +1,17 @@
 #pragma once
+#include "Categoria.h"
 #include <string>
 
 using namespace std;
 
-int renderMenuEntidad(string nombre);
+int renderMenuBilleteras();
+int renderMenuDentroDeBilletera(string nombre);
+int renderMenuGestionarBilletera();
+
 int renderMenuInformes();
-int renderMenuBuscar(string nombre);
-int renderMenuListas(string nombre);
-int renderMenuCategoriasIngresos();
-int renderMenuCategoriasEgresos();
-int renderMenuMediosPago();
+int renderMenuBuscar();
+
+int renderMenuCategorias();
+int renderMenuTiposMovimientos();
+int menuTipoMovimiento();
+Categoria menuCategoriasMovimientos(int tipo);
