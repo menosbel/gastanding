@@ -2,6 +2,7 @@
 #include "Categoria.h"
 #include "functions.h"
 #include "tables.h"
+#include "rlutil.h"
 
 using namespace std;
 
@@ -38,10 +39,16 @@ void CategoriasRepository::eliminar(int tipoMovimiento)
 
     if (caracter == 's' || caracter == 'S')
     {
-        if(this->bajaLogica(categoriaId))
+        if (this->bajaLogica(categoriaId)) 
+        {
+            rlutil::cls();
             mostrarMensaje("Categoria borrada exitosamente", 15, 2);
-        else
-            mostrarMensaje("No se pudo borrar esta categoria", 15, 2);
+        }
+        else 
+        {
+            rlutil::cls();
+            mostrarMensaje("No se pudo borrar esta categoria", 15, 4);
+        }
     }
 }
 

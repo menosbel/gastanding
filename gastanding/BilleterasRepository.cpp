@@ -1,6 +1,7 @@
 #include "BilleterasRepository.h"
 #include "functions.h"
 #include "tables.h"
+#include "rlutil.h"
 
 void BilleterasRepository::agregar()
 {
@@ -33,15 +34,22 @@ void BilleterasRepository::eliminar()
    Billetera billeteraEliminar = this->seleccionar();
    char caracter;
 
+   rlutil::cls();
    mostrarMensaje("¿Esta seguro de eliminar esta billetera? S/N", 15, 4);
    cin >> caracter;
 
    if (caracter == 's' || caracter == 'S')
    {
        if(this->bajaLogica(billeteraEliminar.getId()))
+       {
+           rlutil::cls();
            mostrarMensaje("Billetera borrada exitosamente", 15, 2);
+       }
        else
-           mostrarMensaje("No se pudo borrar esta billetera", 15, 2);
+       {
+           rlutil::cls();
+           mostrarMensaje("No se pudo borrar esta billetera", 15, 4);
+       }
    }
 }
 
