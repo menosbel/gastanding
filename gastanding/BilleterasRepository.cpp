@@ -33,12 +33,15 @@ void BilleterasRepository::eliminar()
    Billetera billeteraEliminar = this->seleccionar();
    char caracter;
 
-   mostrarMensaje("¿Esta seguro de eliminar esta billetera? S N", 15, 4);
+   mostrarMensaje("¿Esta seguro de eliminar esta billetera? S/N", 15, 4);
    cin >> caracter;
 
    if (caracter == 's' || caracter == 'S')
    {
-       this->bajaLogica(billeteraEliminar.getId());
+       if(this->bajaLogica(billeteraEliminar.getId()))
+           mostrarMensaje("Billetera borrada exitosamente", 15, 2);
+       else
+           mostrarMensaje("No se pudo borrar esta billetera", 15, 2);
    }
 }
 

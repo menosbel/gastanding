@@ -5,8 +5,6 @@ class BilleterasRepository
 {
 private:
 	string _nombreArchivo;
-
-	bool bajaLogica(int idBilletera);
 public:
 	BilleterasRepository() { _nombreArchivo = ""; };
 	BilleterasRepository(string nombreArchivo) { _nombreArchivo = nombreArchivo; };
@@ -16,5 +14,7 @@ public:
 	Billetera seleccionar();
 	int cantidadRegistros();
 	Billetera buscarPor(int id) { return Billetera(); };
+private:
+	bool bajaLogica(int idBilletera);
 };
 

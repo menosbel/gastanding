@@ -12,9 +12,12 @@ public:
 	CategoriasRepository() { _nombreArchivo = ""; };
 	CategoriasRepository(string nombreArchivo) { _nombreArchivo = nombreArchivo; };
 	void agregar();
+	void eliminar(int tipoMovimiento);
 	void listar(int tipoMovimiento);
 	int seleccionarPor(int tipoMovimiento);
 	Categoria buscarPor(int id);
 	int cantidadRegistros();
+private:
+	bool bajaLogica(int idCategoria);
 };
 

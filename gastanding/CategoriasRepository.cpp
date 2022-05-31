@@ -28,6 +28,23 @@ void CategoriasRepository::agregar()
     }
 }
 
+void CategoriasRepository::eliminar(int tipoMovimiento)
+{
+    int categoriaId = this->seleccionarPor(tipoMovimiento);
+    char caracter;
+
+    mostrarMensaje("¿Esta seguro de eliminar esta categoria? S/N", 15, 4);
+    cin >> caracter;
+
+    if (caracter == 's' || caracter == 'S')
+    {
+        if(this->bajaLogica(categoriaId))
+            mostrarMensaje("Categoria borrada exitosamente", 15, 2);
+        else
+            mostrarMensaje("No se pudo borrar esta categoria", 15, 2);
+    }
+}
+
 void CategoriasRepository::listar(int tipoMovimiento)
 {
     Categoria aux;
@@ -96,4 +113,30 @@ int CategoriasRepository::cantidadRegistros() {
     fclose(p);
     cant_reg = bytes / sizeof(Categoria);
     return cant_reg;
+}
+
+bool CategoriasRepository::bajaLogica(int idCategoria)
+{
+    Categoria aux;
+    bool reescribio;
+
+    FILE* p;
+    errno_t err;
+    err = fopen_s(&p, _nombreArchivo.c_str(), "rb+");
+    if (err != 0)
+        return false;
+
+    while (fread(&aux, sizeof aux, 1, p))
+    {
+        if (aux.getId() == idCategoria)
+        {
+            aux.setEstado(false);
+            fseek(p, ftell(p) - sizeof aux, 0);
+            reescribio = fwrite(&aux, sizeof aux, 1, p);
+            fclose(p);
+            return reescribio;
+        }
+    }
+    fclose(p);
+    return false;
 }

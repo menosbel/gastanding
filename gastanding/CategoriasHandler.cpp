@@ -19,7 +19,8 @@ bool CategoriasHandler::exec()
             rlutil::anykey();
             break;
         case 2:
-            //eliminar categoria
+            tipoMovimiento = renderMenuTiposMovimientos();
+            _categorias.eliminar(tipoMovimiento);
             rlutil::anykey();
             break;
         case 3:
