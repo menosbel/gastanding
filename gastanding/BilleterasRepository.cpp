@@ -27,6 +27,21 @@ void BilleterasRepository::agregar()
     }
 }
 
+void BilleterasRepository::eliminar()
+{
+   mostrarMensaje("Seleccione la billetera que desee eliminar", 15, 4);
+   Billetera billeteraEliminar = this->seleccionar();
+   char caracter;
+
+   mostrarMensaje("¿Esta seguro de eliminar esta billetera? S/N", 15, 4);
+   cin >> caracter;
+
+   if (caracter == 's' || caracter == 'S')
+   {
+       this->bajaLogica(billeteraEliminar.getId());
+   }
+}
+
 void BilleterasRepository::listar()
 {
     Billetera aux;
@@ -82,3 +97,30 @@ int BilleterasRepository::cantidadRegistros() {
     cant_reg = bytes / sizeof(Billetera);
     return cant_reg;
 }
+
+bool BilleterasRepository::bajaLogica(int idBilletera)
+{
+    Billetera aux;
+    bool reescribio;
+
+    FILE* p;
+    errno_t err;
+    err = fopen_s(&p, _nombreArchivo.c_str(), "rb+");
+    if (err != 0)  
+        return false; 
+
+    while (fread(&aux, sizeof aux, 1, p))
+    {
+        if (aux.getId() == idBilletera)
+        {
+            aux.setEstado(false);
+            fseek(p, ftell(p) - sizeof aux, 0);
+            reescribio = fwrite(&aux, sizeof aux, 1, p);
+            fclose(p);
+            return reescribio;
+        }
+    }
+    fclose(p);
+    return false;
+}
+
