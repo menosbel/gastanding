@@ -33,7 +33,7 @@ void BilleterasRepository::eliminar()
    Billetera billeteraEliminar = this->seleccionar();
    char caracter;
 
-   mostrarMensaje("¿Esta seguro de eliminar esta billetera? S/N", 15, 4);
+   mostrarMensaje("¿Esta seguro de eliminar esta billetera? S N", 15, 4);
    cin >> caracter;
 
    if (caracter == 's' || caracter == 'S')
@@ -51,7 +51,8 @@ void BilleterasRepository::listar()
     for (int i = 0; i < cantRegistros; i++)
     {
         aux.leerDeDisco(i, _nombreArchivo);
-        aux.mostrar();
+        if(aux.getEstado())
+            aux.mostrar();
         cout << endl;
     }
 }
@@ -66,8 +67,10 @@ Billetera BilleterasRepository::seleccionar()
         for (int i = 0; i < cantRegistros; i++)
         {
             aux.leerDeDisco(i, _nombreArchivo);
-            cout << i + 1 << "- " << aux.getNombre() << endl;
-            cout << endl;
+           
+                cout << i + 1 << "- " << aux.getNombre() << endl;
+                cout << endl;
+            
         }
 
         cout << "Opcion: ";

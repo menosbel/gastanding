@@ -51,7 +51,7 @@ bool BilleterasHandler::gestionarBilleteras()
             rlutil::anykey();
             break;
         case 2:
-            //eliminar
+            _billeteras.eliminar();
             rlutil::anykey();
             break;
         case 3:
