@@ -38,10 +38,12 @@ int main()
         cout << "----------------------------------" << endl;
         cout << "\t MENU PRINCIPAL" << endl;
         cout << "----------------------------------" << endl;
-        cout << "1. Billeteras" << endl;
-        cout << "2. Categorias" << endl;
-        cout << "3. Informes" << endl;
+        cout << "----1. Billeteras" << endl;
+        cout << "----2. Categorias" << endl;
+        cout << "----3. Informes" << endl;
+        cout << "----------------------------------" << endl;
         cout << "0. Salir" << endl;
+        cout << "----------------------------------" << endl;
         cout << "Ingrese una opción: ";
         cin >> opcion;
 
@@ -55,20 +57,18 @@ int main()
             break;
         case 3:
             break;
-        case 4:
-            break;
-        case 5:
-            break;
         case 0:
             cout << "¿Confirma que desea salir? (S/N): ";
             cin >> confirmarSalida;
             if (tolower(confirmarSalida) == 's') {
                 rlutil::cls();
-                mostrarMensaje("** Muchas gracias por usar Gastanding **", 15, 13);
+                mostrarMensaje("** Muchas gracias por utilizar Gastanding **", 15, 13);
                 return 0;
             }
             break;
         default:
+                mostrarMensaje("** Ingrese una opcion valida **", 15, 13);
+                rlutil::anykey();
             break;
         }
     }
