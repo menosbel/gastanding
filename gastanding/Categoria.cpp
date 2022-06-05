@@ -17,9 +17,22 @@ string Categoria::getTipoToString()
 	};
 }
 
+string Categoria::getEstadoToString()
+{
+	switch (getEstado())
+	{
+	case 0:
+		return "Inactiva";
+	case 1:
+		return "Activa";
+	default:
+		break;
+	}
+}
+
 void Categoria::mostrar()
 {
-	const int nameWidth = 50;
+	const int nameWidth = 20;
 	printElement(getNombre(), nameWidth);
 	printElement(getTipoToString(), nameWidth);
 }

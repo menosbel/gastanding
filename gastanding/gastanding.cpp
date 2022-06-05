@@ -20,12 +20,7 @@ int main()
     MovimientosHandler movimientosHandler(movimientos, categorias);
     InformesHandler informesHandler;
 
-    BilleterasHandler billeterasHandler = BilleterasHandler(
-        billeteras,
-        movimientos,
-        categorias,
-        movimientosHandler
-    );
+    BilleterasHandler billeterasHandler(billeteras, movimientos, categorias, movimientosHandler);
     CategoriasHandler categoriasHandler(categorias);
 
     setlocale(LC_ALL, "spanish");

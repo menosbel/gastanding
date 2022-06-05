@@ -31,24 +31,25 @@ void CategoriasRepository::agregar()
 
 void CategoriasRepository::eliminar(int tipoMovimiento)
 {
-	cout << "Seleccione la categoría que desee eliminar: " << endl;
+	cout << "Seleccione la categoría que desee eliminar." << endl;
 	int categoriaId = seleccionarPor(tipoMovimiento);
 	char caracter = 'n';
 
-	cout << "¿Esta seguro de eliminar esta categoria? S/N: ";
-	cin >> caracter;
-
-	rlutil::cls();
-
-	if (tolower(caracter) == 's')
+	if (categoriaId != -1)
 	{
-		if (bajaLogica(categoriaId))
-			mostrarMensaje("Categoria borradada exitosamente", 15, 2);
-		else
-			mostrarMensaje("No se pudo borrar esta categoria", 15, 4);
+		cout << "¿Esta seguro de eliminar esta categoria? S/N: ";
+		cin >> caracter;
+
+		rlutil::cls();
+
+		if (tolower(caracter) == 's')
+		{
+			if (bajaLogica(categoriaId))
+				mostrarMensaje("Categoria eliminada exitosamente", 15, 2);
+			else
+				mostrarMensaje("No se pudo cambiar eliminar la categoria", 15, 4);
+		}
 	}
-	else
-		return;
 }
 
 void CategoriasRepository::listar(int tipoMovimiento)
@@ -62,16 +63,12 @@ void CategoriasRepository::listar(int tipoMovimiento)
 	{
 		aux.leerDeDisco(i, _nombreArchivo);
 
-		if (aux.getTipoMovimiento() == tipoMovimiento)
+		if (aux.getTipoMovimiento() == tipoMovimiento && aux.getEstado())
 		{
-			if (aux.getEstado())
-			{
-				aux.mostrar();
-				cout << endl;
-				hayCategoriasActivas = true;
-			}
+			aux.mostrar();
+			cout << endl;
+			hayCategoriasActivas = true;
 		}
-
 	}
 
 	if (!hayCategoriasActivas) 
@@ -87,6 +84,8 @@ int CategoriasRepository::seleccionarPor(int tipoMovimiento)
 
 	if (cantRegistros > 0) {
 		cout << "Elegí una categoría: " << endl << endl;
+		cout << left << setw(10) << setfill(' ') << "ID";
+		cout << left << setw(20) << setfill(' ') << "NOMBRE" << endl;
 
 		while (aux.leerDeDisco(pos++, _nombreArchivo))
 		{
@@ -94,9 +93,9 @@ int CategoriasRepository::seleccionarPor(int tipoMovimiento)
 			{
 				if (aux.getTipoMovimiento() == tipoMovimiento)
 				{
-					cout << pos + 1 << "- " << aux.getNombre() << endl;
+					cout << left << setw(10) << setfill(' ') << aux.getId();
+					cout << left << setw(20) << setfill(' ') << aux.getNombre() << endl;
 				}
-
 				hayCategoriasActivas = true;
 			}
 		}
@@ -106,14 +105,12 @@ int CategoriasRepository::seleccionarPor(int tipoMovimiento)
 	{
 		cout << endl << "Opcion: ";
 		cin >> opcion;
-
-		aux.leerDeDisco(opcion - 1, _nombreArchivo);
-		return aux.getId();
+		return opcion;
 	}
 	else
 	{
 		mostrarMensaje("Aún no existe ninguna categoría. Tenés que crear una.", 15, 4);
-		return 0;
+		return -1;
 	}
 }
 
@@ -151,8 +148,7 @@ bool CategoriasRepository::bajaLogica(int idCategoria)
 	FILE* p;
 	errno_t err;
 	err = fopen_s(&p, _nombreArchivo.c_str(), "rb+");
-	if (err != 0)
-		return false;
+	if (err != 0) return false;
 
 	while (fread(&aux, sizeof aux, 1, p))
 	{

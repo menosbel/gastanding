@@ -92,7 +92,7 @@ Billetera BilleterasRepository::seleccionar()
 
 			if (aux.getEstado())
 			{
-				cout << i + 1 << "- " << aux.getNombre() << endl;
+				cout << aux.getId() << "- " << aux.getNombre() << endl;
 				cout << endl;
 				hayBilleterasActivas = true;
 			}

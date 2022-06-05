@@ -14,6 +14,7 @@ public:
 	string getNombre() { return string(_nombre); };
 	int getTipoMovimiento() { return _tipoMovimiento; };
 	string getTipoToString();
+	string getEstadoToString();
 	bool getEstado() { return _estado; };
 	void setId(int valor) { _id = valor; };
 	void setNombre(string valor) { strcpy_s(_nombre, valor.c_str()); };

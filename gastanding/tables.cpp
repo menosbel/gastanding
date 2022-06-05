@@ -32,7 +32,7 @@ void printBilleterasHeader()
 void printCategoriasHeader()
 {
 	const char separator = ' ';
-	const int nameWidth = 50;
+	const int nameWidth = 20;
 
 	cout << left << setw(nameWidth) << setfill(separator) << "Nombre";
 	cout << left << setw(nameWidth) << setfill(separator) << "Tipo";
