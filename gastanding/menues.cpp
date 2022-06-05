@@ -111,7 +111,6 @@ int renderMenuCategorias()
 
 int renderMenuTiposMovimientos() {
     int tipo;
-    Categoria categoria;
     tipo = menuTipoMovimiento();
 
     while (tipo != 1 && tipo != 2)
