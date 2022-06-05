@@ -13,7 +13,7 @@ public:
 	void listar();
 	Billetera seleccionar();
 	int cantidadRegistros();
-	Billetera buscarPor(int id) { return Billetera(); };
+	Billetera buscarPor(int id);
 private:
 	bool bajaLogica(int idBilletera);
 };

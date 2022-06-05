@@ -22,10 +22,12 @@ void printBilleterasHeader()
 {
 	const char separator = ' ';
 	const int nameWidth = 25;
+	const int numWidth = 10;
 
+	cout << left << setw(numWidth) << setfill(separator) << "ID";
 	cout << left << setw(nameWidth) << setfill(separator) << "Nombre";
 	cout << endl;
-	cout << left << setw(110) << setfill('_') << "";
+	cout << left << setw(50) << setfill('_') << "";
 	cout << endl << endl;
 }
 
@@ -33,10 +35,12 @@ void printCategoriasHeader()
 {
 	const char separator = ' ';
 	const int nameWidth = 20;
+	const int numWidth = 10;
 
+	cout << left << setw(numWidth) << setfill(separator) << "ID";
 	cout << left << setw(nameWidth) << setfill(separator) << "Nombre";
 	cout << left << setw(nameWidth) << setfill(separator) << "Tipo";
 	cout << endl;
-	cout << left << setw(110) << setfill('_') << "";
+	cout << left << setw(50) << setfill('_') << "";
 	cout << endl << endl;
 }

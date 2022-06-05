@@ -86,17 +86,20 @@ Billetera BilleterasRepository::seleccionar()
 
 	if (cantRegistros > 0)
 	{
+		cout << left << setw(10) << setfill(' ') << "ID";
+		cout << left << setw(20) << setfill(' ') << "NOMBRE" << endl;
 		for (int i = 0; i < cantRegistros; i++)
 		{
 			aux.leerDeDisco(i, _nombreArchivo);
 
 			if (aux.getEstado())
 			{
-				cout << aux.getId() << "- " << aux.getNombre() << endl;
-				cout << endl;
+				cout << left << setw(10) << setfill(' ') << aux.getId();
+				cout << left << setw(20) << setfill(' ') << aux.getNombre() << endl;
 				hayBilleterasActivas = true;
 			}
 		}
+		cout << endl << endl;
 	}
 
 	if (hayBilleterasActivas)
@@ -104,7 +107,7 @@ Billetera BilleterasRepository::seleccionar()
 		cout << "Opcion: ";
 		cin >> opcion;
 
-		aux.leerDeDisco(opcion - 1, _nombreArchivo);
+		aux = buscarPor(opcion);
 		return aux;
 	}
 	else
@@ -127,6 +130,16 @@ int BilleterasRepository::cantidadRegistros() {
 	fclose(p);
 	cant_reg = bytes / sizeof(Billetera);
 	return cant_reg;
+}
+
+Billetera BilleterasRepository::buscarPor(int id)
+{
+	Billetera aux;
+	int pos = 0;
+	while (aux.leerDeDisco(pos++, _nombreArchivo))
+	{
+		if (aux.getId() == id) return aux;
+	}
 }
 
 bool BilleterasRepository::bajaLogica(int idBilletera)

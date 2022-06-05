@@ -31,7 +31,7 @@ void CategoriasRepository::agregar()
 
 void CategoriasRepository::eliminar(int tipoMovimiento)
 {
-	cout << "Seleccione la categoría que desee eliminar." << endl;
+	cout << "Seleccione la categoría que desee eliminar: " << endl;
 	int categoriaId = seleccionarPor(tipoMovimiento);
 	char caracter = 'n';
 
@@ -83,7 +83,6 @@ int CategoriasRepository::seleccionarPor(int tipoMovimiento)
 	bool hayCategoriasActivas = false;
 
 	if (cantRegistros > 0) {
-		cout << "Elegí una categoría: " << endl << endl;
 		cout << left << setw(10) << setfill(' ') << "ID";
 		cout << left << setw(20) << setfill(' ') << "NOMBRE" << endl;
 
