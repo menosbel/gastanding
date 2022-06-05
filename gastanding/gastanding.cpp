@@ -2,8 +2,10 @@
 #include <string>
 #include "rlutil.h"
 #include "functions.h"
+#include "MovimientosHandler.h"
 #include "BilleterasHandler.h"
 #include "CategoriasHandler.h"
+#include "InformesHandler.h"
 
 using namespace std;
 
@@ -12,10 +14,11 @@ int main()
     string billeterasArchivo = "billeteras.dat";
     string movimientosArchivo = "movimientos.dat";
     string categoriasArchivo = "categorias.dat";
-    BilleterasRepository billeteras = BilleterasRepository(billeterasArchivo);
-    CategoriasRepository categorias = CategoriasRepository(categoriasArchivo);
-    MovimientosRepository movimientos = MovimientosRepository(movimientosArchivo, categorias);
-    MovimientosHandler movimientosHandler = MovimientosHandler(movimientos, categorias);
+    BilleterasRepository billeteras(billeterasArchivo);
+    CategoriasRepository categorias(categoriasArchivo);
+    MovimientosRepository movimientos(movimientosArchivo, categorias);
+    MovimientosHandler movimientosHandler(movimientos, categorias);
+    InformesHandler informesHandler;
 
     BilleterasHandler billeterasHandler = BilleterasHandler(
         billeteras,
@@ -38,9 +41,9 @@ int main()
         cout << "----------------------------------" << endl;
         cout << "\t MENU PRINCIPAL" << endl;
         cout << "----------------------------------" << endl;
-        cout << "----1. Billeteras" << endl;
-        cout << "----2. Categorias" << endl;
-        cout << "----3. Informes" << endl;
+        cout << "1. Billeteras" << endl;
+        cout << "2. Categorias" << endl;
+        cout << "3. Informes" << endl;
         cout << "----------------------------------" << endl;
         cout << "0. Salir" << endl;
         cout << "----------------------------------" << endl;
@@ -56,6 +59,7 @@ int main()
             categoriasHandler.exec();
             break;
         case 3:
+            informesHandler.exec();
             break;
         case 0:
             cout << "¿Confirma que desea salir? (S/N): ";

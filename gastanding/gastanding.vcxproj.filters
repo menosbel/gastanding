@@ -43,6 +43,12 @@
     <Filter Include="Source Files\Categorias">
       <UniqueIdentifier>{627c13bd-e127-43a7-8c08-ef6df93fed57}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Informes">
+      <UniqueIdentifier>{a9743023-86ad-41d2-a5ea-2666cd8536cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Informes">
+      <UniqueIdentifier>{f33e2e0e-f229-4abd-b8aa-6cc74df31258}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="gastanding.cpp">
@@ -89,6 +95,9 @@
     </ClCompile>
     <ClCompile Include="CategoriasHandler.cpp">
       <Filter>Source Files\Categorias</Filter>
+    </ClCompile>
+    <ClCompile Include="InformesHandler.cpp">
+      <Filter>Source Files\Informes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -139,6 +148,9 @@
     </ClInclude>
     <ClInclude Include="CategoriasHandler.h">
       <Filter>Header Files\Categorias</Filter>
+    </ClInclude>
+    <ClInclude Include="InformesHandler.h">
+      <Filter>Header Files\Informes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

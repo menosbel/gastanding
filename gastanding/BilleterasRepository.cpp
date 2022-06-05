@@ -1,4 +1,5 @@
 #include "BilleterasRepository.h"
+#include "Billetera.h"
 #include "functions.h"
 #include "tables.h"
 #include "rlutil.h"
@@ -30,26 +31,20 @@ void BilleterasRepository::agregar()
 
 void BilleterasRepository::eliminar()
 {
-   mostrarMensaje("Seleccione la billetera que desee eliminar", 15, 4);
-   Billetera billeteraEliminar = this->seleccionar();
+   
+   cout << "Seleccione la billetera que desee eliminar:" << endl;
+   Billetera billeteraEliminar = seleccionar();
    char caracter;
 
    rlutil::cls();
-   mostrarMensaje("¿Esta seguro de eliminar esta billetera? S/N", 15, 4);
+   cout << "¿Esta seguro de eliminar esta billetera? S/N: ";
    cin >> caracter;
+   rlutil::cls();
 
-   if (caracter == 's' || caracter == 'S')
+   if (tolower(caracter) == 's')
    {
-       if(this->bajaLogica(billeteraEliminar.getId()))
-       {
-           rlutil::cls();
-           mostrarMensaje("Billetera borrada exitosamente", 15, 2);
-       }
-       else
-       {
-           rlutil::cls();
-           mostrarMensaje("No se pudo borrar esta billetera", 15, 4);
-       }
+       if (bajaLogica(billeteraEliminar.getId())) mostrarMensaje("Billetera borrada exitosamente", 15, 2);
+       else mostrarMensaje("No se pudo borrar esta billetera", 15, 4);
    }
 }
 
@@ -57,15 +52,20 @@ void BilleterasRepository::listar()
 {
     Billetera aux;
     int cantRegistros = cantidadRegistros();
-
+    bool hayBilleterasActivas = false;
+    
     printBilleterasHeader();
     for (int i = 0; i < cantRegistros; i++)
     {
         aux.leerDeDisco(i, _nombreArchivo);
-        if(aux.getEstado())
+        if (aux.getEstado()) {
             aux.mostrar();
-        cout << endl;
+            cout << endl;
+            hayBilleterasActivas = true;
+        }
     }
+
+    if (!hayBilleterasActivas) mostrarMensaje("Aún no se ha ingresado ninguna billetera", 15, 4);
 }
 
 Billetera BilleterasRepository::seleccionar()
@@ -120,8 +120,7 @@ bool BilleterasRepository::bajaLogica(int idBilletera)
     FILE* p;
     errno_t err;
     err = fopen_s(&p, _nombreArchivo.c_str(), "rb+");
-    if (err != 0)  
-        return false; 
+    if (err != 0) return false; 
 
     while (fread(&aux, sizeof aux, 1, p))
     {

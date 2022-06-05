@@ -66,7 +66,6 @@ int renderMenuInformes()
     cout << "2. Balance anual" << endl;
     cout << "3. Gastos por categoría" << endl;
     cout << "4. Comparación de gastos interanual por categoría" << endl;
-    cout << "5. Escenario simulado de inversiones" << endl;
     cout << "0. Salir" << endl << endl;
     cout << "Ingrese una opción: ";
     cin >> opcion;
@@ -136,21 +135,4 @@ int menuTipoMovimiento()
     cin >> tipo;
     rlutil::cls();
     return tipo;
-}
-
-Categoria menuCategoriasMovimientos(int tipo) {
-    Categoria categoria = Categoria();
-    switch (tipo)
-    {
-    case 1:
-        // buscar y listar categorias ingresos
-        return categoria;
-        break;
-    case 2:
-        // buscar y listar categorias gastos
-        return categoria;
-        break;
-    default:
-        break;
-    }
 }

@@ -148,6 +148,7 @@
     <ClCompile Include="functions.cpp" />
     <ClCompile Include="Fecha.cpp" />
     <ClCompile Include="gastanding.cpp" />
+    <ClCompile Include="InformesHandler.cpp" />
     <ClCompile Include="Movimiento.cpp" />
     <ClCompile Include="ingresoDatos.cpp" />
     <ClCompile Include="MovimientosRepository.cpp" />
@@ -164,6 +165,7 @@
     <ClInclude Include="CategoriasRepository.h" />
     <ClInclude Include="functions.h" />
     <ClInclude Include="Fecha.h" />
+    <ClInclude Include="InformesHandler.h" />
     <ClInclude Include="Movimiento.h" />
     <ClInclude Include="ingresoDatos.h" />
     <ClInclude Include="MovimientosRepository.h" />

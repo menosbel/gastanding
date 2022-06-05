@@ -31,24 +31,19 @@ void CategoriasRepository::agregar()
 
 void CategoriasRepository::eliminar(int tipoMovimiento)
 {
-    int categoriaId = this->seleccionarPor(tipoMovimiento);
+    cout << "Seleccione la categoría que desee eliminar: " << endl;
+    int categoriaId = seleccionarPor(tipoMovimiento);
     char caracter;
 
-    mostrarMensaje("¿Esta seguro de eliminar esta categoria? S/N", 15, 4);
+    cout << "¿Esta seguro de eliminar esta categoria? S/N: ";
     cin >> caracter;
 
-    if (caracter == 's' || caracter == 'S')
+    rlutil::cls();
+
+    if (tolower(caracter))
     {
-        if (this->bajaLogica(categoriaId)) 
-        {
-            rlutil::cls();
-            mostrarMensaje("Categoria borrada exitosamente", 15, 2);
-        }
-        else 
-        {
-            rlutil::cls();
-            mostrarMensaje("No se pudo borrar esta categoria", 15, 4);
-        }
+        if (bajaLogica(categoriaId)) mostrarMensaje("Categoria borradada exitosamente", 15, 2);
+        else mostrarMensaje("No se pudo borrar esta categoria", 15, 4);
     }
 }
 
@@ -56,16 +51,20 @@ void CategoriasRepository::listar(int tipoMovimiento)
 {
     Categoria aux;
     int cantRegistros = cantidadRegistros();
+    bool hayCategoriasActivas = false;
 
     printCategoriasHeader();
     for (int i = 0; i < cantRegistros; i++)
     {
+        aux.leerDeDisco(i, _nombreArchivo);
         if (aux.getTipoMovimiento() == tipoMovimiento) {
-            aux.leerDeDisco(i, _nombreArchivo);
             aux.mostrar();
             cout << endl;
+            hayCategoriasActivas = true;
         }
     }
+
+    if (!hayCategoriasActivas) mostrarMensaje("Aún no se ha ingresado ninguna categoría", 15, 4);
 }
 
 int CategoriasRepository::seleccionarPor(int tipoMovimiento)
