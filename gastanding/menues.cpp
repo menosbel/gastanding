@@ -64,14 +64,17 @@ int renderMenuInformes()
     cout << "---------------------------" << endl;    
     cout << "1. Balance mensual" << endl;
     cout << "2. Balance anual" << endl;
-    cout << "3. Gastos por categoría" << endl;
-    cout << "4. Comparación de gastos interanual por categoría" << endl;
+    cout << "3. Patrimonio neto" << endl;
     cout << "0. Salir" << endl << endl;
     cout << "Ingrese una opción: ";
     cin >> opcion;
-    rlutil::cls();
-    return opcion;
-}
+    while (!(opcion >= 0 && opcion <= 3)) {
+        cout << "ingrese una opcion correcta" << endl;
+        cin >> opcion;
+    }
+        rlutil::cls();
+        return opcion;
+    }
 
 int renderMenuBuscar()
 {
