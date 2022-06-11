@@ -1,6 +1,7 @@
 #include "InformesHandler.h"
 #include "rlutil.h"
 #include "menues.h"
+#include "Informes.h"
 
 using namespace std;
 
@@ -8,28 +9,43 @@ bool InformesHandler::exec()
 {
     int opcion;
     bool seguir = true;
+   
 
     while (seguir)
     {
         rlutil::cls();
         opcion = renderMenuInformes();
         rlutil::cls();
+        Informes Informe;
         switch (opcion)
         {
+
         case 1:
-            cout << "Balance Mensual" << endl;
-            rlutil::anykey();
+
+            Informe.BalanceMensual();
             
             break;
         case 2:
-            cout<<"Balance Anual" << endl;
-            rlutil::anykey();
+
+            Informe.BalanceAnual();
+
             break;
            
         case 3:
-            cout << "Patrimonio neto" << endl;
-            rlutil::anykey();
+
+            Informe.PatrimonioNeto();
             
+            break;
+        case 4:
+
+            Informe.TopDeIngresosOGastos();
+
+            break;
+
+        case 5:
+
+            Informe.EvolucionDeIngresosOGastos();
+
             break;
         case 0:
             return false;

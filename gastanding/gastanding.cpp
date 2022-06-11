@@ -20,6 +20,7 @@ int main()
     MovimientosHandler movimientosHandler(movimientos, categorias);
     InformesHandler informesHandler;
 
+
     BilleterasHandler billeterasHandler(billeteras, movimientos, categorias, movimientosHandler);
     CategoriasHandler categoriasHandler(categorias);
 
@@ -33,15 +34,19 @@ int main()
     while (true)
     {
         rlutil::cls();
-        cout << "----------------------------------" << endl;
+        cout << "------------------------------------" << endl;
         cout << "\t MENU PRINCIPAL" << endl;
-        cout << "----------------------------------" << endl;
-        cout << "1. Billeteras" << endl;
-        cout << "2. Categorias" << endl;
-        cout << "3. Informes" << endl;
-        cout << "----------------------------------" << endl;
-        cout << "0. Salir" << endl;
-        cout << "----------------------------------" << endl;
+        cout << "------------------------------------" << endl;
+        cout << endl;
+        cout << "- 1. Billeteras" << endl;
+        cout << "- 2. Categorias" << endl;
+        cout << "- 3. Informes" << endl;
+        cout << endl;
+        cout << endl;
+        cout << endl;
+        cout << "- 0. Salir" << endl;
+        cout << endl;
+        cout << "------------------------------------" << endl;
         cout << "Ingrese una opción: ";
         cin >> opcion;
 
