@@ -83,9 +83,7 @@ bool BilleterasHandler::ingresarABilletera()
             switch (opcion)
             {
             case 1:
-                tipoMovimiento = renderMenuTiposMovimientos();
-                categoriaId = _categorias.seleccionarPor(tipoMovimiento);
-                if (categoriaId != 0) _movimientos.agregarA(_billeteraElegida.getId(), categoriaId);
+                _movimientosHandler.agregarMovimientosA(_billeteraElegida.getId());
                 rlutil::anykey();
                 break;
             case 2:

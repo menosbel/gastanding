@@ -68,3 +68,18 @@ string ingresoConcepto()
     cin >> concepto;
     return concepto;
 }
+
+Fecha ingresoMesAnio() 
+{
+    Fecha fecha;
+    int mes, anio;
+    cout << "Mes: ";
+    cin >> mes;
+    cout << "Año: ";
+    cin >> anio;
+
+    fecha.setDia(1);
+    fecha.setMes(mes);
+    fecha.setAnio(anio);
+    return fecha;
+}

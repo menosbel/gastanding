@@ -46,8 +46,7 @@ void MovimientosHandler::agregarMovimientosA(int billeteraId)
 {
     int tipoMovimiento = renderMenuTiposMovimientos();
     int categoriaId = _categorias.seleccionarPor(tipoMovimiento);
-    rlutil::cls();
-    if (categoriaId != 0) _movimientos.agregarA(billeteraId, categoriaId);
+    if (categoriaId != -1) _movimientos.agregarA(billeteraId, categoriaId);
 }
 
 void MovimientosHandler::mostrarPorFecha()
@@ -57,12 +56,12 @@ void MovimientosHandler::mostrarPorFecha()
     cout << "Buscar " << _nombre << " por fecha" << endl << endl;
     fecha.cargar();
     
-    vector<int> posiciones = _movimientos.buscarPor(fecha);
-    if (posiciones.empty()) mostrarMensaje("No se encontraron movimientos para esa fecha", 15, 4);
+    vector<Movimiento> movimientos = _movimientos.buscarPor(fecha);
+    if (movimientos.empty()) mostrarMensaje("No se encontraron movimientos para esa fecha", 15, 4);
     else {
         cout << endl << endl;
         cout << "Buscar " << _nombre << " por fecha" << endl << endl;
-        _movimientos.mostrarRegistrosPor(posiciones, _billeteraElegida.getId());
+        _movimientos.mostrarRegistrosPor(movimientos, _billeteraElegida.getId());
     }
 }
 
@@ -73,12 +72,12 @@ void MovimientosHandler::mostrarPorRangoMontos()
     montoMin = movimientoMontoMin();
     montoMax = movimientoMontoMax();
 
-    vector<int> posiciones = _movimientos.buscarPor(montoMin, montoMax);
-    if (posiciones.empty()) mostrarMensaje("No se encontraron movimientos dentro de ese rango de montos", 15, 4);
+    vector<Movimiento> movimientos = _movimientos.buscarPor(montoMin, montoMax);
+    if (movimientos.empty()) mostrarMensaje("No se encontraron movimientos dentro de ese rango de montos", 15, 4);
     else {
         cout << endl << endl;
         cout << "Buscar " << _nombre << " por rango de montos" << endl << endl;
-        _movimientos.mostrarRegistrosPor(posiciones, _billeteraElegida.getId());
+        _movimientos.mostrarRegistrosPor(movimientos, _billeteraElegida.getId());
     }
 }
 
@@ -88,12 +87,12 @@ void MovimientosHandler::mostrarPorMonto()
     cout << "Buscar " << _nombre << " por monto" << endl << endl;
     monto = ingresoMonto();
 
-    vector<int> posiciones = _movimientos.buscarPor(monto);
-    if (posiciones.empty()) mostrarMensaje("No se encontraron movimientos por ese monto", 15, 4);
+    vector<Movimiento> movimientos = _movimientos.buscarPor(monto);
+    if (movimientos.empty()) mostrarMensaje("No se encontraron movimientos por ese monto", 15, 4);
     else {
         cout << endl << endl;
         cout << "Buscar " << _nombre << " por monto" << endl << endl;
-        _movimientos.mostrarRegistrosPor(posiciones, _billeteraElegida.getId());
+        _movimientos.mostrarRegistrosPor(movimientos, _billeteraElegida.getId());
     }
 }
 
@@ -105,12 +104,12 @@ void MovimientosHandler::mostrarPorMesYAnio()
     mes = ingresoMes();
     anio = ingresoAnio();
 
-    vector<int> posiciones = _movimientos.buscarPor(mes, anio);
-    if (posiciones.empty()) mostrarMensaje("No se encontraron movimientos para ese mes y año", 15, 4);
+    vector<Movimiento> movimientos = _movimientos.buscarPor(mes, anio);
+    if (movimientos.empty()) mostrarMensaje("No se encontraron movimientos para ese mes y año", 15, 4);
     else {
         cout << endl << endl;
         cout << "Listar " << _nombre << " por mes y año" << endl << endl;
-        _movimientos.mostrarRegistrosPor(posiciones, _billeteraElegida.getId());
+        _movimientos.mostrarRegistrosPor(movimientos, _billeteraElegida.getId());
     }
 }
 
@@ -121,11 +120,11 @@ void MovimientosHandler::mostrarPorCategoria()
     int tipoMovimiento = renderMenuTiposMovimientos();
     categoriaId = _categorias.seleccionarPor(tipoMovimiento);
 
-    vector<int> posiciones = _movimientos.buscarPor(categoriaId);
-    if (posiciones.empty()) mostrarMensaje("No se encontraron movimientos para esa categoría", 15, 4);
+    vector<Movimiento> movimientos = _movimientos.buscarPor(categoriaId);
+    if (movimientos.empty()) mostrarMensaje("No se encontraron movimientos para esa categoría", 15, 4);
     else {
         cout << endl << endl;
         cout << "Listar " << _nombre << " por categoria" << endl << endl;
-        _movimientos.mostrarRegistrosPor(posiciones, _billeteraElegida.getId());
+        _movimientos.mostrarRegistrosPor(movimientos, _billeteraElegida.getId());
     }
 }

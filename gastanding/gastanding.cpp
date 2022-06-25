@@ -18,9 +18,7 @@ int main()
     CategoriasRepository categorias(categoriasArchivo);
     MovimientosRepository movimientos(movimientosArchivo, categorias);
     MovimientosHandler movimientosHandler(movimientos, categorias);
-    InformesHandler informesHandler;
-
-
+    InformesHandler informesHandler(movimientos, categorias);
     BilleterasHandler billeterasHandler(billeteras, movimientos, categorias, movimientosHandler);
     CategoriasHandler categoriasHandler(categorias);
 

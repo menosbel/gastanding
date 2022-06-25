@@ -21,10 +21,11 @@ public:
 	void eliminar(int pos);
 	int cantidadRegistros();
 	int buscarPor(float monto, Fecha fecha, int categoriaId, string concepto, int billeteraId);
-	vector<int> buscarPor(float monto);
-	vector<int> buscarPor(float montoMin, float montoMax);
-	vector<int> buscarPor(Fecha fecha);
-	vector<int> buscarPor(int mes, int anio);
-	vector<int> buscarPor(int categoriaId);
-	void mostrarRegistrosPor(vector<int> posiciones, int billeteraId);
+	vector<Movimiento> buscarPor(float monto);
+	vector<Movimiento> buscarPor(float montoMin, float montoMax);
+	vector<Movimiento> buscarPor(Fecha fecha);
+	vector<Movimiento> buscarPor(int mes, int anio);
+	vector<Movimiento> buscarPor(int categoriaId);
+	vector<Movimiento> buscarPor(int categoriaId, Fecha inicio, Fecha fin);
+	void mostrarRegistrosPor(vector<Movimiento> movimientos, int billeteraId);
 };

@@ -34,12 +34,24 @@ void printBilleterasHeader()
 void printCategoriasHeader()
 {
 	const char separator = ' ';
-	const int nameWidth = 20;
+	const int nameWidth = 40;
 	const int numWidth = 10;
 
 	cout << left << setw(numWidth) << setfill(separator) << "ID";
 	cout << left << setw(nameWidth) << setfill(separator) << "Nombre";
-	cout << left << setw(nameWidth) << setfill(separator) << "Tipo";
+	cout << left << setw(numWidth) << setfill(separator) << "Tipo";
+	cout << endl;
+	cout << left << setw(70) << setfill('_') << "";
+	cout << endl << endl;
+}
+
+void printInformeEvolucionMovimientosHeader()
+{
+	const char separator = ' ';
+	const int numWidth = 10;
+
+	cout << left << setw(numWidth) << setfill(separator) << "Fecha";
+	cout << left << setw(numWidth) << setfill(separator) << "Monto";
 	cout << endl;
 	cout << left << setw(50) << setfill('_') << "";
 	cout << endl << endl;

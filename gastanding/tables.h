@@ -11,3 +11,4 @@ template<typename T> void printElement(T t, const int& width)
 void printMovimientosHeader();
 void printBilleterasHeader();
 void printCategoriasHeader();
+void printInformeEvolucionMovimientosHeader();

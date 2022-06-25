@@ -26,7 +26,7 @@ int renderMenuBilleteras()
     cin >> opcion;
     while (!(opcion >= 0 && opcion <= 2)) {
         cout << "Ingrese una opcion valida" << endl;
-
+        cout << "Opcion: ";
         cin >> opcion;
     }
     rlutil::cls();
@@ -53,8 +53,8 @@ int renderMenuGestionarBilletera()
     cout << "Ingrese una opción: ";
     cin >> opcion;
     while (!(opcion >= 0 && opcion <= 3)) {
-        cout << "Ingrese una opcion valida" << endl;
-
+        cout << "Ingrese una opcion valida." << endl;
+        cout << "Opcion: ";
         cin >> opcion;
     }
     rlutil::cls();
@@ -82,7 +82,7 @@ int renderMenuDentroDeBilletera(string billetera)
     cin >> opcion;
     while (!(opcion >= 0 && opcion <= 3)) {
         cout << "Ingrese una opcion valida" << endl;
-
+        cout << "Opcion: ";
         cin >> opcion;
     }
     rlutil::cls();
@@ -110,7 +110,7 @@ int renderMenuInformes()
     cin >> opcion;
     while (!(opcion >= 0 && opcion <= 5)) {
         cout << "Ingrese una opcion valida" << endl;
-
+        cout << "Opcion: ";
         cin >> opcion;
     }
         rlutil::cls();
@@ -138,7 +138,7 @@ int renderMenuBuscar()
     cin >> opcion;
     while (!(opcion >= 0 && opcion <= 5)) {
         cout << "Ingrese una opcion valida" << endl;
-
+        cout << "Opcion: ";
         cin >> opcion;
     }
     rlutil::cls();
@@ -166,7 +166,7 @@ int renderMenuCategorias()
     cin >> opcion;
     while (!(opcion >= 0 && opcion <= 3)) {
         cout << "Ingrese una opcion valida" << endl;
-
+        cout << "Opcion: ";
         cin >> opcion;
     }
     rlutil::cls();

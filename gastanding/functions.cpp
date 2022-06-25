@@ -69,3 +69,11 @@ void mostrarMensaje(string mensaje, int color, int colorFondo, int x, int y) {
 	cout << mensaje << endl;
 	rlutil::setBackgroundColor(0);
 }
+
+void vectorEnCero(int* vector, int cant) {
+	for (int i = 0; i < cant; i++)
+	{
+		vector[i] = 0;
+	}
+};
+

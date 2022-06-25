@@ -3,6 +3,7 @@
 #include "functions.h"
 #include "tables.h"
 #include "rlutil.h"
+#include <vector>
 
 using namespace std;
 
@@ -75,12 +76,26 @@ void CategoriasRepository::listar(int tipoMovimiento)
 		mostrarMensaje("Aún no se ha ingresado ninguna categoría", 15, 4);
 }
 
+bool checkCategoriaSeleccionadaExiste(int id, vector<int> categoriasId)
+{
+	bool existe = false;
+	for (int i = 0; i < categoriasId.size(); i++)
+	{
+		if (categoriasId[i] == id) {
+			existe = true;
+			return existe;
+		}
+	}
+	return existe;
+}
+
 int CategoriasRepository::seleccionarPor(int tipoMovimiento)
 {
 	Categoria aux;
 	int opcion, pos = 0;
 	int cantRegistros = cantidadRegistros();
 	bool hayCategoriasActivas = false;
+	vector<int> categoriasId;
 
 	if (cantRegistros > 0) {
 		cout << left << setw(10) << setfill(' ') << "ID";
@@ -94,8 +109,9 @@ int CategoriasRepository::seleccionarPor(int tipoMovimiento)
 				{
 					cout << left << setw(10) << setfill(' ') << aux.getId();
 					cout << left << setw(20) << setfill(' ') << aux.getNombre() << endl;
+					categoriasId.push_back(aux.getId());
+					hayCategoriasActivas = true;
 				}
-				hayCategoriasActivas = true;
 			}
 		}
 	}
@@ -104,6 +120,15 @@ int CategoriasRepository::seleccionarPor(int tipoMovimiento)
 	{
 		cout << endl << "Opcion: ";
 		cin >> opcion;
+		bool existe = checkCategoriaSeleccionadaExiste(opcion, categoriasId);
+
+		while (!existe) {
+			cout << "La categorias seleccionada no existe. Volvé a intentarlo" << endl;
+			cout << endl << "Opcion: ";
+			cin >> opcion;
+			existe = checkCategoriaSeleccionadaExiste(opcion, categoriasId);
+			cout << endl << endl;
+		}
 		return opcion;
 	}
 	else

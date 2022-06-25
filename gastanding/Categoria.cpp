@@ -32,11 +32,11 @@ string Categoria::getEstadoToString()
 
 void Categoria::mostrar()
 {
-	const int nameWidth = 20;
+	const int nameWidth = 40;
 	const int numWidth = 10;
 	printElement(getId(), numWidth);
 	printElement(getNombre(), nameWidth);
-	printElement(getTipoToString(), nameWidth);
+	printElement(getTipoToString(), numWidth);
 }
 
 void Categoria::cargar(int nextId)

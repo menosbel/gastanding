@@ -14,7 +14,6 @@ void MovimientosRepository::agregarA(int billeteraId, int categoriaId)
     int cantRegistros = cantidadRegistros();
 
 	movimiento.cargarEn(billeteraId, categoriaId, cantRegistros + 1);
-
     
     bool existe = false;
     for (int i = 0; i < cantRegistros; i++)
@@ -25,6 +24,8 @@ void MovimientosRepository::agregarA(int billeteraId, int categoriaId)
             break;
         };
     }
+
+    rlutil::cls();
 
     if (existe) mostrarMensaje("El movimiento ya existe. No puede volver a agregarse", 15, 4);
     else {
@@ -93,99 +94,126 @@ int MovimientosRepository::buscarPor(float monto, Fecha fecha, int categoriaId, 
     return -1;
 }
 
-vector<int> MovimientosRepository::buscarPor(float monto)
+vector<Movimiento> MovimientosRepository::buscarPor(float monto)
 {
     Movimiento aux;
     int cantRegistros = cantidadRegistros();
-    vector<int> posiciones;
+    vector<Movimiento> movimientos;
 
     for (int i = 0; i < cantRegistros; i++)
     {
         aux.leerDeDisco(i, _nombreArchivo);
         if (aux.getEstado() == true && aux.getMonto() == monto) {
-            posiciones.push_back(i);
+            movimientos.push_back(aux);
         }
     }
-    return posiciones;
+    return movimientos;
 }
 
-vector<int> MovimientosRepository::buscarPor(float montoMin, float montoMax)
+vector<Movimiento> MovimientosRepository::buscarPor(float montoMin, float montoMax)
 {
     Movimiento aux;
     int cantRegistros = cantidadRegistros();
-    vector<int> posiciones;
+    vector<Movimiento> movimientos;
 
     for (int i = 0; i < cantRegistros; i++)
     {
         aux.leerDeDisco(i, _nombreArchivo);
         if (aux.getEstado() == true) {
             if (aux.getMonto() >= montoMin || aux.getMonto() <= montoMax) {
-                posiciones.push_back(i);
+                movimientos.push_back(aux);
             }
         }
     }
-    return posiciones;
+    return movimientos;
 }
 
-vector<int> MovimientosRepository::buscarPor(Fecha fecha)
+vector<Movimiento> MovimientosRepository::buscarPor(Fecha fecha)
 {
     Movimiento aux;
     int cantRegistros = cantidadRegistros();
-    vector<int> posiciones;
+    vector<Movimiento> movimientos;
 
     for (int i = 0; i < cantRegistros; i++)
     {
         aux.leerDeDisco(i, _nombreArchivo);
         if (aux.getEstado() == true && aux.getFecha().equals(fecha)) {
-            posiciones.push_back(i);
+            movimientos.push_back(aux);
         }
     }
-    return posiciones;
+    return movimientos;
 }
 
-vector<int> MovimientosRepository::buscarPor(int mes, int anio)
+vector<Movimiento> MovimientosRepository::buscarPor(int mes, int anio)
 {
     Movimiento aux;
     int cantRegistros = cantidadRegistros();
-    vector<int> posiciones;
+    vector<Movimiento> movimientos;
 
     for (int i = 0; i < cantRegistros; i++)
     {
         aux.leerDeDisco(i, _nombreArchivo);
         if (aux.getEstado() == true && aux.getFecha().getAnio() == anio && aux.getFecha().getMes() == mes) {
-            posiciones.push_back(i);
+            movimientos.push_back(aux);
         }
     }
-    return posiciones;
+    return movimientos;
 }
 
-vector<int> MovimientosRepository::buscarPor(int categoriaId)
+vector<Movimiento> MovimientosRepository::buscarPor(int categoriaId)
 {
     Movimiento aux;
     int cantRegistros = cantidadRegistros();
-    vector<int> posiciones;
+    vector<Movimiento> movimientos;
 
     for (int i = 0; i < cantRegistros; i++)
     {
         aux.leerDeDisco(i, _nombreArchivo);
         if (aux.getEstado() == true && aux.getCategoria() == categoriaId) {
-            posiciones.push_back(i);
+            movimientos.push_back(aux);
         }
     }
-    return posiciones;
+    return movimientos;
 }
 
-void MovimientosRepository::mostrarRegistrosPor(vector<int> posiciones, int billeteraId)
+vector<Movimiento> MovimientosRepository::buscarPor(int categoriaId, Fecha inicio, Fecha fin)
 {
-    Movimiento movimiento;
-    Categoria categoria;
-    printMovimientosHeader();
-    for (int i = 0; i < posiciones.size(); i++)
+
+    Movimiento aux;
+    int cantRegistros = cantidadRegistros();
+    vector<Movimiento> movimientos;
+
+    int anio, mes;
+    for (int i = 0; i < cantRegistros; i++)
     {
-        movimiento.leerDeDisco(posiciones[i], _nombreArchivo);
-        if (movimiento.getBilletera() == billeteraId) {
-            categoria = _categorias.buscarPor(movimiento.getCategoria());
-            movimiento.mostrar(categoria);
+        aux.leerDeDisco(i, _nombreArchivo);
+        if (aux.getEstado() == true && aux.getCategoria() == categoriaId) 
+        {
+            anio = aux.getFecha().getAnio();
+            mes = aux.getFecha().getMes();
+            if (anio >= inicio.getAnio() && mes >= inicio.getMes())
+            {
+                if (anio <= fin.getAnio() && mes <= fin.getMes())
+                {
+                    movimientos.push_back(aux);
+
+                }
+            }
+        }
+    }
+    return movimientos;
+}
+
+void MovimientosRepository::mostrarRegistrosPor(vector<Movimiento> movimientos, int billeteraId)
+{
+    Categoria categoria;
+
+    printMovimientosHeader();
+    for (int i = 0; i < movimientos.size(); i++)
+    {
+        if (movimientos[i].getBilletera() == billeteraId) {
+            categoria = _categorias.buscarPor(movimientos[i].getCategoria());
+            movimientos[i].mostrar(categoria);
             cout << endl;
         }
     }
