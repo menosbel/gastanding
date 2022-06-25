@@ -164,6 +164,26 @@ int CategoriasRepository::cantidadRegistros() {
 	return cant_reg;
 }
 
+int CategoriasRepository::cantidadRegistrosActivosPorTipo(int tipo)
+{
+	int cont = 0;
+	Categoria aux;
+	FILE* p;
+	errno_t err;
+	err = fopen_s(&p, _nombreArchivo.c_str(), "rb");
+	if (err != 0) 
+		return 0;
+
+	while (fread(&aux, sizeof aux, 1, p))
+	{
+		if (aux.getEstado() && aux.getTipoMovimiento() == tipo)
+			cont++;
+	}
+
+	fclose(p);
+	return cont;
+}
+
 bool CategoriasRepository::bajaLogica(int idCategoria)
 {
 	Categoria aux;

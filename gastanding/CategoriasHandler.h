@@ -7,7 +7,7 @@ class CategoriasHandler
 {
 private:
 	string _nombre = "CATEGORIAS";
-	CategoriasRepository _categorias;;
+	CategoriasRepository _categorias;
 public:
 	CategoriasHandler(CategoriasRepository cRepo) {
 		_categorias = cRepo;
