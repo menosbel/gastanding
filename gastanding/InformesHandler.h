@@ -1,6 +1,7 @@
 #pragma once
 #include "MovimientosRepository.h"
 #include "CategoriasRepository.h"
+#include <map>
 
 class InformesHandler
 {
@@ -13,8 +14,10 @@ public:
 		_categorias = cRepo;
 	}
 	bool exec();
-	int calcularMesesEntreFechas(Fecha inicio, Fecha fin);
+	void evolucionMovimientos();
 	void generarInformeEvolucionMovimientos(int categoriaId, Fecha fechaInicio, Fecha fechaFin);
+	void ordenarInformeEvolucionMovimientos(map<string, int> montoPorMesYAnio);
+	void mostrarInformeEvolucionMovimientos(map<string, int> montoPorMesYAnio);
 };
 
  
