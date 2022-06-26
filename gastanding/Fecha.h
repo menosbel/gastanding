@@ -25,5 +25,6 @@ public:
 	void cargar();
 	std::string dia_semana();
 	bool equals(Fecha otraFecha);
+	bool anioBiciesto(int anio);
 };
 

@@ -15,7 +15,7 @@ class Informes
 		void BalanceMensual();
 		void BalanceAnual();
 		void PatrimonioNeto();
-		void TopDeIngresosOGastos(); // mucho harcodeo aca sorrwyy :,(
+		void TopDeIngresosOGastos(); // mucho harcodeo aca sorrwyy :,( // igual no resuelve.. pero dale que lo sacamossss ?•??•????
 		void EvolucionDeIngresosOGastos();
 };
 
