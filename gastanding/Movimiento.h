@@ -36,5 +36,6 @@ public:
 	bool leerDeDisco(int pos, string fileName);
 	bool grabarEnDisco(string fileName);
 	bool grabarEnDisco(int pos, string fileName);
+	bool Ultimos30dias(Fecha fechaMovimiento);
 };
 

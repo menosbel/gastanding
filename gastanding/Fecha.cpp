@@ -195,3 +195,17 @@ bool Fecha::equals(Fecha otraFecha)
 	if (otraFecha._anio == _anio && otraFecha._mes == _mes && otraFecha._dia == _dia) return true;
 	else return false;
 }
+
+bool Fecha::anioBiciesto(int anio)
+{
+
+	if(anio/4==0)
+	{
+		return true;
+	}
+	else 
+	{ 
+		return false; 
+	}
+
+}
