@@ -117,7 +117,7 @@ void Informes::Balance30dias()
 		{
 			cout << "-----------------------------------" << endl;
 			cout << "Su billetera:" << Billeteras.getNombre() << endl;
-			cout << " no registra movimientos" << endl;
+			cout << "No registra movimientos" << endl;
 
 		}
 
@@ -138,8 +138,133 @@ void Informes::Balance30dias()
 
 void Informes::BalanceAnual()
 {
-	cout << "Balance Anual" << endl;
-	rlutil::anykey();
+	int anioOP = 0;
+	Fecha Actual;
+		cout << "Elija el año del Balance: " << endl;
+		cin >> anioOP;
+		while (anioOP > Actual.getAnio() || anioOP < 1990)
+		{
+			cout << "*Año ingresado no valido*" << endl;
+			cout << "Vuelva a ingresar el año: ";
+			cin >> anioOP;
+		}
+		system("cls");
+
+		cout << "Su Balance durante el año " << anioOP << " es..."<<endl;
+		float ImporteTotal = 0;
+		int ContadorMov = 0;
+		int ContadorIng = 0;
+		int ContadorGas = 0;
+
+
+		Billetera Billeteras;
+
+
+		bool RegistraMov = false;
+
+		int i = 0;
+		while (Billeteras.leerDeDisco(i, "billeteras.dat"))
+		{
+
+			int idB = Billeteras.getId();
+
+			Movimiento Movimientos;
+
+			float contImpGas = 0;
+			float contImpIng = 0;
+			int cantMovGasto = 0;
+			int cantMovIngreso = 0;
+
+			int k = 0;
+
+			while (Movimientos.leerDeDisco(k, "movimientos.dat"))
+			{
+
+
+				int idM = Movimientos.getBilletera();
+
+				Fecha FMov;
+
+				FMov.setDia(Movimientos.getFecha().getDia());
+				FMov.setMes(Movimientos.getFecha().getMes());
+				FMov.setAnio(Movimientos.getFecha().getAnio());
+				int diaM=FMov.getDia();
+				int mesM=FMov.getMes();
+				int anioM= FMov.getAnio();
+
+				if (idM == idB && anioM==anioOP)
+				{
+					int CatM = Movimientos.getCategoria();
+
+					Categoria Categorias;
+					int TipoDeMov = 0;
+
+					int j = 0;
+					while (Categorias.leerDeDisco(j, "categorias.dat"))
+					{
+
+						if (CatM == Categorias.getId() && Categorias.getEstado() == true)
+						{
+							TipoDeMov = Categorias.getTipoMovimiento();
+						}
+						j++;
+					}
+					if (TipoDeMov == 1)
+					{
+						cantMovIngreso++;
+						contImpIng += Movimientos.getMonto();
+						ImporteTotal += Movimientos.getMonto();
+						ContadorMov++;
+						ContadorIng++;
+						RegistraMov = true;
+
+					}
+					else
+					{
+						cantMovGasto++;
+						contImpGas += Movimientos.getMonto();
+						ImporteTotal -= Movimientos.getMonto();
+						ContadorMov++;
+						ContadorGas++;
+						RegistraMov = true;
+					}
+
+
+				}
+
+				k++;
+			}
+
+
+			if (RegistraMov == true) {
+				cout << "-----------------------------------" << endl;
+				cout << "En la billetera: " << Billeteras.getNombre() << endl;
+				cout << "Registra un total de: $" << contImpIng << endl;
+				cout << "Entre : " << cantMovIngreso << " Ingreso/s y" << endl;
+				cout << "* * * * * *" << endl;
+				cout << "Registra un total de: $" << contImpGas << endl;
+				cout << "Entre : " << cantMovGasto << " Gasto/s" << endl;
+			}
+
+			else
+			{
+				cout << "-----------------------------------" << endl;
+				cout << "Su billetera:" << Billeteras.getNombre() << endl;
+				cout << "No registra movimientos en ese año" << endl;
+
+			}
+
+			i++;
+		}
+
+		cout << "------------------------------------------------------------" << endl;
+		cout << "El Balance TOTAL del año "<<anioOP<< " es de: $ " << ImporteTotal << endl;
+		cout << "Registrado en un total de: " << ContadorMov << " movimientos." << endl;
+		cout << "Separados en: " << endl;
+		cout << ContadorIng << " ingreso/s" << " y " << ContadorGas << " deuda/s" << endl;
+		cout << "------------------------------------------------------------" << endl;
+
+		rlutil::anykey();
 
 }
 
