@@ -48,10 +48,10 @@ void printCategoriasHeader()
 void printInformeEvolucionMovimientosHeader()
 {
 	const char separator = ' ';
-	const int numWidth = 10;
+	const int width = 10;
 
-	cout << left << setw(numWidth) << setfill(separator) << "Fecha";
-	cout << left << setw(numWidth) << setfill(separator) << "Monto";
+	cout << left << setw(width) << setfill(separator) << "Fecha";
+	cout << left << setw(width) << setfill(separator) << "Monto";
 	cout << endl;
 	cout << left << setw(50) << setfill('_') << "";
 	cout << endl << endl;

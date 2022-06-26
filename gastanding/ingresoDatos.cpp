@@ -73,10 +73,8 @@ Fecha ingresoMesAnio()
 {
     Fecha fecha;
     int mes, anio;
-    cout << "Mes: ";
-    cin >> mes;
-    cout << "Año: ";
-    cin >> anio;
+    mes = ingresoMes();
+    anio = ingresoAnio();
 
     fecha.setDia(1);
     fecha.setMes(mes);
