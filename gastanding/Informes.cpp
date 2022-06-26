@@ -106,6 +106,7 @@ void Informes::Balance30dias()
 		if (RegistraMov == true) {
 			cout << "-----------------------------------" << endl;
 			cout << "En la billetera: " << Billeteras.getNombre() << endl;
+			cout << "* * * * * *" << endl;
 			cout << "Registra un total de: $" << contImpIng << endl;
 			cout << "Entre : " << cantMovIngreso << " Ingreso/s y" << endl;
 			cout << "* * * * * *" << endl;
@@ -126,6 +127,7 @@ void Informes::Balance30dias()
 
 		cout << "------------------------------------------------------------" << endl;
 		cout << "El Balance TOTAL de los ultimos 30 dias es de: $" << ImporteTotal << endl;
+		cout << "* * * * * *" << endl;
 		cout << "Registrado en un total de: " << ContadorMov << " movimientos." << endl;
 		cout << "Separados en: " << endl;
 		cout << ContadorIng << " ingreso/s" << " y " << ContadorGas << " deuda/s" << endl;
@@ -239,6 +241,7 @@ void Informes::BalanceAnual()
 			if (RegistraMov == true) {
 				cout << "-----------------------------------" << endl;
 				cout << "En la billetera: " << Billeteras.getNombre() << endl;
+				cout << "* * * * * *" << endl;
 				cout << "Registra un total de: $" << contImpIng << endl;
 				cout << "Entre : " << cantMovIngreso << " Ingreso/s y" << endl;
 				cout << "* * * * * *" << endl;
@@ -259,6 +262,7 @@ void Informes::BalanceAnual()
 
 		cout << "------------------------------------------------------------" << endl;
 		cout << "El Balance TOTAL del año "<<anioOP<< " es de: $ " << ImporteTotal << endl;
+		cout << "* * * * * *" << endl;
 		cout << "Registrado en un total de: " << ContadorMov << " movimientos." << endl;
 		cout << "Separados en: " << endl;
 		cout << ContadorIng << " ingreso/s" << " y " << ContadorGas << " deuda/s" << endl;
@@ -270,7 +274,124 @@ void Informes::BalanceAnual()
 
 void Informes::PatrimonioNeto()
 {
-	cout << "Patrimonio neto" << endl;
+	cout << "------------------------------------------------------------" << endl;
+	cout << "-----PATRIMONIO NETO-----" << endl;
+	cout << "Separado por billeteras: " << endl;
+	cout << "------------------------------------------------------------" << endl;
+
+	float ImporteTotal = 0;
+	int ContadorMov = 0;
+	int ContadorIng = 0;
+	int ContadorGas = 0;
+	int ContadorBill = 0;
+
+
+	Billetera Billeteras;
+
+
+	bool RegistraMov = false;
+
+	int i = 0;
+	while (Billeteras.leerDeDisco(i, "billeteras.dat"))
+	{
+
+		int idB = Billeteras.getId();
+		ContadorBill++;
+
+		Movimiento Movimientos;
+
+		float contImpGas = 0;
+		float contImpIng = 0;
+		int cantMovGasto = 0;
+		int cantMovIngreso = 0;
+
+		int k = 0;
+
+		while (Movimientos.leerDeDisco(k, "movimientos.dat"))
+		{
+
+
+			int idM = Movimientos.getBilletera();
+
+			if (idM == idB)
+			{
+				int CatM = Movimientos.getCategoria();
+
+				Categoria Categorias;
+				int TipoDeMov = 0;
+
+				int j = 0;
+				while (Categorias.leerDeDisco(j, "categorias.dat"))
+				{
+
+					if (CatM == Categorias.getId() && Categorias.getEstado() == true)
+					{
+						TipoDeMov = Categorias.getTipoMovimiento();
+					}
+					j++;
+				}
+				if (TipoDeMov == 1)
+				{
+					cantMovIngreso++;
+					contImpIng += Movimientos.getMonto();
+					ImporteTotal += Movimientos.getMonto();
+					ContadorMov++;
+					ContadorIng++;
+					RegistraMov = true;
+
+				}
+				else
+				{
+					cantMovGasto++;
+					contImpGas += Movimientos.getMonto();
+					ImporteTotal -= Movimientos.getMonto();
+					ContadorMov++;
+					ContadorGas++;
+					RegistraMov = true;
+				}
+
+
+			}
+
+			k++;
+		}
+
+
+		if (RegistraMov == true) {
+			cout << "-----------------------------------" << endl;
+			cout << "Billetera: " << Billeteras.getNombre() << endl;
+			cout << "* * * * * *" << endl;
+			cout << "Registra un total de: $" << contImpIng << endl;
+			cout << "Entre : " << cantMovIngreso << " Ingreso/s y" << endl;
+			cout << "* * * * * *" << endl;
+			cout << "Registra un total de: $" << contImpGas << endl;
+			cout << "Entre : " << cantMovGasto << " Gasto/s" << endl;
+		}
+
+		else
+		{
+			cout << "------------------------------------------------------------" << endl;
+			cout << "Billetera:" << Billeteras.getNombre() << endl;
+			cout << "Que no registra ningun movimiento hasta la fecha" << endl;
+
+		}
+
+		i++;
+	}
+
+	cout << "------------------------------------------------------------" << endl;
+	cout << "-----PATRIMONIO NETO TOTAL-----" << endl;
+	cout << "------------------------------------------------------------" << endl;
+	cout << "Siendo su Patrimonio neto hasta la fecha..." << endl;
+	cout << "...un total de: $" << ImporteTotal << endl;
+	cout << "* * * * * *" << endl;
+	cout << "Registrado en: " << ContadorMov << " movimientos." << endl;
+	cout << "Separados en: " << endl;
+	cout << ContadorIng << " ingreso/s" << " y " << ContadorGas << " deuda/s" << endl;
+	cout << "En un total de " << ContadorBill << " billetera/s registrada/s."<<endl;
+
+	cout << "------------------------------------------------------------" << endl;
+
 	rlutil::anykey();
 
 }
