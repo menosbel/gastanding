@@ -25,7 +25,7 @@ bool InformesHandler::exec()
 
         case 1:
 
-            Informe.BalanceMensual();
+            Informe.Balance30dias();
             
             break;
         case 2:

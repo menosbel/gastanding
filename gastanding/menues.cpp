@@ -97,7 +97,7 @@ int renderMenuInformes()
     cout << "\t" << "INFORMES" << endl;
     cout << "------------------------------------" << endl;
     cout << endl;
-    cout << "- 1. Balance mensual" << endl;
+    cout << "- 1. Balance de los ultimos 30 dias" << endl;
     cout << "- 2. Balance anual" << endl;
     cout << "- 3. Patrimonio neto" << endl;
     cout << "- 4. TOP de Ingresos o Gastos" << endl;
