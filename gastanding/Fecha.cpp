@@ -48,7 +48,7 @@ Fecha::Fecha(std::string fecha) {
 int Fecha::setDia(int valor)
 {
 	bool es_mes_largo = std::find(std::begin(_meses_largos), std::end(_meses_largos), _mes) != std::end(_meses_largos);
-	
+
 	if (_mes == 2) {
 		if (valor >= 1 && valor <= 28) _dia = valor;
 		else {

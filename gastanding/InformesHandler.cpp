@@ -76,6 +76,7 @@ void InformesHandler::evolucionMovimientos()
     rlutil::cls();
     cout << "FECHA DE INICIO" << endl;
     fechaInicio = ingresoMesAnio();
+    cout << endl;
     cout << "FECHA DE FINALIZACION" << endl;
     fechaFin = ingresoMesAnio();
     rlutil::cls();
@@ -90,38 +91,46 @@ void InformesHandler::generarInformeEvolucionMovimientos(int categoriaId, Fecha 
 
     if (movimientos.empty()) mostrarMensaje("No se encontraron movimientos para esa categoría dentro de ese rango de fechas", 15, 4);
     else {
-        map<string, int> montoPorMesYAnio;
+        map<int, map<int, int>> montoPorMesYAnio;
         for (int i = 0; i < movimientos.size(); i++)
         {
             int mes = movimientos[i].getFecha().getMes();
             int anio = movimientos[i].getFecha().getAnio();
-            string mesAnio = ZeroPadNumber(mes) + "/" + to_string(anio);
-            if (montoPorMesYAnio.find(mesAnio) == montoPorMesYAnio.end())
-            {
-                montoPorMesYAnio[mesAnio] = 0;
-            }
-            montoPorMesYAnio[mesAnio] += movimientos[i].getMonto();
-        }
-
+            montoPorMesYAnio[anio][mes] += movimientos[i].getMonto();
+        }    
         mostrarInformeEvolucionMovimientos(montoPorMesYAnio);
     }
 }
 
-void InformesHandler::ordenarInformeEvolucionMovimientos(map<string, int> montoPorMesYAnio)
-{
-}
 
-void InformesHandler::mostrarInformeEvolucionMovimientos(map<string, int> montoPorMesYAnio)
+void InformesHandler::mostrarInformeEvolucionMovimientos(map<int, map<int, int>> montoPorMesYAnio)
 {
     printInformeEvolucionMovimientosHeader();
-    map<string, int>::iterator it = montoPorMesYAnio.begin();
+    map<int, map<int, int>>::iterator anioDict = montoPorMesYAnio.begin();
 
-    while (it != montoPorMesYAnio.end())
+    while (anioDict != montoPorMesYAnio.end())
     {
-        string mesAnio = it->first;
-        int monto = it->second;
-        cout << mesAnio << " :: " << monto << endl;
-        it++;
+        int anio = anioDict->first;
+        map<int, int> mesMonto = anioDict->second;
+
+        string nuevoAnio = "- " + to_string(anio) + " -";
+        printElement(nuevoAnio, 10);
+        cout << endl << endl;
+
+        map<int, int>::iterator mesDict = mesMonto.begin();
+        while (mesDict != mesMonto.end())
+        {
+            int mes = mesDict->first;
+            int monto = mesDict->second;
+
+            const int width = 10;
+            string fecha = ZeroPadNumber(mes) + "/" + to_string(anio);
+            printElement(fecha, width);
+            printElement(monto, width);
+            cout << endl << endl;
+            mesDict++;
+        }
+        anioDict++;
     }
 
     cout << endl << endl;
