@@ -2,6 +2,7 @@
 #include <string>
 #include "MovimientosRepository.h"
 #include "CategoriasRepository.h"
+#include"BilleterasRepository.h"
 
 using namespace std;
 
@@ -25,6 +26,7 @@ public:
 	}
 	void agregarMovimientosA(int billeteraId);
 	void buscarMovimientosEn(Billetera billetera);
+	void hacerTransferencia(Billetera billetera);
 	void mostrarPorFecha();
 	void mostrarPorRangoMontos();
 	void mostrarPorMonto();

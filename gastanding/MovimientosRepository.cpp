@@ -16,6 +16,7 @@ void MovimientosRepository::agregarA(int billeteraId, int categoriaId)
 	movimiento.cargarEn(billeteraId, categoriaId, cantRegistros + 1);
     
     bool existe = false;
+
     for (int i = 0; i < cantRegistros; i++)
     {
         aux.leerDeDisco(i, _nombreArchivo);
@@ -28,7 +29,8 @@ void MovimientosRepository::agregarA(int billeteraId, int categoriaId)
     rlutil::cls();
 
     if (existe) mostrarMensaje("El movimiento ya existe. No puede volver a agregarse", 15, 4);
-    else {
+    else 
+    {
         if (movimiento.grabarEnDisco(_nombreArchivo)) mostrarMensaje("Movimiento agregado exitosamente", 15, 2);
         else mostrarMensaje("No se pudo agregar el movimiento", 15, 4);
     }
@@ -57,7 +59,23 @@ void MovimientosRepository::eliminar(int pos)
     else mostrarMensaje("Ocurrió un error. El registro no ha sido eliminado", 15, 4);
 }
 
-int MovimientosRepository::cantidadRegistros() {
+void MovimientosRepository::transferir(int billeteraActual, int billeteraDestino, float monto)
+{
+    Movimiento movimiento;
+    int id = cantidadRegistros();
+
+    movimiento.cargarTransferenciaSalida(id + 1, billeteraActual, monto);
+    movimiento.grabarEnDisco(_nombreArchivo);
+    //creo y guardo el movimiento trasferencia tipo egreso, para la billetera remitente
+
+    movimiento.cargarTransferenciaEntrada(id + 2, billeteraDestino, monto);
+    movimiento.grabarEnDisco(_nombreArchivo);
+    //same anterior ingreso billetera destinataria
+
+}
+
+int MovimientosRepository::cantidadRegistros() 
+{
     FILE* p;
     errno_t err;
     err = fopen_s(&p, _nombreArchivo.c_str(), "rb");
@@ -178,7 +196,6 @@ vector<Movimiento> MovimientosRepository::buscarPor(int categoriaId)
 
 vector<Movimiento> MovimientosRepository::buscarPor(int categoriaId, Fecha inicio, Fecha fin)
 {
-
     Movimiento aux;
     int cantRegistros = cantidadRegistros();
     vector<Movimiento> movimientos;

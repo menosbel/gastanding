@@ -42,6 +42,51 @@ void MovimientosHandler::buscarMovimientosEn(Billetera billetera)
     }
 }
 
+void MovimientosHandler::hacerTransferencia(Billetera billetera)
+{
+    int cantidadBilleterasActivas = 0;
+    int pos = 0;
+    int idATransferir;
+    float montoATransferir;
+    Billetera obj;
+    BilleterasRepository billeteraRepo("billeteras.dat");
+
+    while (obj.leerDeDisco(pos++, "billeteras.dat"))
+    {
+        if (obj.getEstado())
+            cantidadBilleterasActivas++;
+    }
+
+    if (cantidadBilleterasActivas > 1)
+    {
+        cout << "Seleccione una billetera donde trasnferir! " << endl << endl;
+        idATransferir = billeteraRepo.seleccionarTransferencia(billetera.getId()); //el metodo devuelve la id de la billetera donde queremos transferir, si es un nmero invalido, devuelve -1
+
+        rlutil::cls();
+
+        if (idATransferir == -1)
+        {
+            cout << "El numero ingresado no es valido";
+            return;
+        }
+
+        cout << "Seleccione un monto a transferir!" << endl;
+        cin >> montoATransferir;
+
+        rlutil::cls();
+
+        _movimientos.transferir(billetera.getId(), idATransferir, montoATransferir);
+         mostrarMensaje("Transferencia efectuada con exito!", 15, 2);
+    }
+    else
+    {
+        cout << "No se pueden hacer transferecias ya que no hay destinatarios activos" << endl;
+        rlutil::anykey();
+        return;
+    }
+    return;
+}
+
 void MovimientosHandler::agregarMovimientosA(int billeteraId)
 {
     int tipoMovimiento = renderMenuTiposMovimientos();

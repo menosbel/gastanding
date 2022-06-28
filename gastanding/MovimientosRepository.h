@@ -19,6 +19,7 @@ public:
 	};
 	void agregarA(int billeteraId, int categoriaId);
 	void eliminar(int pos);
+	void transferir(int billeteraActual, int billeteraDestino, float monto);
 	int cantidadRegistros();
 	int buscarPor(float monto, Fecha fecha, int categoriaId, string concepto, int billeteraId);
 	vector<Movimiento> buscarPor(float monto);
