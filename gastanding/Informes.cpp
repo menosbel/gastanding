@@ -418,7 +418,7 @@ void Informes::TopDeIngresosOGastos()
 	
 	llenarVectorCategorias(categorias, montos, tam, tipo);
 	ordenarVectorCategorias(categorias, montos, tam);
-	mostrarVectorCategorias(categorias, montos, 5);
+	mostrarVectorCategorias(categorias, montos, tam);
 
 	delete[] categorias;
 	delete[] montos;
@@ -509,6 +509,9 @@ void Informes::mostrarVectorCategorias(Categoria* vec, float* montos, int tam)
 	printElement("Nombre categoria", nameWidth);
 	printElement("Monto acumulado", numWidth);
 	cout << endl << endl;
+
+	if (tam > 5)
+		tam = 5;
 
 	for (int i = 0; i < tam; i++)
 	{
