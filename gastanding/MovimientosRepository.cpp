@@ -223,15 +223,37 @@ vector<Movimiento> MovimientosRepository::buscarPor(int categoriaId, Fecha inici
 
 void MovimientosRepository::mostrarRegistrosPor(vector<Movimiento> movimientos, int billeteraId)
 {
-    Categoria categoria;
+    ordenarMovimientos(movimientos);
 
+    Categoria categoria;
     printMovimientosHeader();
     for (int i = 0; i < movimientos.size(); i++)
     {
-        if (movimientos[i].getBilletera() == billeteraId) {
+        if (movimientos[i].getBilletera() == billeteraId) 
+        {
             categoria = _categorias.buscarPor(movimientos[i].getCategoria());
             movimientos[i].mostrar(categoria);
             cout << endl;
         }
+    }
+}
+
+void MovimientosRepository::ordenarMovimientos(vector<Movimiento>& movimientos)
+{
+    Movimiento aux;
+
+    for (int i = 0; i < movimientos.size(); i++)
+    {
+        for (int j = i + 1; j < movimientos.size(); j++)
+        {
+            if (movimientos[j].getFecha() > movimientos[i].getFecha())
+            {
+                aux = movimientos[j];
+                movimientos[j] = movimientos[i];
+                movimientos[i] = aux;
+                break;
+            }
+        }
+
     }
 }

@@ -29,4 +29,5 @@ public:
 	vector<Movimiento> buscarPor(int categoriaId);
 	vector<Movimiento> buscarPor(int categoriaId, Fecha inicio, Fecha fin);
 	void mostrarRegistrosPor(vector<Movimiento> movimientos, int billeteraId);
+	void ordenarMovimientos(vector<Movimiento>& movimientos);
 };
