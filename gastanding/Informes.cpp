@@ -510,7 +510,7 @@ void Informes::mostrarVectorCategorias(Categoria* vec, float* montos, int tam)
 	printElement("Monto acumulado", numWidth);
 	cout << endl << endl;
 
-	if (tam > 5)
+	if (tam >= 5)
 		tam = 5;
 
 	for (int i = 0; i < tam; i++)
