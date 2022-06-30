@@ -5,12 +5,13 @@
 #include "rlutil.h"
 #include "tables.h"
 #include "Fecha.h"
+#include "CategoriasRepository.h"
 using namespace std;
 
 
 void Movimiento::cargarEn(int billeteraId, int categoriaId, int nextId)
 {
-	int monto, dia, mes, anio, tipoCategoria;
+	float monto;
 	string concepto;
 		
 	_fecha.cargar();
@@ -27,6 +28,45 @@ void Movimiento::cargarEn(int billeteraId, int categoriaId, int nextId)
 	setBilletera(billeteraId);
 	setEstado(true);
 	setId(nextId);
+}
+
+void Movimiento::cargarTransferenciaSalida(int id, int billeteraActual, float monto)
+{
+	CategoriasRepository repo("categorias.dat");
+	string concepto;
+	Fecha hoy;
+
+	_fecha = hoy;
+
+	setMonto(monto);
+
+	cout << "Concepto: ";
+	cin >> concepto;
+	setConcepto(concepto);
+
+	setBilletera(billeteraActual);
+	setEstado(true);
+	
+	setCategoria(repo.existeTransferencia(2));
+	setId(id);
+}
+
+void Movimiento::cargarTransferenciaEntrada(int id, int billeteraDestino, float monto)
+{
+	CategoriasRepository repo("categorias.dat");
+	Fecha hoy;
+
+	_fecha = hoy;
+
+	setMonto(monto);
+
+	setConcepto(" IngresoTransferencia");
+
+	setBilletera(billeteraDestino);
+	setEstado(true);
+
+	setCategoria(repo.existeTransferencia(1));
+	setId(id);
 }
 
 void Movimiento::mostrar(Categoria categoria) 

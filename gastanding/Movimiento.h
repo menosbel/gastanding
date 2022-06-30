@@ -31,6 +31,8 @@ public:
 	void setEstado(bool valor) { _estado = valor; };
 	
 	void cargarEn(int billeteraId, int categoriaId, int nextId);
+	void cargarTransferenciaSalida(int id, int billeteraActual, float monto);
+	void cargarTransferenciaEntrada(int id, int billeteraDestino, float monto);
 	void mostrar(Categoria categoria);
 	bool equals(Movimiento otro);
 	bool leerDeDisco(int pos, string fileName);
@@ -38,4 +40,3 @@ public:
 	bool grabarEnDisco(int pos, string fileName);
 	bool Ultimos30dias(Fecha fechaMovimiento);
 };
-

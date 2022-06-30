@@ -88,6 +88,7 @@ Billetera BilleterasRepository::seleccionar()
 	{
 		cout << left << setw(10) << setfill(' ') << "ID";
 		cout << left << setw(20) << setfill(' ') << "NOMBRE" << endl;
+		
 		for (int i = 0; i < cantRegistros; i++)
 		{
 			aux.leerDeDisco(i, _nombreArchivo);
@@ -115,6 +116,53 @@ Billetera BilleterasRepository::seleccionar()
 		mostrarMensaje("Aún no existe ninguna billetera. Tenés que crear una.", 15, 4);
 		return Billetera();
 	}
+}
+
+int BilleterasRepository::seleccionarTransferencia(int id)
+{
+	Billetera aux;
+	int opcion;
+	int cantRegistros = cantidadRegistros();
+	bool hayBilleterasActivas = false;
+	bool ok;
+
+	if (cantRegistros > 0)
+	{
+		cout << left << setw(10) << setfill(' ') << "ID";
+		cout << left << setw(20) << setfill(' ') << "NOMBRE" << endl;
+
+		for (int i = 0; i < cantRegistros; i++)
+		{
+			aux.leerDeDisco(i, _nombreArchivo);
+
+			if (aux.getEstado() && aux.getId() != id)
+			{
+				cout << left << setw(10) << setfill(' ') << aux.getId();
+				cout << left << setw(20) << setfill(' ') << aux.getNombre() << endl;
+			}
+		}
+		cout << endl << endl;
+	}
+	else
+		return -1;
+	
+	cout << "Opcion: ";
+	cin >> opcion;
+
+	for (int i = 0; i < cantRegistros; i++)
+	{
+		aux.leerDeDisco(i, _nombreArchivo);
+
+		if (aux.getEstado() && aux.getId() != id && aux.getId() == opcion)
+			ok = true;
+		else
+			ok = false;
+	}
+
+	if (ok)
+		return opcion;
+	else
+		return -1;
 }
 
 int BilleterasRepository::cantidadRegistros() {

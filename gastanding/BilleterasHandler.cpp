@@ -90,10 +90,12 @@ bool BilleterasHandler::ingresarABilletera()
                 _movimientosHandler.buscarMovimientosEn(_billeteraElegida);
                 rlutil::anykey();
                 break;
-            case 0:
-                // trasnferir
-                return false;
+            case 3:
+                _movimientosHandler.hacerTransferencia(_billeteraElegida);
+                rlutil::anykey();
                 break;
+            case 0:
+                return false;
             default:
                 break;
             }

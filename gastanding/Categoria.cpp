@@ -1,6 +1,7 @@
 #include "Categoria.h"
 #include "tables.h"
 #include "menues.h"
+#include"CategoriasRepository.h"
 #include <iostream>
 using namespace std;
 

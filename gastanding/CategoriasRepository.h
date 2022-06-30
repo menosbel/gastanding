@@ -19,6 +19,8 @@ public:
 	Categoria buscarPor(int id);
 	int cantidadRegistros();
 	int cantidadRegistrosActivosPorTipo(int tipo);
+	int existeTransferencia(int tipo);
+	int crearTransferencia(int tipo);
 private:
 	bool bajaLogica(int idCategoria);
 };

@@ -12,6 +12,7 @@ public:
 	void eliminar();
 	void listar();
 	Billetera seleccionar();
+	int seleccionarTransferencia(int id);
 	int cantidadRegistros();
 	Billetera buscarPor(int id);
 private:
