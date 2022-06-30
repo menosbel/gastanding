@@ -16,7 +16,7 @@ public:
 	bool exec();
 	void evolucionMovimientos();
 	void generarInformeEvolucionMovimientos(int categoriaId, Fecha fechaInicio, Fecha fechaFin);
-	void mostrarInformeEvolucionMovimientos(map<int, map<int, int>> montoPorMesYAnio);
+	void mostrarInformeEvolucionMovimientos(map<int, map<int, float>> montoPorMesYAnio);
 };
 
  
