@@ -153,7 +153,7 @@ int BilleterasRepository::seleccionarTransferencia(int id)
 	{
 		aux.leerDeDisco(i, _nombreArchivo);
 
-		if (aux.getEstado() && aux.getId() != id && aux.getId() == opcion)
+		if (aux.getEstado() && aux.getId() != id )
 			ok = true;
 		else
 			ok = false;

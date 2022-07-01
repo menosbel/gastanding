@@ -59,8 +59,8 @@ void MovimientosHandler::hacerTransferencia(Billetera billetera)
 
     if (cantidadBilleterasActivas > 1)
     {
-        cout << "Seleccione una billetera donde trasnferir! " << endl << endl;
-        idATransferir = billeteraRepo.seleccionarTransferencia(billetera.getId()); //el metodo devuelve la id de la billetera donde queremos transferir, si es un nmero invalido, devuelve -1
+        cout << "Seleccione una billetera donde transferir! " << endl << endl;
+        idATransferir = billeteraRepo.seleccionarTransferencia(billetera.getId()); 
 
         rlutil::cls();
 
