@@ -41,18 +41,22 @@ bool EntradaDatosHandler::exec()
 
 void EntradaDatosHandler::entradaBilleteras()
 {
+    bool canBeNeg;
+    string nombre;
+    Billetera billetera;
+
     int cant;
     cout << "Cantidad a cargar: ";
     cin >> cant;
     cin.ignore();
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < 5; i++)
     {
-        string nombre;
+        cin >> canBeNeg;
         getline(cin, nombre);
-        Billetera billetera;
         billetera.setId(i + 1);
         billetera.setNombre(nombre);
         billetera.setEstado(true);
+        billetera.setCanBeNeg(canBeNeg);
         billetera.grabarEnDisco("billeteras.dat");
     }
 }
@@ -77,8 +81,6 @@ void EntradaDatosHandler::entradaCategorias()
         categoria.setEstado(true);
         categoria.grabarEnDisco("categorias.dat");
     }
-    cout << endl << endl;
-    
 }
 
 void EntradaDatosHandler::entradaMovimientos()
@@ -112,5 +114,4 @@ void EntradaDatosHandler::entradaMovimientos()
         movimiento.setEstado(true);
         movimiento.grabarEnDisco("movimientos.dat");
     }
-    cout << endl << endl;
 }

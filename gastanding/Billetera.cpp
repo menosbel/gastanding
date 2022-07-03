@@ -10,6 +10,28 @@ void Billetera::cargar(int nextId)
 	cin.ignore();
 	getline(cin, nombre);
 	setNombre(nombre);
+
+	char confirmar;
+	cout << "¿Puede el sado de esta billetera ser negativo? S/N: ";
+	cin >> confirmar;
+	if (tolower(confirmar) == 's') 
+	{
+		setCanBeNeg(true);
+	}
+	else if (tolower(confirmar) == 'n')
+	{
+		setCanBeNeg(false);
+	}
+	else 
+	{
+		while ((tolower(confirmar) != 's' && (tolower(confirmar) == 'n')))
+		{
+			cout << endl;
+			cout << "Respuesta inválida. Intentelo nuevamente." << endl;
+			cout << "¿Puede el sado de esta billetera ser negativo? S/N: ";
+			cin >> confirmar;
+		}
+	}
 	setEstado(true);
 	setId(nextId);
 }

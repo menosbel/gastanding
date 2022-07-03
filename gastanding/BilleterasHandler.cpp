@@ -94,6 +94,10 @@ bool BilleterasHandler::ingresarABilletera()
                 _movimientosHandler.hacerTransferencia(_billeteraElegida);
                 rlutil::anykey();
                 break;
+            case 4:
+                _movimientosHandler.consultarSaldo(_billeteraElegida);
+                rlutil::anykey();
+                break;
             case 0:
                 return false;
             default:

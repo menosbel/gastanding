@@ -74,6 +74,7 @@ int renderMenuDentroDeBilletera(string billetera)
     cout << "1. Agregar movimiento" << endl;
     cout << "2. Buscar movimientos" << endl;
     cout << "3. Hacer una transferencia" << endl;
+    cout << "4. Consultar saldo" << endl;
     cout << endl;
     cout << endl;
     cout << endl;
@@ -82,7 +83,7 @@ int renderMenuDentroDeBilletera(string billetera)
     cout << "------------------------------------" << endl;
     cout << "Ingrese una opción: ";
     cin >> opcion;
-    while (!(opcion >= 0 && opcion <= 3)) {
+    while (!(opcion >= 0 && opcion <= 4)) {
         cout << "Ingrese una opcion valida" << endl;
         cout << "Opcion: ";
         cin >> opcion;

@@ -30,6 +30,7 @@ public:
 	void agregarMovimientosA(int billeteraId);
 	void buscarMovimientosEn(Billetera billetera);
 	void hacerTransferencia(Billetera billetera);
+	void consultarSaldo(Billetera billetera);
 	void mostrarPorFecha();
 	void mostrarPorRangoMontos();
 	void mostrarPorMonto();

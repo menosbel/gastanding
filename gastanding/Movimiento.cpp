@@ -14,7 +14,7 @@ void Movimiento::cargarEn(int billeteraId, int categoriaId, int nextId)
 	double monto;
 	string concepto;
 		
-	_fecha.cargar();
+	Fecha fecha;
 	
 	cout << "Monto: $";
 	cin >> monto;
@@ -24,6 +24,7 @@ void Movimiento::cargarEn(int billeteraId, int categoriaId, int nextId)
 	cin >> concepto;
 	setConcepto(concepto);
 	
+	setFecha(fecha);
 	setCategoria(categoriaId);
 	setBilletera(billeteraId);
 	setEstado(true);

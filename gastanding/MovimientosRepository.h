@@ -1,6 +1,7 @@
 #pragma once
 #include "Movimiento.h"
 #include "CategoriasRepository.h"
+#include "BilleterasRepository.h"
 #include <string>
 #include <vector>
 
@@ -11,16 +12,19 @@ class MovimientosRepository
 private:
 	string _nombreArchivo;
 	CategoriasRepository _categorias;
+	BilleterasRepository _billeteras;
 public:
-	MovimientosRepository() { _nombreArchivo = ""; _categorias = CategoriasRepository(); };
-	MovimientosRepository(string nombreArchivo, CategoriasRepository categorias) { 
+	MovimientosRepository() { _nombreArchivo = ""; _categorias = CategoriasRepository(); _billeteras = BilleterasRepository(); };
+	MovimientosRepository(string nombreArchivo, CategoriasRepository categorias, BilleterasRepository billeteras) {
 		_nombreArchivo = nombreArchivo;
 		_categorias = categorias;
+		_billeteras = billeteras;
 	};
-	void agregarA(int billeteraId, int categoriaId);
+	bool agregarA(int billeteraId, int categoriaId);
 	void eliminar(int pos);
 	void transferir(int billeteraActual, int billeteraDestino, double monto);
 	int cantidadRegistros();
+	bool chequearSiMovimientoExiste(Movimiento movimiento);
 	int buscarPor(double monto, Fecha fecha, int categoriaId, string concepto, int billeteraId);
 	vector<Movimiento> buscarPor(double monto);
 	vector<Movimiento> buscarPor(double montoMin, double montoMax);

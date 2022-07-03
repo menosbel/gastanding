@@ -24,6 +24,7 @@ public:
 	int getCategoria() { return _categoriaId; };
 	bool getEstado() { return _estado; };
 	void setId(int valor) { _id = valor; };
+	void setFecha(Fecha fecha) { _fecha = fecha; };
 	void setFecha(int dia, int mes, int anio) { 
 		_fecha.setDia(dia); 
 		_fecha.setMes(mes); 

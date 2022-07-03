@@ -86,6 +86,19 @@ void MovimientosHandler::hacerTransferencia(Billetera billetera)
     return;
 }
 
+void MovimientosHandler::consultarSaldo(Billetera billetera)
+{
+    cout << "------------------------------------" << endl;
+    cout << "\t" << billetera.getNombre() << endl;
+    cout << "------------------------------------" << endl;
+    cout << endl << endl;
+    cout << "Saldo actual: ";
+    std::cout.imbue(std::locale(std::cout.getloc(), new locate_miles));
+    cout << fixed << setprecision(2);
+    cout << "$" << _billeteras.calcularSaldoActual(billetera.getId());
+    cout << endl << endl;
+}
+
 void MovimientosHandler::agregarMovimientosA(int billeteraId)
 {
     int tipoMovimiento = renderMenuTiposMovimientos();

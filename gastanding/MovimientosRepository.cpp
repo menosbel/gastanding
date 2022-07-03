@@ -9,31 +9,41 @@
 
 using namespace std;
 
-void MovimientosRepository::agregarA(int billeteraId, int categoriaId) 
+bool MovimientosRepository::agregarA(int billeteraId, int categoriaId) 
 {
-	Movimiento movimiento, aux;
+	Movimiento movimiento;
     int cantRegistros = cantidadRegistros();
-
 	movimiento.cargarEn(billeteraId, categoriaId, cantRegistros + 1);
-    
-    bool existe = false;
-
-    for (int i = 0; i < cantRegistros; i++)
-    {
-        aux.leerDeDisco(i, _nombreArchivo);
-        if (aux.equals(movimiento)) {
-            existe = true;
-            break;
-        };
-    }
-
     rlutil::cls();
-
-    if (existe) mostrarMensaje("El movimiento ya existe. No puede volver a agregarse", 15, 4);
-    else 
+    
+    bool existe = chequearSiMovimientoExiste(movimiento);
+    if (existe)
     {
-        if (movimiento.grabarEnDisco(_nombreArchivo)) mostrarMensaje("Movimiento agregado exitosamente", 15, 2);
-        else mostrarMensaje("No se pudo agregar el movimiento", 15, 4);
+        mostrarMensaje("El movimiento ya existe. No puede volver a agregarse", 15, 4);
+        return false;
+    }
+    else {
+        if (!(_billeteras.buscarPor(billeteraId).getCanBeNeg()) && _categorias.esEgreso(movimiento.getCategoria()))
+        {
+            double saldoActual = _billeteras.calcularSaldoActual(billeteraId);
+            double nuevoSaldo = saldoActual - movimiento.getMonto();
+            if (nuevoSaldo < 0)
+            {
+                mostrarMensaje("Esta billetera no puede tener saldo negativo.", 15, 4);
+                return false;
+            }
+        }
+
+        if (movimiento.grabarEnDisco(_nombreArchivo))
+        {
+            mostrarMensaje("Movimiento agregado exitosamente", 15, 2);
+            return true;
+        }
+        else
+        {
+            mostrarMensaje("No se pudo agregar el movimiento", 15, 4);
+            return false;
+        }
     }
 };
 
@@ -89,6 +99,21 @@ int MovimientosRepository::cantidadRegistros()
     fclose(p);
     cant_reg = bytes / sizeof(Movimiento);
     return cant_reg;
+}
+
+bool MovimientosRepository::chequearSiMovimientoExiste(Movimiento movimiento)
+{
+    Movimiento aux;
+    int cantRegistros = cantidadRegistros();
+    for (int i = 0; i < cantRegistros; i++)
+    {
+        aux.leerDeDisco(i, _nombreArchivo);
+        if (aux.equals(movimiento)) {
+            return true;
+            break;
+        };
+    }
+    return false;
 }
 
 int MovimientosRepository::buscarPor(double monto, Fecha fecha, int categoriaId, string concepto, int billeteraId)
