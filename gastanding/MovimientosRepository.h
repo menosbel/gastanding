@@ -21,7 +21,6 @@ public:
 		_billeteras = billeteras;
 	};
 	bool agregarA(int billeteraId, int categoriaId);
-	void eliminar(int pos);
 	void transferir(int billeteraActual, int billeteraDestino, double monto);
 	int cantidadRegistros();
 	bool chequearSiMovimientoExiste(Movimiento movimiento);

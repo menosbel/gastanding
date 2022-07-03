@@ -16,3 +16,5 @@ int renderMenuTiposMovimientos();
 int menuTipoMovimiento();
 
 int renderMenuEntradaDatos();
+
+bool confirmarAccion(char letra);

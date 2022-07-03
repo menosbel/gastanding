@@ -2,6 +2,7 @@
 #include "Categoria.h"
 #include "functions.h"
 #include "tables.h"
+#include "menues.h"
 #include "rlutil.h"
 #include <vector>
 
@@ -63,21 +64,20 @@ void CategoriasRepository::eliminar(int tipoMovimiento)
 {
 	cout << "Seleccione la categoría que desee eliminar: " << endl;
 	int categoriaId = seleccionarPor(tipoMovimiento);
-	char caracter = 'n';
-
+	char caracter;
+	bool confirmar;
 	if (categoriaId != -1)
 	{
 		cout << "¿Esta seguro de eliminar esta categoria? S/N: ";
 		cin >> caracter;
+		confirmar = confirmarAccion(caracter);
 
 		rlutil::cls();
 
-		if (tolower(caracter) == 's')
+		if (confirmar)
 		{
-			if (bajaLogica(categoriaId))
-				mostrarMensaje("Categoria eliminada exitosamente", 15, 2);
-			else
-				mostrarMensaje("No se pudo cambiar eliminar la categoria", 15, 4);
+			if (bajaLogica(categoriaId)) mostrarMensaje("Categoria eliminada exitosamente", 15, 2);
+			else mostrarMensaje("No se pudo cambiar eliminar la categoria", 15, 4);
 		}
 	}
 }

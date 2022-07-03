@@ -2,6 +2,7 @@
 #include "Billetera.h"
 #include "Movimiento.h"
 #include "functions.h"
+#include "menues.h"
 #include "tables.h"
 #include "rlutil.h"
 
@@ -35,27 +36,23 @@ void BilleterasRepository::eliminar()
 	cout << "Seleccione la billetera que desee eliminar:" << endl;
 	Billetera billeteraEliminar = seleccionar();
 	char caracter = 'n';
-
+	bool confirmar;
 	if (billeteraEliminar.getEstado())
 	{
 		cout << "¿Esta seguro de eliminar esta billetera? S/N: ";
 		cin >> caracter;
-
+		confirmar = confirmarAccion(caracter);
 		rlutil::cls();
 	}
 
-	if (tolower(caracter) == 's')
+	if (confirmar)
 	{
-		if (bajaLogica(billeteraEliminar.getId()))
-			mostrarMensaje("Billetera borrada exitosamente", 15, 2);
-		else
-			mostrarMensaje("No se pudo borrar esta billetera", 15, 4);
+		if (bajaLogica(billeteraEliminar.getId())) mostrarMensaje("Billetera borrada exitosamente", 15, 2);
+		else mostrarMensaje("No se pudo borrar esta billetera", 15, 4);
 	}
-	else
-		return;
 }
 
-void BilleterasRepository::listar()
+bool BilleterasRepository::listar()
 {
 	Billetera aux;
 	int cantRegistros = cantidadRegistros();
@@ -68,7 +65,6 @@ void BilleterasRepository::listar()
 
 		if (aux.getEstado())
 		{
-			
 			double saldo = calcularSaldoActual(aux.getId());
 			aux.mostrar();
 			std::cout.imbue(std::locale(std::cout.getloc(), new locate_miles));
@@ -79,8 +75,8 @@ void BilleterasRepository::listar()
 		}
 	}
 
-	if (!hayBilleterasActivas)
-		mostrarMensaje("Aún no se ha ingresado ninguna billetera", 15, 4);
+	if (!hayBilleterasActivas) mostrarMensaje("Aún no se ha ingresado ninguna billetera", 15, 4);
+	return hayBilleterasActivas;
 }
 
 
@@ -110,40 +106,33 @@ Billetera BilleterasRepository::seleccionar()
 {
 	Billetera aux;
 	int opcion;
-	int cantRegistros = cantidadRegistros();
-	bool hayBilleterasActivas = false;
-
-	if (cantRegistros > 0)
-	{
-		cout << left << setw(10) << setfill(' ') << "ID";
-		cout << left << setw(20) << setfill(' ') << "NOMBRE" << endl;
-		
-		for (int i = 0; i < cantRegistros; i++)
-		{
-			aux.leerDeDisco(i, _nombreArchivo);
-
-			if (aux.getEstado())
-			{
-				cout << left << setw(10) << setfill(' ') << aux.getId();
-				cout << left << setw(20) << setfill(' ') << aux.getNombre() << endl;
-				hayBilleterasActivas = true;
-			}
-		}
-		cout << endl << endl;
-	}
+	bool hayBilleterasActivas = listar();
+	bool idValido = false;
 
 	if (hayBilleterasActivas)
 	{
-		cout << "Opcion: ";
-		cin >> opcion;
+		while (!idValido)
+		{
+			cout << "Opcion: ";
+			cin >> opcion;
 
-		aux = buscarPor(opcion);
-		return aux;
+			aux = buscarPor(opcion);
+			if (aux.getId() == opcion)
+			{
+				idValido = true;
+				return aux;
+			}
+			else
+			{
+				cout << endl;
+				cout << "El ID ingresado es inválido." << endl;
+				cout << "Por favor, vuelva a intentarlo" << endl << endl;
+			}
+		}
 	}
 	else
 	{
 		mostrarMensaje("Aún no existe ninguna billetera. Tenés que crear una.", 15, 4);
-		return Billetera();
 	}
 }
 
@@ -217,6 +206,7 @@ Billetera BilleterasRepository::buscarPor(int id)
 	{
 		if (aux.getId() == id) return aux;
 	}
+	return aux;
 }
 
 bool BilleterasRepository::bajaLogica(int idBilletera)

@@ -15,7 +15,7 @@ public:
 	};
 	void agregar();
 	void eliminar();
-	void listar();
+	bool listar();
 	double calcularSaldoActual(int billeteraId);
 	Billetera seleccionar();
 	int seleccionarTransferencia(int id);

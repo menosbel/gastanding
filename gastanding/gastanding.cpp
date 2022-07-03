@@ -2,6 +2,7 @@
 #include <string>
 #include "rlutil.h"
 #include "functions.h"
+#include "menues.h"
 #include "MovimientosHandler.h"
 #include "BilleterasHandler.h"
 #include "CategoriasHandler.h"
@@ -33,7 +34,7 @@ int main()
     rlutil::anykey();
 
     int opcion;
-    char confirmarSalida;
+    char letra;
     while (true)
     {
         rlutil::cls();
@@ -69,14 +70,18 @@ int main()
             entradaDatosHandler.exec();
             break;
         case 0:
+        {
             cout << "¿Confirma que desea salir? (S/N): ";
-            cin >> confirmarSalida;
-            if (tolower(confirmarSalida) == 's') {
+            cin >> letra;
+            bool confirmar = confirmarAccion(letra);
+
+            if (confirmar) {
                 rlutil::cls();
                 mostrarMensaje("** Muchas gracias por utilizar Gastanding **", 15, 13);
                 return 0;
             }
             break;
+        }
         default:
                 mostrarMensaje("** Ingrese una opcion valida **", 15, 13);
                 rlutil::anykey();

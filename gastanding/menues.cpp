@@ -183,8 +183,8 @@ int renderMenuTiposMovimientos() {
     while (tipo != 1 && tipo != 2)
     {
         cout << "La opción elegida es invalida. Vuelva a intentarlo" << endl << endl;
-        tipo = menuTipoMovimiento();
         rlutil::anykey();
+        tipo = menuTipoMovimiento();
     }
 
     return tipo;
@@ -214,4 +214,34 @@ int renderMenuEntradaDatos()
     cin >> opcion;
     rlutil::cls();
     return opcion;
+}
+
+bool confirmarAccion(char letra)
+{
+    bool valido = false;
+    char opcion;
+    if (tolower(letra) == 's') return true;
+    if (tolower(letra) == 'n') return false;
+    if (tolower(letra) != 's' && tolower(letra) != 'n')
+    {
+        while (!valido)
+        {
+            cout << "La opción elegida es inválida." << endl;
+            cout << "Por favor, vuelva a intentarlo." << endl;
+            cout << "Opción: ";
+            cin >> opcion;
+
+            if (tolower(opcion) == 's')
+            {
+                valido = true;
+                return true;
+            }
+
+            else if (tolower(opcion) == 'n')
+            {
+                valido = true;
+                return false;
+            }
+        }
+    }
 }

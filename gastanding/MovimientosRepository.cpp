@@ -47,29 +47,6 @@ bool MovimientosRepository::agregarA(int billeteraId, int categoriaId)
     }
 };
 
-void MovimientosRepository::eliminar(int pos)
-{
-    Movimiento movimiento;
-    Categoria categoria;
-    char confirmacion;
-    bool guardo = false;
-
-    movimiento.leerDeDisco(pos, _nombreArchivo);
-    categoria = _categorias.buscarPor(movimiento.getCategoria());
-    printMovimientosHeader();
-    movimiento.mostrar(categoria);
-    cout << endl << endl;
-    cout << "¿Desea eliminar el registro? (S/N): ";
-    cin >> confirmacion;
-    if (tolower(confirmacion) == 's') {
-        movimiento.setEstado(false);
-        guardo = movimiento.grabarEnDisco(pos, _nombreArchivo);
-    }
-    rlutil::cls();
-    if (guardo) mostrarMensaje("Registro eliminado exitosamente", 15, 2);
-    else mostrarMensaje("Ocurrió un error. El registro no ha sido eliminado", 15, 4);
-}
-
 void MovimientosRepository::transferir(int billeteraActual, int billeteraDestino, double monto)
 {
     Movimiento movimiento;
