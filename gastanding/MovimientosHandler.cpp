@@ -47,9 +47,8 @@ void MovimientosHandler::hacerTransferencia(Billetera billetera)
     int cantidadBilleterasActivas = 0;
     int pos = 0;
     int idATransferir;
-    float montoATransferir;
+    double montoATransferir;
     Billetera obj;
-    BilleterasRepository billeteraRepo("billeteras.dat");
 
     while (obj.leerDeDisco(pos++, "billeteras.dat"))
     {
@@ -59,8 +58,8 @@ void MovimientosHandler::hacerTransferencia(Billetera billetera)
 
     if (cantidadBilleterasActivas > 1)
     {
-        cout << "Seleccione una billetera donde transferir! " << endl << endl;
-        idATransferir = billeteraRepo.seleccionarTransferencia(billetera.getId()); 
+        cout << "Seleccione una billetera donde transferir: " << endl << endl;
+        idATransferir = _billeteras.seleccionarTransferencia(billetera.getId()); 
 
         rlutil::cls();
 
@@ -112,7 +111,7 @@ void MovimientosHandler::mostrarPorFecha()
 
 void MovimientosHandler::mostrarPorRangoMontos()
 {
-    float montoMin, montoMax;
+    double montoMin, montoMax;
     cout << "Buscar " << _nombre << " por rango de montos" << endl << endl;
     montoMin = movimientoMontoMin();
     montoMax = movimientoMontoMax();
@@ -128,7 +127,7 @@ void MovimientosHandler::mostrarPorRangoMontos()
 
 void MovimientosHandler::mostrarPorMonto()
 {
-    float monto;
+    double monto;
     cout << "Buscar " << _nombre << " por monto" << endl << endl;
     monto = ingresoMonto();
 

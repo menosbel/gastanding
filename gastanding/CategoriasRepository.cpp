@@ -30,6 +30,35 @@ void CategoriasRepository::agregar()
 	}
 }
 
+bool CategoriasRepository::esIngreso(int catId)
+{
+	Categoria categoria;
+	int pos = 0;
+	while (categoria.leerDeDisco(pos++, _nombreArchivo))
+	{
+		if (categoria.getId() == catId && categoria.getTipoMovimiento() == 1)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+bool CategoriasRepository::esEgreso(int catId)
+{
+	Categoria categoria;
+	int pos = 0;
+
+	while (categoria.leerDeDisco(pos++, _nombreArchivo))
+	{
+		if (categoria.getId() == catId && categoria.getTipoMovimiento() == 2)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
 void CategoriasRepository::eliminar(int tipoMovimiento)
 {
 	cout << "Seleccione la categoría que desee eliminar: " << endl;

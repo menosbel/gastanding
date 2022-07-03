@@ -6,6 +6,7 @@
 #include "BilleterasHandler.h"
 #include "CategoriasHandler.h"
 #include "InformesHandler.h"
+#include "EntradaDatosHandler.h"
 
 using namespace std;
 
@@ -15,15 +16,16 @@ int main()
     string movimientosArchivo = "movimientos.dat";
     string categoriasArchivo = "categorias.dat";
 
-    BilleterasRepository billeteras(billeterasArchivo);
     CategoriasRepository categorias(categoriasArchivo);
+    BilleterasRepository billeteras(billeterasArchivo, categorias);
     MovimientosRepository movimientos(movimientosArchivo, categorias);
 
-    MovimientosHandler movimientosHandler(movimientos, categorias);
+    MovimientosHandler movimientosHandler(movimientos, categorias, billeteras);
     BilleterasHandler billeterasHandler(billeteras, movimientos, categorias, movimientosHandler);
     CategoriasHandler categoriasHandler(categorias);
 
     InformesHandler informesHandler(movimientos, categorias);
+    EntradaDatosHandler entradaDatosHandler;
 
     setlocale(LC_ALL, "spanish");
     rlutil::setColor(rlutil::WHITE);
@@ -39,13 +41,14 @@ int main()
         cout << "\t MENU PRINCIPAL" << endl;
         cout << "------------------------------------" << endl;
         cout << endl;
-        cout << "- 1. Billeteras" << endl;
-        cout << "- 2. Categorias" << endl;
-        cout << "- 3. Informes" << endl;
+        cout << "1. Billeteras" << endl;
+        cout << "2. Categorias" << endl;
+        cout << "3. Informes" << endl;
+        cout << "4. Entrada masiva de datos" << endl;
         cout << endl;
         cout << endl;
         cout << endl;
-        cout << "- 0. Salir" << endl;
+        cout << "0. Salir" << endl;
         cout << endl;
         cout << "------------------------------------" << endl;
         cout << "Ingrese una opción: ";
@@ -61,6 +64,9 @@ int main()
             break;
         case 3:
             informesHandler.exec();
+            break;
+        case 4:
+            entradaDatosHandler.exec();
             break;
         case 0:
             cout << "¿Confirma que desea salir? (S/N): ";

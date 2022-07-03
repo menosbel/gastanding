@@ -11,7 +11,7 @@ using namespace std;
 
 void Movimiento::cargarEn(int billeteraId, int categoriaId, int nextId)
 {
-	float monto;
+	double monto;
 	string concepto;
 		
 	_fecha.cargar();
@@ -30,7 +30,7 @@ void Movimiento::cargarEn(int billeteraId, int categoriaId, int nextId)
 	setId(nextId);
 }
 
-void Movimiento::cargarTransferenciaSalida(int id, int billeteraActual, float monto)
+void Movimiento::cargarTransferenciaSalida(int id, int billeteraActual, double monto)
 {
 	CategoriasRepository repo("categorias.dat");
 	string concepto;
@@ -51,7 +51,7 @@ void Movimiento::cargarTransferenciaSalida(int id, int billeteraActual, float mo
 	setId(id);
 }
 
-void Movimiento::cargarTransferenciaEntrada(int id, int billeteraDestino, float monto)
+void Movimiento::cargarTransferenciaEntrada(int id, int billeteraDestino, double monto)
 {
 	CategoriasRepository repo("categorias.dat");
 	Fecha hoy;
@@ -73,8 +73,10 @@ void Movimiento::mostrar(Categoria categoria)
 {
 	const int nameWidth = 30;
 	const int numWidth = 15;
-
 	printElement(_fecha.toString(), numWidth);
+	std::cout.imbue(std::locale(std::cout.getloc(), new locate_miles));
+	cout << fixed << setprecision(2);
+	cout << "$";
 	printElement(_monto, numWidth);
 	printElement(_concepto, nameWidth);
 	printElement(categoria.getNombre(), nameWidth);

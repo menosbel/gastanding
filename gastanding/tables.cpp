@@ -26,6 +26,7 @@ void printBilleterasHeader()
 
 	cout << left << setw(numWidth) << setfill(separator) << "ID";
 	cout << left << setw(nameWidth) << setfill(separator) << "Nombre";
+	cout << left << setw(nameWidth) << setfill(separator) << "Saldo actual";
 	cout << endl;
 	cout << left << setw(50) << setfill('_') << "";
 	cout << endl << endl;

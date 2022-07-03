@@ -17,7 +17,7 @@ void Billetera::cargar(int nextId)
 void Billetera::mostrar()
 {
 	const int numWidth = 10;
-	const int nameWidth = 30;
+	const int nameWidth = 25;
 	printElement(getId(), numWidth);
 	printElement(getNombre(), nameWidth);
 }

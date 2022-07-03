@@ -14,3 +14,5 @@ int renderMenuBuscar();
 int renderMenuCategorias();
 int renderMenuTiposMovimientos();
 int menuTipoMovimiento();
+
+int renderMenuEntradaDatos();

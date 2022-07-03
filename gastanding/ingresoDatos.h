@@ -3,9 +3,9 @@
 #include "Fecha.h"
 using namespace std;
 
-float movimientoMontoMin();
-float movimientoMontoMax();
-float ingresoMonto();
+double movimientoMontoMin();
+double movimientoMontoMax();
+double ingresoMonto();
 int ingresoMes();
 int ingresoAnio();
 string ingresoConcepto();

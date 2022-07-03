@@ -15,7 +15,7 @@ void Informes::Balance30dias()
 {
 	cout << "Su balance de los ultimos 30 dias es: " << endl;
 
-	float ImporteTotal = 0;
+	double ImporteTotal = 0;
 	int ContadorMov = 0;
 	int ContadorIng = 0;
 	int ContadorGas = 0;
@@ -42,8 +42,8 @@ void Informes::Balance30dias()
 
 			Movimiento Movimientos;
 
-			float contImpGas = 0;
-			float contImpIng = 0;
+			double contImpGas = 0;
+			double contImpIng = 0;
 			int cantMovGasto = 0;
 			int cantMovIngreso = 0;
 
@@ -157,7 +157,7 @@ void Informes::BalanceAnual()
 		system("cls");
 
 		cout << "Su Balance durante el año " << anioOP << " es..."<<endl;
-		float ImporteTotal = 0;
+		double ImporteTotal = 0;
 		int ContadorMov = 0;
 		int ContadorIng = 0;
 		int ContadorGas = 0;
@@ -177,8 +177,8 @@ void Informes::BalanceAnual()
 
 				Movimiento Movimientos;
 
-				float contImpGas = 0;
-				float contImpIng = 0;
+				double contImpGas = 0;
+				double contImpIng = 0;
 				int cantMovGasto = 0;
 				int cantMovIngreso = 0;
 
@@ -284,7 +284,7 @@ void Informes::PatrimonioNeto()
 	cout << "Separado por billeteras: " << endl;
 	cout << "------------------------------------------------------------" << endl;
 
-	float ImporteTotal = 0;
+	double ImporteTotal = 0;
 	int ContadorMov = 0;
 	int ContadorIng = 0;
 	int ContadorGas = 0;
@@ -307,8 +307,8 @@ void Informes::PatrimonioNeto()
 
 			Movimiento Movimientos;
 
-			float contImpGas = 0;
-			float contImpIng = 0;
+			double contImpGas = 0;
+			double contImpIng = 0;
 			int cantMovGasto = 0;
 			int cantMovIngreso = 0;
 
@@ -421,7 +421,7 @@ void Informes::TopDeIngresosOGastos()
 	}
 
 	Categoria* categorias = new Categoria[tam];
-	float* montos = new float[tam];
+	double* montos = new double[tam];
 	
 	llenarVectorCategorias(categorias, montos, tam, tipo);
 	ordenarVectorCategorias(categorias, montos, tam);
@@ -432,14 +432,7 @@ void Informes::TopDeIngresosOGastos()
 	rlutil::anykey();
 }
 
-void Informes::EvolucionDeIngresosOGastos()
-{
-	cout << "Evolucion de sus Ingresos o Gastos" << endl;
-	rlutil::anykey();
-
-}
-
-void Informes::llenarVectorCategorias(Categoria* vec, float* montos, int tam, int tipo)
+void Informes::llenarVectorCategorias(Categoria* vec, double* montos, int tam, int tipo)
 {
 	Categoria aux;
 	Movimiento mov;
@@ -483,10 +476,10 @@ void Informes::llenarVectorCategorias(Categoria* vec, float* montos, int tam, in
 	}
 }
 
-void Informes::ordenarVectorCategorias(Categoria* vec, float* montos, int tam)
+void Informes::ordenarVectorCategorias(Categoria* vec, double* montos, int tam)
 {
 	Categoria aux;
-	float aux2;
+	double aux2;
 
 	for (int i = 0; i < tam; i++)
 	{
@@ -507,7 +500,7 @@ void Informes::ordenarVectorCategorias(Categoria* vec, float* montos, int tam)
 	}
 }
 
-void Informes::mostrarVectorCategorias(Categoria* vec, float* montos, int tam)
+void Informes::mostrarVectorCategorias(Categoria* vec, double* montos, int tam)
 {
 	const int nameWidth = 20;
 	const int numWidth = 10;

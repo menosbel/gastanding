@@ -5,6 +5,7 @@
 #include "Movimiento.h"
 #include "Categoria.h"
 #include <iostream>
+#include <algorithm>
 
 using namespace std;
 
@@ -59,7 +60,7 @@ void MovimientosRepository::eliminar(int pos)
     else mostrarMensaje("Ocurrió un error. El registro no ha sido eliminado", 15, 4);
 }
 
-void MovimientosRepository::transferir(int billeteraActual, int billeteraDestino, float monto)
+void MovimientosRepository::transferir(int billeteraActual, int billeteraDestino, double monto)
 {
     Movimiento movimiento;
     int id = cantidadRegistros();
@@ -90,7 +91,7 @@ int MovimientosRepository::cantidadRegistros()
     return cant_reg;
 }
 
-int MovimientosRepository::buscarPor(float monto, Fecha fecha, int categoriaId, string concepto, int billeteraId)
+int MovimientosRepository::buscarPor(double monto, Fecha fecha, int categoriaId, string concepto, int billeteraId)
 {
     Movimiento aux;
     int cantRegistros = cantidadRegistros();
@@ -112,7 +113,7 @@ int MovimientosRepository::buscarPor(float monto, Fecha fecha, int categoriaId, 
     return -1;
 }
 
-vector<Movimiento> MovimientosRepository::buscarPor(float monto)
+vector<Movimiento> MovimientosRepository::buscarPor(double monto)
 {
     Movimiento aux;
     int cantRegistros = cantidadRegistros();
@@ -128,7 +129,7 @@ vector<Movimiento> MovimientosRepository::buscarPor(float monto)
     return movimientos;
 }
 
-vector<Movimiento> MovimientosRepository::buscarPor(float montoMin, float montoMax)
+vector<Movimiento> MovimientosRepository::buscarPor(double montoMin, double montoMax)
 {
     Movimiento aux;
     int cantRegistros = cantidadRegistros();
@@ -241,19 +242,10 @@ void MovimientosRepository::mostrarRegistrosPor(vector<Movimiento> movimientos, 
 void MovimientosRepository::ordenarMovimientos(vector<Movimiento>& movimientos)
 {
     Movimiento aux;
-
-    for (int i = 0; i < movimientos.size(); i++)
-    {
-        for (int j = i + 1; j < movimientos.size(); j++)
-        {
-            if (movimientos[j].getFecha() > movimientos[i].getFecha())
-            {
-                aux = movimientos[j];
-                movimientos[j] = movimientos[i];
-                movimientos[i] = aux;
-                break;
-            }
+    for (int i = 0; i < movimientos.size() - 1; ++i) {
+        for (int j = 0; j < movimientos.size() - i - 1; ++j) {
+            if (movimientos.at(j + 1).getFecha() > movimientos.at(j).getFecha())
+                std::swap(movimientos.at(j), movimientos.at(j + 1));
         }
-
     }
 }

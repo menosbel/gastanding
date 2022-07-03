@@ -146,6 +146,7 @@
     <ClCompile Include="Categoria.cpp" />
     <ClCompile Include="CategoriasHandler.cpp" />
     <ClCompile Include="CategoriasRepository.cpp" />
+    <ClCompile Include="EntradaDatosHandler.cpp" />
     <ClCompile Include="functions.cpp" />
     <ClCompile Include="Fecha.cpp" />
     <ClCompile Include="gastanding.cpp" />
@@ -165,6 +166,7 @@
     <ClInclude Include="Categoria.h" />
     <ClInclude Include="CategoriasHandler.h" />
     <ClInclude Include="CategoriasRepository.h" />
+    <ClInclude Include="EntradaDatosHandler.h" />
     <ClInclude Include="functions.h" />
     <ClInclude Include="Fecha.h" />
     <ClInclude Include="Informes.h" />

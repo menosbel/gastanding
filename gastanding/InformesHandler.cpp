@@ -91,7 +91,7 @@ void InformesHandler::generarInformeEvolucionMovimientos(int categoriaId, Fecha 
 
     if (movimientos.empty()) mostrarMensaje("No se encontraron movimientos para esa categoría dentro de ese rango de fechas", 15, 4);
     else {
-        map<int, map<int, float>> montoPorMesYAnio;
+        map<int, map<int, double>> montoPorMesYAnio;
         for (int i = 0; i < movimientos.size(); i++)
         {
             int mes = movimientos[i].getFecha().getMes();
@@ -103,21 +103,21 @@ void InformesHandler::generarInformeEvolucionMovimientos(int categoriaId, Fecha 
 }
 
 
-void InformesHandler::mostrarInformeEvolucionMovimientos(map<int, map<int, float>> montoPorMesYAnio)
+void InformesHandler::mostrarInformeEvolucionMovimientos(map<int, map<int, double>> montoPorMesYAnio)
 {
     printInformeEvolucionMovimientosHeader();
-    map<int, map<int, float>>::iterator anioDict = montoPorMesYAnio.begin();
+    map<int, map<int, double>>::iterator anioDict = montoPorMesYAnio.begin();
 
     while (anioDict != montoPorMesYAnio.end())
     {
         int anio = anioDict->first;
-        map<int, float> mesMonto = anioDict->second;
+        map<int, double> mesMonto = anioDict->second;
 
         string nuevoAnio = "- " + to_string(anio) + " -";
         printElement(nuevoAnio, 10);
         cout << endl << endl;
 
-        map<int, float>::iterator mesDict = mesMonto.begin();
+        map<int, double>::iterator mesDict = mesMonto.begin();
         while (mesDict != mesMonto.end())
         {
             int mes = mesDict->first;
@@ -126,6 +126,8 @@ void InformesHandler::mostrarInformeEvolucionMovimientos(map<int, map<int, float
             const int width = 10;
             string fecha = ZeroPadNumber(mes) + "/" + to_string(anio);
             printElement(fecha, width);
+            cout << fixed;
+            cout << setprecision(2);
             printElement(monto, width);
             cout << endl << endl;
             mesDict++;

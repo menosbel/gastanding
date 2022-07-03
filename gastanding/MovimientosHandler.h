@@ -13,16 +13,19 @@ private:
 	Billetera _billeteraElegida;
 	MovimientosRepository _movimientos;
 	CategoriasRepository _categorias;
+	BilleterasRepository _billeteras;
 public:
 	MovimientosHandler() {
 		_nombre = "";
 		_billeteraElegida = Billetera();
 		_movimientos = MovimientosRepository();
 		_categorias = CategoriasRepository();
+		_billeteras = BilleterasRepository();
 	};
-	MovimientosHandler(MovimientosRepository mRepo, CategoriasRepository cRepo) {
+	MovimientosHandler(MovimientosRepository mRepo, CategoriasRepository cRepo, BilleterasRepository bRepo) {
 		_movimientos = mRepo;
 		_categorias = cRepo;
+		_billeteras = bRepo;
 	}
 	void agregarMovimientosA(int billeteraId);
 	void buscarMovimientosEn(Billetera billetera);

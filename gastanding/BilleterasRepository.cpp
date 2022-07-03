@@ -1,5 +1,6 @@
 #include "BilleterasRepository.h"
 #include "Billetera.h"
+#include "Movimiento.h"
 #include "functions.h"
 #include "tables.h"
 #include "rlutil.h"
@@ -67,7 +68,12 @@ void BilleterasRepository::listar()
 
 		if (aux.getEstado())
 		{
+			
+			double saldo = calcularSaldoActual(aux.getId());
 			aux.mostrar();
+			std::cout.imbue(std::locale(std::cout.getloc(), new locate_miles));
+			cout << fixed << setprecision(2);
+			cout << "$" << saldo;
 			cout << endl;
 			hayBilleterasActivas = true;
 		}
@@ -75,6 +81,29 @@ void BilleterasRepository::listar()
 
 	if (!hayBilleterasActivas)
 		mostrarMensaje("Aún no se ha ingresado ninguna billetera", 15, 4);
+}
+
+
+double BilleterasRepository::calcularSaldoActual(int billeteraId)
+{
+	double saldoActual = 0;
+	Movimiento movimiento;
+	int pos = 0;
+	while (movimiento.leerDeDisco(pos++, "movimientos.dat"))
+	{
+		if (movimiento.getBilletera() == billeteraId)
+		{
+			if (_categorias.esIngreso(movimiento.getCategoria()))
+			{
+				saldoActual += movimiento.getMonto();
+			}
+			else if (_categorias.esEgreso(movimiento.getCategoria()))
+			{
+				saldoActual -= movimiento.getMonto();
+			}
+		}
+	}
+	return saldoActual;
 }
 
 Billetera BilleterasRepository::seleccionar()
