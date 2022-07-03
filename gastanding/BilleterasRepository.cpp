@@ -36,7 +36,7 @@ void BilleterasRepository::eliminar()
 	cout << "Seleccione la billetera que desee eliminar:" << endl;
 	Billetera billeteraEliminar = seleccionar();
 	char caracter = 'n';
-	bool confirmar;
+	bool confirmar = 'n';
 	if (billeteraEliminar.getEstado())
 	{
 		cout << "¿Esta seguro de eliminar esta billetera? S/N: ";
@@ -102,6 +102,14 @@ double BilleterasRepository::calcularSaldoActual(int billeteraId)
 	return saldoActual;
 }
 
+bool BilleterasRepository::tieneFondos(int billeteraId, double montoATransferir)
+{
+	double saldoActual = calcularSaldoActual(billeteraId);
+	if ((saldoActual - montoATransferir) >= 0 ) return true;
+	return false;
+
+}
+
 Billetera BilleterasRepository::seleccionar()
 {
 	Billetera aux;
@@ -136,14 +144,13 @@ Billetera BilleterasRepository::seleccionar()
 	}
 }
 
-int BilleterasRepository::seleccionarTransferencia(int id)
+int BilleterasRepository::seleccionarTransferencia(int billeteraActualId)
 {
 	Billetera aux;
 	int opcion;
-	int cantRegistros = cantidadRegistros();
 	bool hayBilleterasActivas = false;
 	bool ok;
-
+	int cantRegistros = cantidadRegistros();
 	if (cantRegistros > 0)
 	{
 		cout << left << setw(10) << setfill(' ') << "ID";
@@ -153,7 +160,7 @@ int BilleterasRepository::seleccionarTransferencia(int id)
 		{
 			aux.leerDeDisco(i, _nombreArchivo);
 
-			if (aux.getEstado() && aux.getId() != id)
+			if (aux.getEstado() && aux.getId() != billeteraActualId)
 			{
 				cout << left << setw(10) << setfill(' ') << aux.getId();
 				cout << left << setw(20) << setfill(' ') << aux.getNombre() << endl;
@@ -161,8 +168,7 @@ int BilleterasRepository::seleccionarTransferencia(int id)
 		}
 		cout << endl << endl;
 	}
-	else
-		return -1;
+	else return -1;
 	
 	cout << "Opcion: ";
 	cin >> opcion;
@@ -171,16 +177,12 @@ int BilleterasRepository::seleccionarTransferencia(int id)
 	{
 		aux.leerDeDisco(i, _nombreArchivo);
 
-		if (aux.getEstado() && aux.getId() != id )
-			ok = true;
-		else
-			ok = false;
+		if (aux.getEstado() && aux.getId() != billeteraActualId ) ok = true;
+		else ok = false;
 	}
 
-	if (ok)
-		return opcion;
-	else
-		return -1;
+	if (ok) return opcion;
+	else return -1;
 }
 
 int BilleterasRepository::cantidadRegistros() {
@@ -196,6 +198,17 @@ int BilleterasRepository::cantidadRegistros() {
 	fclose(p);
 	cant_reg = bytes / sizeof(Billetera);
 	return cant_reg;
+}
+
+int BilleterasRepository::cantidadRegistrosActivos()
+{
+	Billetera obj;
+	int cantBilleterasActivas = 0, pos = 0;
+	while (obj.leerDeDisco(pos++, _nombreArchivo))
+	{
+		if (obj.getEstado()) cantBilleterasActivas++;
+	}
+	return cantBilleterasActivas;
 }
 
 Billetera BilleterasRepository::buscarPor(int id)

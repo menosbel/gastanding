@@ -17,9 +17,11 @@ public:
 	void eliminar();
 	bool listar();
 	double calcularSaldoActual(int billeteraId);
+	bool tieneFondos(int billeteraId, double monto);
 	Billetera seleccionar();
 	int seleccionarTransferencia(int id);
 	int cantidadRegistros();
+	int cantidadRegistrosActivos();
 	Billetera buscarPor(int id);
 private:
 	bool bajaLogica(int idBilletera);

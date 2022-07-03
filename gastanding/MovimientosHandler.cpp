@@ -44,46 +44,37 @@ void MovimientosHandler::buscarMovimientosEn(Billetera billetera)
 
 void MovimientosHandler::hacerTransferencia(Billetera billetera)
 {
-    int cantidadBilleterasActivas = 0;
     int pos = 0;
     int idATransferir;
     double montoATransferir;
-    Billetera obj;
+    bool tieneFondos = false;
 
-    while (obj.leerDeDisco(pos++, "billeteras.dat"))
-    {
-        if (obj.getEstado())
-            cantidadBilleterasActivas++;
-    }
-
-    if (cantidadBilleterasActivas > 1)
+    if (_billeteras.cantidadRegistrosActivos() > 1)
     {
         cout << "Seleccione una billetera donde transferir: " << endl << endl;
-        idATransferir = _billeteras.seleccionarTransferencia(billetera.getId()); 
-
+        idATransferir = _billeteras.seleccionarTransferencia(billetera.getId());
+        if (idATransferir == -1) mostrarMensaje("El ID ingresado no es valido", 15, 4);
         rlutil::cls();
 
-        if (idATransferir == -1)
-        {
-            cout << "El numero ingresado no es valido";
-            return;
-        }
-
-        cout << "Seleccione un monto a transferir!" << endl;
+        cout << "Monto a transferir:" << endl;
         cin >> montoATransferir;
-
         rlutil::cls();
 
-        _movimientos.transferir(billetera.getId(), idATransferir, montoATransferir);
-         mostrarMensaje("Transferencia efectuada con exito!", 15, 2);
+        tieneFondos = _billeteras.tieneFondos(billetera.getId(), montoATransferir);
+
+        if (montoATransferir > 0 && tieneFondos)
+        {
+            _movimientos.transferir(billetera.getId(), idATransferir, montoATransferir);
+            mostrarMensaje("Transferencia efectuada con exito!", 15, 2);
+        }
+        else if (montoATransferir < 0) mostrarMensaje("El monto debe ser mayor a cero", 15, 4);
+        else if (!tieneFondos) mostrarMensaje("Fondos insifucientes", 15, 4);
     }
     else
     {
-        cout << "No se pueden hacer transferecias ya que no hay destinatarios activos" << endl;
+        mostrarMensaje("No se pueden hacer transferecias, ya que no hay destinatarios activos", 15, 4);
         rlutil::anykey();
-        return;
     }
-    return;
 }
 
 void MovimientosHandler::consultarSaldo(Billetera billetera)
