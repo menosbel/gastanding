@@ -152,7 +152,7 @@ int CategoriasRepository::seleccionarPor(int tipoMovimiento)
 		bool existe = checkCategoriaSeleccionadaExiste(opcion, categoriasId);
 
 		while (!existe) {
-			cout << "La categorias seleccionada no existe. Volvé a intentarlo" << endl;
+			cout << "La categoria seleccionada no existe. Volvé a intentarlo" << endl;
 			cout << endl << "Opcion: ";
 			cin >> opcion;
 			existe = checkCategoriaSeleccionadaExiste(opcion, categoriasId);
@@ -257,8 +257,6 @@ int CategoriasRepository::existeTransferencia(int tipo)
 				return crearTransferencia(tipo);
 		}
 	}
-
-
 }
 
 int CategoriasRepository::crearTransferencia(int tipo)

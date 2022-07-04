@@ -72,7 +72,7 @@ void Movimiento::cargarTransferenciaEntrada(int id, int billeteraDestino, double
 
 void Movimiento::mostrar(Categoria categoria) 
 {
-	const int nameWidth = 30;
+	const int nameWidth = 25;
 	const int numWidth = 15;
 	printElement(_fecha.toString(), numWidth);
 	std::cout.imbue(std::locale(std::cout.getloc(), new locate_miles));

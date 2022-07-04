@@ -6,7 +6,7 @@ using namespace std;
 void printMovimientosHeader()
 {
 const char separator = ' ';
-const int nameWidth = 30;
+const int nameWidth = 27;
 const int numWidth = 15;
 
 cout << left << setw(numWidth) << setfill(separator) << "Fecha";
