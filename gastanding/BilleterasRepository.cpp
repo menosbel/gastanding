@@ -33,6 +33,7 @@ void BilleterasRepository::agregar()
 
 void BilleterasRepository::eliminar()
 {
+
 	cout << "Seleccione la billetera que desee eliminar:" << endl;
 	Billetera billeteraEliminar = seleccionar();
 	char caracter = 'n';
@@ -75,7 +76,7 @@ bool BilleterasRepository::listar()
 		}
 	}
 
-	if (!hayBilleterasActivas) mostrarMensaje("Aún no se ha ingresado ninguna billetera", 15, 4);
+	
 	return hayBilleterasActivas;
 }
 
@@ -222,6 +223,8 @@ Billetera BilleterasRepository::buscarPor(int id)
 	return aux;
 }
 
+
+
 bool BilleterasRepository::bajaLogica(int idBilletera)
 {
 	Billetera aux;
@@ -246,3 +249,4 @@ bool BilleterasRepository::bajaLogica(int idBilletera)
 	fclose(p);
 	return false;
 }
+

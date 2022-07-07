@@ -4,6 +4,7 @@
 #include <sstream>
 #include <string>
 
+
 using namespace std;
 
 string ZeroPadNumber(int num)
@@ -76,4 +77,3 @@ void vectorEnCero(int* vector, int cant) {
 		vector[i] = 0;
 	}
 };
-

@@ -23,6 +23,8 @@ public:
 	int cantidadRegistros();
 	int cantidadRegistrosActivos();
 	Billetera buscarPor(int id);
+
+
 private:
 	bool bajaLogica(int idBilletera);
 };
