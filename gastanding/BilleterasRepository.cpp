@@ -78,7 +78,7 @@ bool BilleterasRepository::listar()
 		}
 	}
 
-	
+	if (!hayBilleterasActivas) mostrarMensaje("Aún no se ha ingresado ninguna billetera", 15, 4);
 	return hayBilleterasActivas;
 }
 
