@@ -1,4 +1,5 @@
 #include "BilleterasRepository.h"
+#include "MovimientosRepository.h"
 #include "Billetera.h"
 #include "Movimiento.h"
 #include "functions.h"
@@ -84,9 +85,11 @@ double BilleterasRepository::calcularSaldoActual(int billeteraId)
 {
 	double saldoActual = 0;
 	Movimiento movimiento;
-	int pos = 0;
-	while (movimiento.leerDeDisco(pos++, "movimientos.dat"))
+	MovimientosRepository movimientosRepo;
+	int movimientos = movimientosRepo.cantidadRegistros();
+	for (int i = 0; i < movimientos; i++)
 	{
+		movimiento.leerDeDisco(i, "movimientos.dat");
 		if (movimiento.getBilletera() == billeteraId)
 		{
 			if (_categorias.esIngreso(movimiento.getCategoria()))
