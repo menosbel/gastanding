@@ -16,24 +16,25 @@ void BilleterasRepository::agregar()
 	for (int i = 0; i < cantRegistros; i++)
 	{
 		aux.leerDeDisco(i, _nombreArchivo);
-		if (aux.equals(billetera)) {
+		
+		if (aux.equals(billetera))
+		{
 			existe = true;
 			break;
-		};
+		}
 	}
 
-	if (existe) {
+	if (existe) 
 		mostrarMensaje("La billetera ya existe. No puede volver a agregarse", 15, 4);
-	}
-	else {
-		if (billetera.grabarEnDisco(_nombreArchivo)) mostrarMensaje("Billetera agregada exitosamente", 15, 2);
-		else mostrarMensaje("No se pudo agregar la billetera", 15, 4);
-	}
+	
+	else if (billetera.grabarEnDisco(_nombreArchivo)) 
+		mostrarMensaje("Billetera agregada exitosamente", 15, 2);
+	else 
+		mostrarMensaje("No se pudo agregar la billetera", 15, 4);
 }
 
 void BilleterasRepository::eliminar()
 {
-
 	cout << "Seleccione la billetera que desee eliminar:" << endl;
 	Billetera billeteraEliminar = seleccionar();
 	char caracter = 'n';
@@ -190,7 +191,7 @@ int BilleterasRepository::cantidadRegistros() {
 	FILE* p;
 	errno_t err;
 	err = fopen_s(&p, _nombreArchivo.c_str(), "rb");
-	if (err != 0) { return 0; };
+	if (err != 0)  return 0; 
 	size_t bytes;
 	int cant_reg;
 
