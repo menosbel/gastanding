@@ -137,10 +137,7 @@ void Informes::Balance30dias()
 		cout << "------------------------------------------------------------" << endl;
 
 		rlutil::anykey();
-	
-	
 }
-
 
 void Informes::BalanceAnual()
 {

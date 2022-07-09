@@ -40,6 +40,7 @@ void BilleterasRepository::eliminar()
 	Billetera billeteraEliminar = seleccionar();
 	char caracter = 'n';
 	bool confirmar = 'n';
+
 	if (billeteraEliminar.getEstado())
 	{
 		cout << "¿Esta seguro de eliminar esta billetera? S/N: ";
@@ -50,8 +51,10 @@ void BilleterasRepository::eliminar()
 
 	if (confirmar)
 	{
-		if (bajaLogica(billeteraEliminar.getId())) mostrarMensaje("Billetera borrada exitosamente", 15, 2);
-		else mostrarMensaje("No se pudo borrar esta billetera", 15, 4);
+		if (bajaLogica(billeteraEliminar.getId())) 
+			mostrarMensaje("Billetera borrada exitosamente", 15, 2);
+		else 
+			mostrarMensaje("No se pudo borrar esta billetera", 15, 4);
 	}
 }
 
@@ -62,6 +65,7 @@ bool BilleterasRepository::listar()
 	bool hayBilleterasActivas = false;
 
 	printBilleterasHeader();
+
 	for (int i = 0; i < cantRegistros; i++)
 	{
 		aux.leerDeDisco(i, _nombreArchivo);
@@ -74,10 +78,10 @@ bool BilleterasRepository::listar()
 			cout << fixed << setprecision(2);
 			cout << "$" << saldo;
 			cout << endl;
+
 			hayBilleterasActivas = true;
 		}
 	}
-
 	
 	return hayBilleterasActivas;
 }
@@ -89,9 +93,11 @@ double BilleterasRepository::calcularSaldoActual(int billeteraId)
 	Movimiento movimiento;
 	MovimientosRepository movimientosRepo;
 	int movimientos = movimientosRepo.cantidadRegistros();
+
 	for (int i = 0; i < movimientos; i++)
 	{
 		movimiento.leerDeDisco(i, "movimientos.dat");
+
 		if (movimiento.getBilletera() == billeteraId)
 		{
 			if (_categorias.esIngreso(movimiento.getCategoria()))
@@ -104,15 +110,18 @@ double BilleterasRepository::calcularSaldoActual(int billeteraId)
 			}
 		}
 	}
+
 	return saldoActual;
 }
 
 bool BilleterasRepository::tieneFondos(int billeteraId, double montoATransferir)
 {
 	double saldoActual = calcularSaldoActual(billeteraId);
-	if ((saldoActual - montoATransferir) >= 0 ) return true;
+	
+	if ((saldoActual - montoATransferir) >= 0 ) 
+		return true;
+	
 	return false;
-
 }
 
 Billetera BilleterasRepository::seleccionar()
@@ -156,6 +165,7 @@ int BilleterasRepository::seleccionarTransferencia(int billeteraActualId)
 	bool hayBilleterasActivas = false;
 	bool ok;
 	int cantRegistros = cantidadRegistros();
+
 	if (cantRegistros > 0)
 	{
 		cout << left << setw(10) << setfill(' ') << "ID";
@@ -173,7 +183,8 @@ int BilleterasRepository::seleccionarTransferencia(int billeteraActualId)
 		}
 		cout << endl << endl;
 	}
-	else return -1;
+	else 
+		return -1;
 	
 	cout << "Opcion: ";
 	cin >> opcion;
@@ -182,12 +193,16 @@ int BilleterasRepository::seleccionarTransferencia(int billeteraActualId)
 	{
 		aux.leerDeDisco(i, _nombreArchivo);
 
-		if (aux.getEstado() && aux.getId() != billeteraActualId ) ok = true;
-		else ok = false;
+		if (aux.getEstado() && aux.getId() != billeteraActualId ) 
+			ok = true;
+		else 
+			ok = false;
 	}
 
-	if (ok) return opcion;
-	else return -1;
+	if (ok) 
+		return opcion;
+	else 
+		return -1;
 }
 
 int BilleterasRepository::cantidadRegistros() {
