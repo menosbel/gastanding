@@ -26,4 +26,3 @@ public:
 	bool grabarEnDisco(string fileName);
 	bool grabarEnDisco(int pos, string fileName);
 };
-

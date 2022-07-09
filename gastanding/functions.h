@@ -16,4 +16,7 @@ struct locate_miles : std::numpunct<char> {
     char_type do_thousands_sep() const override { return ','; }
     char_type do_decimal_point() const override { return '.'; }
     string_type do_grouping() const override { return "\3"; }
+
+
+
 };
