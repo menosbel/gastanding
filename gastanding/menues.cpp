@@ -111,6 +111,7 @@ int renderMenuInformes()
     cout << "------------------------------------" << endl;
     cout << "Ingrese una opción: ";
     cin >> opcion;
+    cout << endl;
     while (!(opcion >= 0 && opcion <= 5)) {
         cout << "Ingrese una opcion valida" << endl;
         cout << "Opcion: ";
@@ -140,7 +141,7 @@ int renderMenuBuscar()
     cout << "Ingrese una opción: ";
     cin >> opcion;
     while (!(opcion >= 0 && opcion <= 5)) {
-        cout << "Ingrese una opcion valida" << endl;
+        cout << "Ingrese una opcion valida." << endl;
         cout << "Opcion: ";
         cin >> opcion;
     }

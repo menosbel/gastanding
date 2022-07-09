@@ -34,10 +34,10 @@ void BilleterasRepository::agregar()
 		mostrarMensaje("No se pudo agregar la billetera", 15, 4);
 }
 
-void BilleterasRepository::eliminar()
+void BilleterasRepository::eliminar(int cantMovimientos)
 {
 	cout << "Seleccione la billetera que desee eliminar:" << endl << endl;
-	Billetera billeteraEliminar = seleccionar();
+	Billetera billeteraEliminar = seleccionar(cantMovimientos);
 	char caracter = 'n';
 	bool confirmar = 'n';
 
@@ -56,7 +56,7 @@ void BilleterasRepository::eliminar()
 	}
 }
 
-bool BilleterasRepository::listar()
+bool BilleterasRepository::listar(int cantMovimientos)
 {
 	Billetera aux;
 	int cantRegistros = cantidadRegistros();
@@ -70,7 +70,7 @@ bool BilleterasRepository::listar()
 
 		if (aux.getEstado())
 		{
-			double saldo = calcularSaldoActual(aux.getId());
+			double saldo = calcularSaldoActual(aux.getId(), cantMovimientos);
 			aux.mostrar();
 			std::cout.imbue(std::locale(std::cout.getloc(), new locate_miles));
 			cout << fixed << setprecision(2);
@@ -86,14 +86,12 @@ bool BilleterasRepository::listar()
 }
 
 
-double BilleterasRepository::calcularSaldoActual(int billeteraId)
+double BilleterasRepository::calcularSaldoActual(int billeteraId, int cantMovimientos)
 {
 	double saldoActual = 0;
 	Movimiento movimiento;
-	MovimientosRepository movimientosRepo;
-	int movimientos = movimientosRepo.cantidadRegistros();
 
-	for (int i = 0; i < movimientos; i++)
+	for (int i = 0; i < cantMovimientos; i++)
 	{
 		movimiento.leerDeDisco(i, "movimientos.dat");
 
@@ -113,9 +111,9 @@ double BilleterasRepository::calcularSaldoActual(int billeteraId)
 	return saldoActual;
 }
 
-bool BilleterasRepository::tieneFondos(int billeteraId, double montoATransferir)
+bool BilleterasRepository::tieneFondos(int billeteraId, double montoATransferir, int cantMovimientos)
 {
-	double saldoActual = calcularSaldoActual(billeteraId);
+	double saldoActual = calcularSaldoActual(billeteraId, cantMovimientos);
 	
 	if ((saldoActual - montoATransferir) >= 0 ) 
 		return true;
@@ -123,7 +121,7 @@ bool BilleterasRepository::tieneFondos(int billeteraId, double montoATransferir)
 	return false;
 }
 
-Billetera BilleterasRepository::seleccionar()
+Billetera BilleterasRepository::seleccionar(int cantMovimientos)
 {
 	Billetera aux;
 	int opcion;
@@ -132,7 +130,8 @@ Billetera BilleterasRepository::seleccionar()
 
 	if (cantBilleterasActivas > 0)
 	{
-		listar();
+		listar(cantMovimientos);
+		cout << endl << endl;
 		while (!idValido)
 		{
 			cout << "Opcion: ";

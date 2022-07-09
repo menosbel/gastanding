@@ -38,6 +38,7 @@ bool BilleterasHandler::gestionarBilleteras()
 {
     int opcion, idBilletera;
     bool seguir = true;
+    int cantMovimientos = _movimientos.cantidadRegistros();
     while (seguir)
     {
         rlutil::cls();
@@ -51,11 +52,11 @@ bool BilleterasHandler::gestionarBilleteras()
             rlutil::anykey();
             break;
         case 2:
-            _billeteras.eliminar();
+            _billeteras.eliminar(cantMovimientos);
             rlutil::anykey();
             break;
         case 3:
-            _billeteras.listar();
+            _billeteras.listar(cantMovimientos);
             rlutil::anykey();
             break;
         case 0:
@@ -71,9 +72,10 @@ bool BilleterasHandler::ingresarABilletera()
 {
     int opcion;
     bool seguir = true;
+    int cantMovimientos = _movimientos.cantidadRegistros();
     
     cout << "Elegí una billetera: " << endl << endl;
-    _billeteraElegida = _billeteras.seleccionar();
+    _billeteraElegida = _billeteras.seleccionar(cantMovimientos);
     if (_billeteraElegida.getNombre() != "") {
         while (seguir)
         {
@@ -95,9 +97,12 @@ bool BilleterasHandler::ingresarABilletera()
                 rlutil::anykey();
                 break;
             case 4:
-                _movimientosHandler.consultarSaldo(_billeteraElegida);
+            {
+                int cantMovimientos = _movimientos.cantidadRegistros();
+                _movimientosHandler.consultarSaldo(_billeteraElegida, cantMovimientos);
                 rlutil::anykey();
                 break;
+            }
             case 0:
                 return false;
             default:

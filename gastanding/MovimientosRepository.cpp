@@ -25,7 +25,7 @@ bool MovimientosRepository::agregarA(int billeteraId, int categoriaId)
     else {
         if (!(_billeteras.buscarPor(billeteraId).getCanBeNeg()) && _categorias.esEgreso(movimiento.getCategoria()))
         {
-            double saldoActual = _billeteras.calcularSaldoActual(billeteraId);
+            double saldoActual = _billeteras.calcularSaldoActual(billeteraId, cantidadRegistros());
             double nuevoSaldo = saldoActual - movimiento.getMonto();
             if (nuevoSaldo < 0)
             {

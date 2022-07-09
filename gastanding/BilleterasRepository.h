@@ -14,11 +14,11 @@ public:
 		_categorias = categoriasRepository;
 	};
 	void agregar();
-	void eliminar();
-	bool listar();
-	double calcularSaldoActual(int billeteraId);
-	bool tieneFondos(int billeteraId, double monto);
-	Billetera seleccionar();
+	void eliminar(int cantMovimientos);
+	bool listar(int cantMovimientos);
+	double calcularSaldoActual(int billeteraId, int cantMovimientos);
+	bool tieneFondos(int billeteraId, double monto, int cantMovimientos);
+	Billetera seleccionar(int cantMovimientos);
 	int seleccionarTransferencia(int id);
 	int cantidadRegistros();
 	int cantidadRegistrosActivos();

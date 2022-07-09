@@ -60,7 +60,7 @@ void MovimientosHandler::hacerTransferencia(Billetera billetera)
         cin >> montoATransferir;
         rlutil::cls();
 
-        tieneFondos = _billeteras.tieneFondos(billetera.getId(), montoATransferir);
+        tieneFondos = _billeteras.tieneFondos(billetera.getId(), montoATransferir, _movimientos.cantidadRegistros());
 
         if (montoATransferir > 0 && tieneFondos)
         {
@@ -77,7 +77,7 @@ void MovimientosHandler::hacerTransferencia(Billetera billetera)
     }
 }
 
-void MovimientosHandler::consultarSaldo(Billetera billetera)
+void MovimientosHandler::consultarSaldo(Billetera billetera, int cantMovimientos)
 {
     cout << "------------------------------------" << endl;
     cout << "\t" << billetera.getNombre() << endl;
@@ -86,7 +86,7 @@ void MovimientosHandler::consultarSaldo(Billetera billetera)
     cout << "Saldo actual: ";
     std::cout.imbue(std::locale(std::cout.getloc(), new locate_miles));
     cout << fixed << setprecision(2);
-    cout << "$" << _billeteras.calcularSaldoActual(billetera.getId());
+    cout << "$" << _billeteras.calcularSaldoActual(billetera.getId(), cantMovimientos);
     cout << endl << endl;
 }
 
