@@ -10,6 +10,12 @@ private:
 	bool _canBeNegative;
 	char _nombre[60];
 public:
+	Billetera() {
+		_id = 0;
+		_estado = false;
+		_canBeNegative = false;
+		setNombre("");
+	};
 	int getId() { return _id; };
 	string getNombre() { return string(_nombre); };
 	bool getEstado() { return _estado; };

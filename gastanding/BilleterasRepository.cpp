@@ -36,7 +36,7 @@ void BilleterasRepository::agregar()
 
 void BilleterasRepository::eliminar()
 {
-	cout << "Seleccione la billetera que desee eliminar:" << endl;
+	cout << "Seleccione la billetera que desee eliminar:" << endl << endl;
 	Billetera billeteraEliminar = seleccionar();
 	char caracter = 'n';
 	bool confirmar = 'n';
@@ -127,11 +127,12 @@ Billetera BilleterasRepository::seleccionar()
 {
 	Billetera aux;
 	int opcion;
-	bool hayBilleterasActivas = listar();
+	int cantBilleterasActivas = cantidadRegistrosActivos();
 	bool idValido = false;
 
-	if (hayBilleterasActivas)
+	if (cantBilleterasActivas > 0)
 	{
+		listar();
 		while (!idValido)
 		{
 			cout << "Opcion: ";
@@ -154,6 +155,7 @@ Billetera BilleterasRepository::seleccionar()
 	else
 	{
 		mostrarMensaje("Aún no existe ninguna billetera. Tenés que crear una.", 15, 4);
+		return aux;
 	}
 }
 
@@ -223,9 +225,12 @@ int BilleterasRepository::cantidadRegistrosActivos()
 {
 	Billetera obj;
 	int cantBilleterasActivas = 0, pos = 0;
-	while (obj.leerDeDisco(pos++, _nombreArchivo))
+	int cantidadBilleteras = cantidadRegistros();
+	for (size_t i = 0; i < cantidadBilleteras; i++)
 	{
+		obj.leerDeDisco(i, _nombreArchivo);
 		if (obj.getEstado()) cantBilleterasActivas++;
+
 	}
 	return cantBilleterasActivas;
 }
@@ -240,8 +245,6 @@ Billetera BilleterasRepository::buscarPor(int id)
 	}
 	return aux;
 }
-
-
 
 bool BilleterasRepository::bajaLogica(int idBilletera)
 {
