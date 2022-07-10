@@ -19,18 +19,20 @@ bool BilleterasHandler::exec()
         {
         case 1:
             gestionarBilleteras();
-            rlutil::anykey();
             break;
+
         case 2:
             ingresarABilletera();
-            rlutil::anykey();
             break;
+
         case 0:
             return false;
             break;
+
         default:
             break;
         }
+        rlutil::anykey();
     }
 }
 
@@ -39,6 +41,7 @@ bool BilleterasHandler::gestionarBilleteras()
     int opcion, idBilletera;
     bool seguir = true;
     int cantMovimientos = _movimientos.cantidadRegistros();
+    
     while (seguir)
     {
         rlutil::cls();
@@ -49,24 +52,26 @@ bool BilleterasHandler::gestionarBilleteras()
         {
         case 1:
             _billeteras.agregar();
-            rlutil::anykey();
             break;
+
         case 2:
             _billeteras.eliminar(cantMovimientos);
-            rlutil::anykey();
             break;
+
         case 3:
             _billeteras.listar(cantMovimientos);
-            rlutil::anykey();
             break;
+
         case 0:
             return false;
             break;
+
         default:
             break;
         }
+        rlutil::anykey();
     }
-    };
+}
 
 bool BilleterasHandler::ingresarABilletera()
 {
@@ -76,43 +81,45 @@ bool BilleterasHandler::ingresarABilletera()
     
     cout << "Elegí una billetera: " << endl << endl;
     _billeteraElegida = _billeteras.seleccionar(cantMovimientos);
-    if (_billeteraElegida.getNombre() != "") {
+
+    if (_billeteraElegida.getNombre() != "") 
+    {
         while (seguir)
         {
             rlutil::cls();
             opcion = renderMenuDentroDeBilletera(_billeteraElegida.getNombre());
             rlutil::cls();
+
             switch (opcion)
             {
             case 1:
                 _movimientosHandler.agregarMovimientosA(_billeteraElegida.getId());
-                rlutil::anykey();
                 break;
+
             case 2:
                 _movimientosHandler.buscarMovimientosEn(_billeteraElegida);
-                rlutil::anykey();
                 break;
+
             case 3:
                 _movimientosHandler.hacerTransferencia(_billeteraElegida);
-                rlutil::anykey();
                 break;
+
             case 4:
-            {
-                int cantMovimientos = _movimientos.cantidadRegistros();
                 _movimientosHandler.consultarSaldo(_billeteraElegida, cantMovimientos);
-                rlutil::anykey();
                 break;
-            }
+
             case 0:
                 return false;
+                break;
+
             default:
                 break;
             }
+            rlutil::anykey();
         }
     }
-    else {
+    else 
         return 0;
-    }
-};
+}
 
 

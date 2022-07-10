@@ -53,23 +53,31 @@ void MovimientosHandler::hacerTransferencia(Billetera billetera)
     {
         cout << "Seleccione una billetera donde transferir: " << endl << endl;
         idATransferir = _billeteras.seleccionarTransferencia(billetera.getId());
-        if (idATransferir == -1) mostrarMensaje("El ID ingresado no es valido", 15, 4);
-        rlutil::cls();
 
+        if (idATransferir == -1)
+        {
+            rlutil::cls();
+            mostrarMensaje("El ID ingresado no es valido", 15, 4);
+
+            return;
+        }
+       
+        rlutil::cls();
         cout << endl << endl;
-        for (;;) {
+
+        for (;;) 
+        {
             cout << "Monto a transferir: $";
-            if (cin >> montoATransferir) {
+
+            if (cin >> montoATransferir) 
+            {
                 if (montoATransferir > 0)
-                {
                     break;
-                }
                 else
-                {
                     cout << "Por favor, ingresar un monto válido." << endl << endl;
-                }
             }
-            else {
+            else 
+            {
                 cout << "Por favor, ingresar un monto válido." << endl << endl;
                 cin.clear();
                 cin.ignore(100, '\n');
@@ -84,14 +92,15 @@ void MovimientosHandler::hacerTransferencia(Billetera billetera)
             _movimientos.transferir(billetera.getId(), idATransferir, montoATransferir);
             mostrarMensaje("Transferencia efectuada con exito!", 15, 2);
         }
-        else if (montoATransferir < 0) mostrarMensaje("El monto debe ser mayor a cero", 15, 4);
-        else if (!tieneFondos) mostrarMensaje("Fondos insifucientes", 15, 4);
+        else if (montoATransferir < 0)
+            mostrarMensaje("El monto debe ser mayor a cero", 15, 4);
+        else if (!tieneFondos) 
+            mostrarMensaje("Fondos insifucientes", 15, 4);
     }
     else
-    {
         mostrarMensaje("No se pueden hacer transferecias, ya que no hay destinatarios activos", 15, 4);
-        rlutil::anykey();
-    }
+        
+    rlutil::anykey();
 }
 
 void MovimientosHandler::consultarSaldo(Billetera billetera, int cantMovimientos)
@@ -111,7 +120,9 @@ void MovimientosHandler::agregarMovimientosA(int billeteraId)
 {
     int tipoMovimiento = renderMenuTiposMovimientos();
     int categoriaId = _categorias.seleccionarPor(tipoMovimiento);
-    if (categoriaId != -1) _movimientos.agregarA(billeteraId, categoriaId);
+
+    if (categoriaId != -1) 
+        _movimientos.agregarA(billeteraId, categoriaId);
 }
 
 void MovimientosHandler::mostrarPorFecha()
@@ -122,8 +133,10 @@ void MovimientosHandler::mostrarPorFecha()
     fecha.cargar();
     
     vector<Movimiento> movimientos = _movimientos.buscarPor(fecha);
-    if (movimientos.empty()) mostrarMensaje("No se encontraron movimientos para esa fecha", 15, 4);
-    else {
+    if (movimientos.empty()) 
+        mostrarMensaje("No se encontraron movimientos para esa fecha", 15, 4);
+    else 
+    {
         cout << endl << endl;
         cout << "Buscar " << _nombre << " por fecha" << endl << endl;
         _movimientos.mostrarRegistrosPor(movimientos, _billeteraElegida.getId());
@@ -138,8 +151,10 @@ void MovimientosHandler::mostrarPorRangoMontos()
     montoMax = movimientoMontoMax();
 
     vector<Movimiento> movimientos = _movimientos.buscarPor(montoMin, montoMax);
-    if (movimientos.empty()) mostrarMensaje("No se encontraron movimientos dentro de ese rango de montos", 15, 4);
-    else {
+    if (movimientos.empty()) 
+        mostrarMensaje("No se encontraron movimientos dentro de ese rango de montos", 15, 4);
+    else 
+    {
         cout << endl << endl;
         cout << "Buscar " << _nombre << " por rango de montos" << endl << endl;
         _movimientos.mostrarRegistrosPor(movimientos, _billeteraElegida.getId());
@@ -153,8 +168,10 @@ void MovimientosHandler::mostrarPorMonto()
     monto = ingresoMonto();
 
     vector<Movimiento> movimientos = _movimientos.buscarPor(monto);
-    if (movimientos.empty()) mostrarMensaje("No se encontraron movimientos por ese monto", 15, 4);
-    else {
+    if (movimientos.empty()) 
+        mostrarMensaje("No se encontraron movimientos por ese monto", 15, 4);
+    else 
+    {
         cout << endl << endl;
         cout << "Buscar " << _nombre << " por monto" << endl << endl;
         _movimientos.mostrarRegistrosPor(movimientos, _billeteraElegida.getId());
@@ -170,8 +187,10 @@ void MovimientosHandler::mostrarPorMesYAnio()
     anio = ingresoAnio();
 
     vector<Movimiento> movimientos = _movimientos.buscarPor(mes, anio);
-    if (movimientos.empty()) mostrarMensaje("No se encontraron movimientos para ese mes y año", 15, 4);
-    else {
+    if (movimientos.empty()) 
+        mostrarMensaje("No se encontraron movimientos para ese mes y año", 15, 4);
+    else 
+    {
         cout << endl << endl;
         cout << "Listar " << _nombre << " por mes y año" << endl << endl;
         _movimientos.mostrarRegistrosPor(movimientos, _billeteraElegida.getId());
@@ -186,8 +205,10 @@ void MovimientosHandler::mostrarPorCategoria()
     categoriaId = _categorias.seleccionarPor(tipoMovimiento);
 
     vector<Movimiento> movimientos = _movimientos.buscarPor(categoriaId);
-    if (movimientos.empty()) mostrarMensaje("No se encontraron movimientos para esa categoría", 15, 4);
-    else {
+    if (movimientos.empty()) 
+        mostrarMensaje("No se encontraron movimientos para esa categoría", 15, 4);
+    else 
+    {
         cout << endl << endl;
         cout << "Listar " << _nombre << " por categoria" << endl << endl;
         _movimientos.mostrarRegistrosPor(movimientos, _billeteraElegida.getId());

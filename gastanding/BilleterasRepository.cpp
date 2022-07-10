@@ -163,7 +163,7 @@ int BilleterasRepository::seleccionarTransferencia(int billeteraActualId)
 	Billetera aux;
 	int opcion;
 	bool hayBilleterasActivas = false;
-	bool ok;
+	bool ok = false;
 	int cantRegistros = cantidadRegistros();
 
 	if (cantRegistros > 0)
@@ -193,9 +193,16 @@ int BilleterasRepository::seleccionarTransferencia(int billeteraActualId)
 	{
 		aux.leerDeDisco(i, _nombreArchivo);
 
-		if (aux.getEstado() && aux.getId() != billeteraActualId ) 
+		if (opcion == billeteraActualId)
+			break;
+
+		else if (opcion > cantRegistros)
+			break;
+
+		else if (aux.getEstado() && aux.getId() != billeteraActualId)
 			ok = true;
-		else 
+
+		else
 			ok = false;
 	}
 
