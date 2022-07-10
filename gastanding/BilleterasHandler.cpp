@@ -40,7 +40,7 @@ bool BilleterasHandler::gestionarBilleteras()
 {
     int opcion, idBilletera;
     bool seguir = true;
-    int cantMovimientos = _movimientos.cantidadRegistros();
+    int cantMovimientos = 0;
     
     while (seguir)
     {
@@ -55,13 +55,17 @@ bool BilleterasHandler::gestionarBilleteras()
             break;
 
         case 2:
+        {
+            cantMovimientos = _movimientos.cantidadRegistros();
             _billeteras.eliminar(cantMovimientos);
             break;
-
+        }
         case 3:
+        {
+            cantMovimientos = _movimientos.cantidadRegistros();
             _billeteras.listar(cantMovimientos);
             break;
-
+        }
         case 0:
             return false;
             break;
@@ -105,9 +109,11 @@ bool BilleterasHandler::ingresarABilletera()
                 break;
 
             case 4:
+            {
+                cantMovimientos = _movimientos.cantidadRegistros();
                 _movimientosHandler.consultarSaldo(_billeteraElegida, cantMovimientos);
                 break;
-
+            }
             case 0:
                 return false;
                 break;
