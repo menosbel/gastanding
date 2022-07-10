@@ -8,17 +8,34 @@
 #include "CategoriasRepository.h"
 using namespace std;
 
-
 void Movimiento::cargarEn(int billeteraId, int categoriaId, int nextId)
 {
 	double monto;
 	string concepto;
 		
 	Fecha fecha;
+
+	cout << endl << endl;
+	for (;;) {
+		cout << "Monto: $";
+		if (cin >> monto) {
+			if (monto > 0) 
+			{
+				setMonto(monto);
+				break;
+			}
+			else
+			{
+				cout << "Por favor, ingresar un monto válido." << endl << endl;
+			}
+		}
+		else {
+			cout << "Por favor, ingresar un monto válido." << endl << endl;
+			cin.clear();
+			cin.ignore(100, '\n');
+		}
+	}
 	
-	cout << "Monto: $";
-	cin >> monto;
-	setMonto(monto);
 	
 	cout << "Concepto: ";
 	cin >> concepto;
