@@ -56,8 +56,26 @@ void MovimientosHandler::hacerTransferencia(Billetera billetera)
         if (idATransferir == -1) mostrarMensaje("El ID ingresado no es valido", 15, 4);
         rlutil::cls();
 
-        cout << "Monto a transferir:" << endl;
-        cin >> montoATransferir;
+        cout << "Monto a transferir: $" << endl;
+        cout << endl << endl;
+        for (;;) {
+            cout << "Monto: $";
+            if (cin >> montoATransferir) {
+                if (montoATransferir > 0)
+                {
+                    break;
+                }
+                else
+                {
+                    cout << "Por favor, ingresar un monto válido." << endl << endl;
+                }
+            }
+            else {
+                cout << "Por favor, ingresar un monto válido." << endl << endl;
+                cin.clear();
+                cin.ignore(100, '\n');
+            }
+        }
         rlutil::cls();
 
         tieneFondos = _billeteras.tieneFondos(billetera.getId(), montoATransferir, _movimientos.cantidadRegistros());
