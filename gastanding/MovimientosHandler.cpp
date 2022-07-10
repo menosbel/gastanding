@@ -56,10 +56,9 @@ void MovimientosHandler::hacerTransferencia(Billetera billetera)
         if (idATransferir == -1) mostrarMensaje("El ID ingresado no es valido", 15, 4);
         rlutil::cls();
 
-        cout << "Monto a transferir: $" << endl;
         cout << endl << endl;
         for (;;) {
-            cout << "Monto: $";
+            cout << "Monto a transferir: $";
             if (cin >> montoATransferir) {
                 if (montoATransferir > 0)
                 {
