@@ -30,18 +30,18 @@ bool InformesHandler::exec()
             break;
         case 2:
 
-            Informe.BalanceAnual();
+            Informe.balanceAnual();
 
             break;
            
         case 3:
 
-            Informe.PatrimonioNeto();
+            Informe.patrimonioNeto();
             
             break;
         case 4:
 
-            Informe.TopDeIngresosOGastos();
+            Informe.topDeIngresosOGastos();
 
             break;
 

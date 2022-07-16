@@ -13,8 +13,8 @@ class Informes
 		void mostrarVectorCategorias(Categoria* vec, double* montos, int tam);
 	public:
 		void Balance30dias();
-		void BalanceAnual();
-		void PatrimonioNeto();
-		void TopDeIngresosOGastos(); // mucho harcodeo aca sorrwyy :,( // igual no resuelve.. pero dale que lo sacamossss ?•??•????
+		void balanceAnual();
+		void patrimonioNeto();
+		void topDeIngresosOGastos(); // mucho harcodeo aca sorrwyy :,( // igual no resuelve.. pero dale que lo sacamossss ?•??•????
 };
 
