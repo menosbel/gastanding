@@ -243,26 +243,32 @@ int CategoriasRepository::existeTransferencia(int tipo)
 	int pos = 0;
 	int cant = cantidadRegistros();
 	Categoria obj;
-	bool flag = false;
+	bool existeTransferencia = false;
 
 	for (int i = 0; i < cant; i++)
 	{
-		obj.leerDeDisco(pos++, "categorias.dat");
+		obj.leerDeDisco(pos++, _nombreArchivo);
 
 		if (obj.getEstado())
 		{
-			if (obj.getTipoMovimiento() == tipo && !strcmp("Transferencia", obj.getNombre().c_str()))
-				return obj.getId();
-			else
-				return crearTransferencia(tipo);
+			if (obj.getTipoMovimiento() == tipo)
+				if (!strcmp("Transferencia", obj.getNombre().c_str()))
+				{
+					existeTransferencia = true;
+					return obj.getId();
+				}				
 		}
 	}
+
+	if(!existeTransferencia)
+		return crearTransferencia(tipo);
 }
 
 int CategoriasRepository::crearTransferencia(int tipo)
 {
 	Categoria categoria;
 	int cantRegistros = cantidadRegistros();
+
 	categoria.setEstado(true);
 	categoria.setId(cantRegistros + 1);
 	categoria.setNombre("Transferencia");
