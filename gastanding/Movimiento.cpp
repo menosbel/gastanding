@@ -38,7 +38,8 @@ void Movimiento::cargarEn(int billeteraId, int categoriaId, int nextId)
 	
 	
 	cout << "Concepto: ";
-	cin >> concepto;
+	cin.ignore();
+	getline(cin, concepto);
 	setConcepto(concepto);
 	
 	setFecha(fecha);
