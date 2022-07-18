@@ -71,17 +71,24 @@ void InformesHandler::evolucionMovimientos()
     tipoMovimiento = renderMenuTiposMovimientos();
     categoriaId = _categorias.seleccionarPor(tipoMovimiento);
     rlutil::cls();
-    cout << "Ahora deberas ingresar un rango de fechas para tu consulta." << endl;
-    rlutil::anykey();
-    rlutil::cls();
-    cout << "FECHA DE INICIO" << endl;
-    fechaInicio = ingresoMesAnio();
-    cout << endl;
-    cout << "FECHA DE FINALIZACION" << endl;
-    fechaFin = ingresoMesAnio();
-    rlutil::cls();
+    if (categoriaId == -1)
+    {
+        mostrarMensaje("Aún no existe ninguna categoría. Tenés que crear una.", 15, 4);
+    }
+    else
+    {
+        cout << "Ahora deberas ingresar un rango de fechas para tu consulta." << endl;
+        rlutil::anykey();
+        rlutil::cls();
+        cout << "FECHA DE INICIO" << endl;
+        fechaInicio = ingresoMesAnio();
+        cout << endl;
+        cout << "FECHA DE FINALIZACION" << endl;
+        fechaFin = ingresoMesAnio();
+        rlutil::cls();
 
-    generarInformeEvolucionMovimientos(categoriaId, fechaInicio, fechaFin);
+        generarInformeEvolucionMovimientos(categoriaId, fechaInicio, fechaFin);
+    }
 }
 
 void InformesHandler::generarInformeEvolucionMovimientos(int categoriaId, Fecha fechaInicio, Fecha fechaFin)
