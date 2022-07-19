@@ -120,7 +120,7 @@ void Informes::Balance30dias()
 			else
 			{
 				cout << "-----------------------------------" << endl;
-				cout << "Su billetera:" << Billeteras.getNombre() << endl;
+				cout << "Su billetera: " << Billeteras.getNombre() << endl;
 				cout << "No registra movimientos" << endl;
 				cout << "-----------------------------------" << endl;
 			}
@@ -134,7 +134,7 @@ void Informes::Balance30dias()
 		cout << "* * * * * *" << endl;
 		cout << "Registrado en un total de: " << ContadorMov << " movimientos." << endl;
 		cout << "Separados en: " << endl;
-		cout << ContadorIng << " ingreso/s" << " y " << ContadorGas << " deuda/s" << endl;
+		cout << ContadorIng << " ingreso/s y " << ContadorGas << " deuda/s" << endl;
 		cout << "------------------------------------------------------------" << endl;
 
 		rlutil::anykey();
@@ -146,14 +146,18 @@ void Informes::balanceAnual()
 	Fecha fecha;
 	cout << "Elija el año del balance: ";
 	cin >> anioOP;
+
 	while (anioOP > fecha.getAnio() || anioOP < 1900)
 	{
 		cout << "Año invalido" << endl;
 		cout << "Vuelva a ingresar el año: ";
 		cin >> anioOP;
 	}
-	rlutil::cls;
+	rlutil::cls();
 
+	cout << "------------------------------------------------------------" << endl;
+	cout << "Balance del año "<<anioOP<<"        " << endl;
+	cout << "------------------------------------------------------------" << endl;
 	double importeTotal = 0;
 	int contadorMov = 0;
 	int contadorIng = 0;
@@ -225,7 +229,7 @@ void Informes::balanceAnual()
 				mostrarConColor(mensaje, 5);
 				std::cout.imbue(std::locale(std::cout.getloc(), new locate_miles));
 				cout << fixed << setprecision(2);
-				cout << "Registra un total de $" << contImpIng << " entre" << cantMovIngreso << " ingreso/s y $" << contImpGas << " entre " << cantMovGasto << " gasto/s" << endl;
+				cout << "Registra un total de $" << contImpIng << " entre " << cantMovIngreso << " ingreso/s y $" << contImpGas << " entre " << cantMovGasto << " gasto/s" << endl;
 			}
 			else
 			{
@@ -239,7 +243,7 @@ void Informes::balanceAnual()
 
 	cout << endl << endl;
 	cout << "------------------------------------------------------------" << endl;
-	cout << "El balance TOTAL del año " << anioOP << " es de $" << importeTotal << endl << endl;
+	cout << "El balance TOTAL es de : $" << importeTotal << endl << endl;
 	cout << "Registrado en un total de " << contadorMov << " movimientos." << endl;
 	cout << "Separados en " << contadorIng << " ingreso/s" << " y " << contadorGas << " gasto/s" << endl;
 	cout << "------------------------------------------------------------" << endl;
@@ -333,7 +337,7 @@ void Informes::patrimonioNeto()
 			{
 				string mensaje = "Billetera: " + billetera.getNombre();
 				mostrarConColor(mensaje, 5);
-				cout << "Que no registra ningun movimiento hasta la fecha" << endl;
+				cout << "No registra ningun movimiento hasta la fecha" << endl;
 
 			}
 		}
@@ -343,7 +347,7 @@ void Informes::patrimonioNeto()
 	cout << "------------------------------------------------------------" << endl;
 	cout << "Siendo su patrimonio neto hasta la fecha: $" << importeTotal << endl;
 	cout << "Registrado en: " << contadorMov << " movimientos." << endl;
-	cout << "Separados en: " << contadorIng << " ingreso/s" << " y " << contadorGas << " gasto/s" << endl;
+	cout << "Separados en: " << contadorIng << " ingreso/s y " << contadorGas << " gasto/s" << endl;
 	cout << "En un total de " << contadorBill << " billetera/s activas."<<endl;
 	cout << "------------------------------------------------------------" << endl;
 	rlutil::anykey();
