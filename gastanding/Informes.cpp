@@ -239,7 +239,7 @@ void Informes::balanceAnual()
 
 	cout << endl << endl;
 	cout << "------------------------------------------------------------" << endl;
-	cout << "El balance TOTAL del año " << anioOP << " es de $" << importeTotal << endl << endl;
+	cout << "El balance TOTAL del año es de $" << importeTotal << endl << endl;
 	cout << "Registrado en un total de " << contadorMov << " movimientos." << endl;
 	cout << "Separados en " << contadorIng << " ingreso/s" << " y " << contadorGas << " gasto/s" << endl;
 	cout << "------------------------------------------------------------" << endl;

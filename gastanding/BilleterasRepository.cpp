@@ -198,7 +198,7 @@ int BilleterasRepository::seleccionarTransferencia(int billeteraActualId)
 		else if (opcion > cantRegistros)
 			break;
 
-		else if (aux.getEstado() && aux.getId() != billeteraActualId)
+		else if (aux.getEstado() && aux.getId() != billeteraActualId && aux.getId() == opcion)
 			ok = true;
 
 		else

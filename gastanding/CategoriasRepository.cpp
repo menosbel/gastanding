@@ -285,7 +285,7 @@ int CategoriasRepository::crearTransferencia(int tipo)
 
 	categoria.setEstado(true);
 	categoria.setId(cantRegistros + 1);
-	categoria.setNombre("Transferencia");
+	categoria.setNombre(" Transferencia");
 	categoria.setTipoMovimiento(tipo);
 	
 	categoria.grabarEnDisco(_nombreArchivo);
