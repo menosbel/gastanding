@@ -13,6 +13,7 @@ std::string mediosPagoToString(int num);
 void mostrarMensaje(string mensaje, int color = 15, int colorFondo = 0, int x = 1, int y = 10);
 void mostrarConColor(string mensaje, int colorFondo);
 void vectorEnCero(int* vector, int cant);
+bool ExisteArchivo(string fileName);
 struct locate_miles : std::numpunct<char> {
     char_type do_thousands_sep() const override { return ','; }
     char_type do_decimal_point() const override { return '.'; }

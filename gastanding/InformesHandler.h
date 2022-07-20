@@ -3,6 +3,7 @@
 #include "CategoriasRepository.h"
 #include <map>
 
+
 class InformesHandler
 {
 private:
@@ -17,6 +18,8 @@ public:
 	void evolucionMovimientos();
 	void generarInformeEvolucionMovimientos(int categoriaId, Fecha fechaInicio, Fecha fechaFin);
 	void mostrarInformeEvolucionMovimientos(map<int, map<int, double>> montoPorMesYAnio);
+
+
 };
 
  

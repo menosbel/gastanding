@@ -78,6 +78,18 @@ int MovimientosRepository::cantidadRegistros()
     return cant_reg;
 }
 
+int MovimientosRepository::cantidadRegistrosActivos()
+{
+    Movimiento obj;
+    int cantMovimientosActivos = 0;
+    int i = 0;
+while(obj.leerDeDisco(i, "movimiento.dat")==true)
+{      if (obj.getEstado()) { cantMovimientosActivos++; }
+i++;
+    }
+    return cantMovimientosActivos;
+}
+
 bool MovimientosRepository::chequearSiMovimientoExiste(Movimiento movimiento)
 {
     Movimiento aux;

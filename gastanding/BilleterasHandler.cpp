@@ -3,6 +3,7 @@
 #include "rlutil.h"
 #include "menues.h"
 #include "functions.h"
+#include "BilleterasRepository.h"
 
 bool BilleterasHandler::exec()
 {
@@ -81,6 +82,25 @@ bool BilleterasHandler::ingresarABilletera()
 {
     int opcion;
     bool seguir = true;
+    BilleterasRepository BRepo;
+    bool errorarchivo = false;
+
+
+    if (ExisteArchivo("billeteras.dat") == false) {
+        errorarchivo = true;
+    }
+    else {
+        if (BRepo.cantidadRegistrosActivos() <= 0)
+        {
+            errorarchivo = true;
+        }
+    }
+    if (errorarchivo == true)
+    {
+        rlutil::cls();
+        cout << "-Primero necesita crear una Billetera" << endl << endl;
+        return 0;
+    }
     int cantMovimientos = _movimientos.cantidadRegistros();
     
     cout << "Elegí una billetera: " << endl << endl;

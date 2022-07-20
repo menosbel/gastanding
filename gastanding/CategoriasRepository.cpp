@@ -10,7 +10,7 @@ using namespace std;
 
 void CategoriasRepository::agregar()
 {
-	Categoria categoria, aux;
+	Categoria categoria,aux;
 	int cantRegistros = cantidadRegistros();
 	categoria.cargar(cantRegistros + 1);
 
@@ -21,7 +21,7 @@ void CategoriasRepository::agregar()
 		if (aux.equals(categoria)) {
 			existe = true;
 			break;
-		};
+		}
 	}
 
 	if (existe) mostrarMensaje("La categoria ya existe. No puede volver a agregarse", 15, 4);
@@ -191,6 +191,20 @@ int CategoriasRepository::cantidadRegistros() {
 	fclose(p);
 	cant_reg = bytes / sizeof(Categoria);
 	return cant_reg;
+}
+
+int CategoriasRepository::cantidadRegistrosActivos()
+{
+	Categoria obj;
+	int cantCategoriasActivas = 0;
+	int k = 0;
+	
+		while(obj.leerDeDisco(k, "categorias.dat")==true)
+		{
+			if (obj.getEstado()) { cantCategoriasActivas++; }
+			k++;
+	}
+	return cantCategoriasActivas;
 }
 
 int CategoriasRepository::cantidadRegistrosActivosPorTipo(int tipo)

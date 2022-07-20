@@ -5,57 +5,120 @@
 #include "functions.h"
 #include "tables.h"
 #include "Informes.h"
+#include "BilleterasRepository.h"
+#include "CategoriasRepository.h"
+#include "MovimientosRepository.h"
+#include <iostream>
+#include <string>
+#include <cstdio>
+
+
 
 using namespace std;
+
 
 bool InformesHandler::exec()
 {
     int opcion;
     bool seguir = true;
-   
+    BilleterasRepository BRepo;
+    CategoriasRepository CRepo;
+    bool errorarchivo1 = false;
+    bool errorarchivo2 = false;
+    bool errorarchivo3 = false;
 
-    while (seguir)
-    {
-        rlutil::cls();
-        opcion = renderMenuInformes();
-        rlutil::cls();
-        Informes Informe;
-        switch (opcion)
+
+    if (ExisteArchivo("billeteras.dat")==false) {
+        errorarchivo1 = true;
+    }else{
+        if(BRepo.cantidadRegistrosActivos()<=0)
         {
-
-        case 1:
-
-            Informe.Balance30dias();
-            
-            break;
-        case 2:
-
-            Informe.balanceAnual();
-
-            break;
-           
-        case 3:
-
-            Informe.patrimonioNeto();
-            
-            break;
-        case 4:
-
-            Informe.topDeIngresosOGastos();
-
-            break;
-
-        case 5:
-            evolucionMovimientos();
-            rlutil::anykey();
-            break;
-        case 0:
-            return false;
-            break;
-        default:
-            break;
+            errorarchivo1 = true;
         }
     }
+    if (ExisteArchivo("categorias.dat") == false) {
+        errorarchivo2 = true;
+    }
+    else {
+        if (CRepo.cantidadRegistrosActivos() <= 0)
+        {
+            errorarchivo2 = true;
+        }
+    }
+  if (ExisteArchivo("movimientos.dat") == false) {
+        errorarchivo3 = true;
+    }
+
+    if(errorarchivo1==true|| errorarchivo2 == true || errorarchivo3 == true)
+    {
+            rlutil::cls();
+            if (errorarchivo1 == true) {
+                cout << endl;
+                cout << "-Necesita crear una Billetera" << endl << endl;
+            }
+            else {
+                cout << endl;
+                cout << "Ya hay Billeteras activas." << endl << endl;
+            }
+            if (errorarchivo2 == true) {
+                cout << "-Necesita crear una Categoria" << endl << endl;
+            }
+            else {
+                cout << "Ya hay Categorias activas." << endl << endl;
+            }
+            if (errorarchivo3 == true) {
+                cout << "-Necesita registrar algun Movimiento" << endl << endl;
+            }
+            else {
+                cout << "Ya hay Movimientos activos." << endl << endl;
+            }
+            mostrarMensaje("Los informes se generan con Movimientos de Billeteras y Categorías activas.", 15, 4);
+            rlutil::anykey();
+            seguir= false;
+    }
+        while (seguir)
+        {
+            rlutil::cls();
+            opcion = renderMenuInformes();
+            rlutil::cls();
+            Informes Informe;
+            switch (opcion)
+            {
+
+            case 1:
+
+                Informe.Balance30dias();
+
+                break;
+            case 2:
+
+                Informe.balanceAnual();
+
+                break;
+
+            case 3:
+
+                Informe.patrimonioNeto();
+
+                break;
+            case 4:
+
+                Informe.topDeIngresosOGastos();
+
+                break;
+
+            case 5:
+                evolucionMovimientos();
+                rlutil::anykey();
+                break;
+            case 0:
+                return false;
+                break;
+            default:
+                break;
+            }
+        }
+        return false;
 }
 
 void InformesHandler::evolucionMovimientos()
@@ -144,3 +207,4 @@ void InformesHandler::mostrarInformeEvolucionMovimientos(map<int, map<int, doubl
 
     cout << endl << endl;
 }
+

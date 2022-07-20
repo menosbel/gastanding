@@ -82,4 +82,15 @@ void vectorEnCero(int* vector, int cant) {
 	{
 		vector[i] = 0;
 	}
-};
+}
+
+bool ExisteArchivo(string fileName)
+{
+	const char* file = fileName.c_str();
+	FILE* p = fopen(file, "rb");
+	if (p == NULL) { return false; }
+	else {
+		return true;
+	}
+	fclose(p);
+}

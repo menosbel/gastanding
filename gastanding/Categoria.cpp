@@ -57,8 +57,10 @@ void Categoria::cargar(int nextId)
 
 bool Categoria::equals(Categoria otro)
 {
-	if (getId() == otro.getId()) return true;
-	return false;
+	if (getId() == otro.getId() || (getEstado() == true && getNombre() == otro.getNombre())) { return true; }
+	else {
+		return false;
+	}
 }
 
 bool Categoria::leerDeDisco(int pos, string fileName)

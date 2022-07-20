@@ -23,6 +23,7 @@ public:
 	bool agregarA(int billeteraId, int categoriaId);
 	void transferir(int billeteraActual, int billeteraDestino, double monto);
 	int cantidadRegistros();
+	int cantidadRegistrosActivos();
 	bool chequearSiMovimientoExiste(Movimiento movimiento);
 	int buscarPor(double monto, Fecha fecha, int categoriaId, string concepto, int billeteraId);
 	vector<Movimiento> buscarPor(double monto);

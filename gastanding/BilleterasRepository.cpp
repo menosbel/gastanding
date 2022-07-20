@@ -36,23 +36,45 @@ void BilleterasRepository::agregar()
 
 void BilleterasRepository::eliminar(int cantMovimientos)
 {
-	cout << "Seleccione la billetera que desee eliminar:" << endl << endl;
-	Billetera billeteraEliminar = seleccionar(cantMovimientos);
-	char caracter = 'n';
-	bool confirmar = 'n';
+	bool seguir = true;
+	BilleterasRepository BRepo;
+	bool errorarchivo = false;
 
-	if (billeteraEliminar.getEstado())
-	{
-		cout << "¿Esta seguro de eliminar esta billetera? S/N: ";
-		cin >> caracter;
-		confirmar = confirmarAccion(caracter);
-		rlutil::cls();
+
+	if (ExisteArchivo("billeteras.dat") == false) {
+		errorarchivo = true;
 	}
-
-	if (confirmar)
+	else {
+		if (BRepo.cantidadRegistrosActivos() <= 0)
+		{
+			errorarchivo = true;
+		}
+	}
+	if (errorarchivo == true)
 	{
-		if (bajaLogica(billeteraEliminar.getId())) mostrarMensaje("Billetera borrada exitosamente", 15, 2);
-		else mostrarMensaje("No se pudo borrar esta billetera", 15, 4);
+		rlutil::cls();
+		cout << "-No existen billeteras para borrar" << endl << endl;
+		seguir=false;
+	}
+	while (seguir == true) {
+		cout << "Seleccione la billetera que desee eliminar:" << endl << endl;
+		Billetera billeteraEliminar = seleccionar(cantMovimientos);
+		char caracter = 'n';
+		bool confirmar = false;
+
+		if (billeteraEliminar.getEstado())
+		{
+			cout << "¿Esta seguro de eliminar esta billetera? S/N: ";
+			cin >> caracter;
+			confirmar = confirmarAccion(caracter);
+			rlutil::cls();
+		}
+
+		if (confirmar)
+		{
+			if (bajaLogica(billeteraEliminar.getId())) mostrarMensaje("Billetera borrada exitosamente", 15, 2);
+			else mostrarMensaje("No se pudo borrar esta billetera", 15, 4);
+		}
 	}
 }
 
@@ -230,13 +252,14 @@ int BilleterasRepository::cantidadRegistros() {
 int BilleterasRepository::cantidadRegistrosActivos()
 {
 	Billetera obj;
-	int cantBilleterasActivas = 0, pos = 0;
-	int cantidadBilleteras = cantidadRegistros();
-	for (size_t i = 0; i < cantidadBilleteras; i++)
+	int k = 0;
+	int cantBilleterasActivas = 0;
+	while(obj.leerDeDisco(k,"billeteras.dat"))
 	{
-		obj.leerDeDisco(i, _nombreArchivo);
-		if (obj.getEstado()) cantBilleterasActivas++;
-
+		if (obj.getEstado() == true) {
+			cantBilleterasActivas++;
+		}
+		k++;
 	}
 	return cantBilleterasActivas;
 }
