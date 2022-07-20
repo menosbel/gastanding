@@ -77,7 +77,7 @@ void CategoriasRepository::eliminar(int tipoMovimiento)
 		if (confirmar)
 		{
 			if (bajaLogica(categoriaId)) mostrarMensaje("Categoria eliminada exitosamente", 15, 2);
-			else mostrarMensaje("No se pudo cambiar eliminar la categoria", 15, 4);
+			else mostrarMensaje("No se pudo eliminar la categoria", 15, 4);
 		}
 	}
 }

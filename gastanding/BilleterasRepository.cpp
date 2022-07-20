@@ -39,8 +39,7 @@ void BilleterasRepository::eliminar(int cantMovimientos)
 	cout << "Seleccione la billetera que desee eliminar:" << endl << endl;
 	Billetera billeteraEliminar = seleccionar(cantMovimientos);
 	char caracter = 'n';
-	bool confirmar = 'n';
-
+	bool confirmar = false;
 	if (billeteraEliminar.getEstado())
 	{
 		cout << "¿Esta seguro de eliminar esta billetera? S/N: ";
