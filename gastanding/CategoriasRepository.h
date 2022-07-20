@@ -20,6 +20,7 @@ public:
 	int seleccionarPor(int tipoMovimiento);
 	Categoria buscarPor(int id);
 	int cantidadRegistros();
+	int cantidadRegistrosActivos();
 	int cantidadRegistrosActivosPorTipo(int tipo);
 	int existeTransferencia(int tipo);
 	int crearTransferencia(int tipo);

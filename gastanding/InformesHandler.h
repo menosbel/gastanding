@@ -8,10 +8,12 @@ class InformesHandler
 private:
 	MovimientosRepository _movimientos;
 	CategoriasRepository _categorias;
+	BilleterasRepository _billeteras;
 public:
-	InformesHandler(MovimientosRepository mRepo, CategoriasRepository cRepo) {
+	InformesHandler(MovimientosRepository mRepo, CategoriasRepository cRepo, BilleterasRepository bRepo) {
 		_movimientos = mRepo;
 		_categorias = cRepo;
+		_billeteras = bRepo;
 	}
 	bool exec();
 	void evolucionMovimientos();

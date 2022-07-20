@@ -184,13 +184,27 @@ int CategoriasRepository::cantidadRegistros() {
 	err = fopen_s(&p, _nombreArchivo.c_str(), "rb");
 	if (err != 0) { return 0; };
 	size_t bytes;
-	int cant_reg;
+	int cant_reg = 0;
 
 	fseek(p, 0, SEEK_END);
 	bytes = ftell(p);
 	fclose(p);
 	cant_reg = bytes / sizeof(Categoria);
 	return cant_reg;
+}
+
+int CategoriasRepository::cantidadRegistrosActivos()
+{
+	Categoria obj;
+	int cantCategoriasActivas = 0, pos = 0;
+	int cantidadCategorias = cantidadRegistros();
+	for (size_t i = 0; i < cantidadCategorias; i++)
+	{
+		obj.leerDeDisco(i, _nombreArchivo);
+		if (obj.getEstado()) cantCategoriasActivas++;
+
+	}
+	return cantCategoriasActivas;
 }
 
 int CategoriasRepository::cantidadRegistrosActivosPorTipo(int tipo)

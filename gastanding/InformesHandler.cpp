@@ -12,49 +12,54 @@ bool InformesHandler::exec()
 {
     int opcion;
     bool seguir = true;
+
+    int cantBilleterasActivas = _billeteras.cantidadRegistrosActivos();
+    int cantCategoriasActivas = _categorias.cantidadRegistrosActivos();
+    int cantMovimientos = _movimientos.cantidadRegistros();
    
 
     while (seguir)
     {
         rlutil::cls();
-        opcion = renderMenuInformes();
-        rlutil::cls();
-        Informes Informe;
-        switch (opcion)
+
+        if (cantBilleterasActivas <= 0 || cantCategoriasActivas <= 0 || cantMovimientos <= 0)
         {
-
-        case 1:
-
-            Informe.Balance30dias();
-            
-            break;
-        case 2:
-
-            Informe.balanceAnual();
-
-            break;
-           
-        case 3:
-
-            Informe.patrimonioNeto();
-            
-            break;
-        case 4:
-
-            Informe.topDeIngresosOGastos();
-
-            break;
-
-        case 5:
-            evolucionMovimientos();
+            mostrarMensaje("Para generar un informe, deben existir movimientos, categorias y billeteras", 15, 4);
+            seguir = false;
             rlutil::anykey();
-            break;
-        case 0:
-            return false;
-            break;
-        default:
-            break;
         }
+        else
+        {
+            opcion = renderMenuInformes();
+            rlutil::cls();
+            Informes Informe;
+            switch (opcion)
+            {
+            case 1:
+                Informe.Balance30dias();
+                break;
+            case 2:
+                Informe.balanceAnual();
+                break;
+            case 3:
+                Informe.patrimonioNeto();
+                break;
+            case 4:
+                Informe.topDeIngresosOGastos();
+                break;
+            case 5:
+                evolucionMovimientos();
+                rlutil::anykey();
+                break;
+            case 0:
+                return false;
+                break;
+            default:
+                break;
+            }
+        }
+
+        
     }
 }
 
@@ -70,6 +75,7 @@ void InformesHandler::evolucionMovimientos()
     rlutil::cls();
     tipoMovimiento = renderMenuTiposMovimientos();
     categoriaId = _categorias.seleccionarPor(tipoMovimiento);
+    if (categoriaId == -1) return;
     rlutil::cls();
     cout << "Ahora deberas ingresar un rango de fechas para tu consulta." << endl;
     rlutil::anykey();

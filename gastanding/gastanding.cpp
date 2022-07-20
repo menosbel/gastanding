@@ -25,7 +25,7 @@ int main()
     BilleterasHandler billeterasHandler(billeteras, movimientos, categorias, movimientosHandler);
     CategoriasHandler categoriasHandler(categorias);
 
-    InformesHandler informesHandler(movimientos, categorias);
+    InformesHandler informesHandler(movimientos, categorias, billeteras);
     EntradaDatosHandler entradaDatosHandler;
 
     setlocale(LC_ALL, "spanish");

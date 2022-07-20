@@ -69,7 +69,7 @@ int MovimientosRepository::cantidadRegistros()
     err = fopen_s(&p, _nombreArchivo.c_str(), "rb");
     if (err != 0) { return 0; };
     size_t bytes;
-    int cant_reg;
+    int cant_reg = 0;
 
     fseek(p, 0, SEEK_END);
     bytes = ftell(p);
