@@ -266,7 +266,7 @@ int CategoriasRepository::existeTransferencia(int tipo)
 		if (obj.getEstado())
 		{
 			if (obj.getTipoMovimiento() == tipo)
-				if (!strcmp("Transferencia", obj.getNombre().c_str()))
+				if (!strcmp("Transferencia", obj.getNombre().c_str()) || !strcmp(" Transferencia", obj.getNombre().c_str()))
 				{
 					existeTransferencia = true;
 					return obj.getId();
