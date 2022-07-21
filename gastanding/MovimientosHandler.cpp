@@ -87,7 +87,12 @@ void MovimientosHandler::hacerTransferencia(Billetera billetera)
 
         tieneFondos = _billeteras.tieneFondos(billetera.getId(), montoATransferir, _movimientos.cantidadRegistros());
 
-        if (montoATransferir > 0 && tieneFondos)
+        if (billetera.getCanBeNeg())
+        {
+            _movimientos.transferir(billetera.getId(), idATransferir, montoATransferir);
+            mostrarMensaje("Transferencia efectuada con exito!", 15, 2);
+        }
+        else if (montoATransferir > 0 && tieneFondos)
         {
             _movimientos.transferir(billetera.getId(), idATransferir, montoATransferir);
             mostrarMensaje("Transferencia efectuada con exito!", 15, 2);

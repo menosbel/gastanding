@@ -199,10 +199,10 @@ int BilleterasRepository::seleccionarTransferencia(int billeteraActualId)
 			break;
 
 		else if (aux.getEstado() && aux.getId() != billeteraActualId && aux.getId() == opcion)
+		{
 			ok = true;
-
-		else
-			ok = false;
+			break;
+		}
 	}
 
 	if (ok) 

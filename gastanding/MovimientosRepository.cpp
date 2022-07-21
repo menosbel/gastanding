@@ -54,12 +54,9 @@ void MovimientosRepository::transferir(int billeteraActual, int billeteraDestino
 
     movimiento.cargarTransferenciaSalida(id + 1, billeteraActual, monto);
     movimiento.grabarEnDisco(_nombreArchivo);
-    //creo y guardo el movimiento trasferencia tipo egreso, para la billetera remitente
 
     movimiento.cargarTransferenciaEntrada(id + 2, billeteraDestino, monto);
     movimiento.grabarEnDisco(_nombreArchivo);
-    //same anterior ingreso billetera destinataria
-
 }
 
 int MovimientosRepository::cantidadRegistros() 
